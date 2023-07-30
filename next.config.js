@@ -30,9 +30,10 @@ const nextConfig = {
       },
       {
         source: "/r/hoerbuecher",
-        destination: "https://nilsbtr.notion.site/H-rb-cher-9b1f893c85cd498ebd8a7386ac76a6fb?pvs=4",
-        "permanent": false,
-      }
+        destination:
+          "https://nilsbtr.notion.site/H-rb-cher-9b1f893c85cd498ebd8a7386ac76a6fb?pvs=4",
+        permanent: false,
+      },
       {
         source: "/r/raidreport",
         destination: "https://raid.report/pc/4611686018485820917",
