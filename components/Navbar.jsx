@@ -29,7 +29,7 @@ const Navbar = () => {
           alt="Logo"
           width={30}
           height={30}
-          className="object-contain mb-1.5"
+          className="object-contain"
         />
         <p className="logo_text">nilsbtr.com</p>
       </Link>
