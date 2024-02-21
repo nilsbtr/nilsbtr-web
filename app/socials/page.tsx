@@ -19,14 +19,14 @@ export default function Socials() {
         <h1 className="text-xl font-semibold">My Socials</h1>
       </div>
       <div className="bg-background rounded-b-lg p-3">
-        <ul className="gap-2">
-          <li className="bg-component mb-2 p-2 rounded-lg border-2 border-component hover:border-accent">
+        <ul className="flex flex-col gap-2">
+          <li className="bg-component p-2 rounded-lg border-2 border-component hover:border-accent">
             <a href={socials.instagram} className="flex items-center gap-4">
               <FontAwesomeIcon icon={faInstagram} className="size-10" />
               <p>Instagram</p>
             </a>
           </li>
-          <li className="bg-component mb-2 p-2 rounded-lg border-2 border-component hover:border-accent">
+          <li className="bg-component p-2 rounded-lg border-2 border-component hover:border-accent">
             <a href={socials.spotify} className="flex items-center gap-4">
               <FontAwesomeIcon icon={faSpotify} className="size-10" />
               <p>Spotify</p>

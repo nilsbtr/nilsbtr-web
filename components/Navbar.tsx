@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <nav className=" bg-component w-full rounded-lg border-2 border-content/30 p-3 flex gap-6 items-center">
+    <nav className="bg-component w-full sticky rounded-lg border-2 border-content/30 p-3 flex gap-6 items-center">
       <div className="rounded-lg hover:bg-accent hover:animate-pulse">
         <Link href="/" className="flex gap-3 items-center m-2">
           <Image
