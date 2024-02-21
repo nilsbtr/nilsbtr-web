@@ -46,14 +46,6 @@
     --color-accent: 75 116 194;
   }
 
-  :root[theme="depressive"] {
-    --color-background: 22 22 22;
-    --color-content: 237 237 237;
-    --color-primary: 190 174 174;
-    --color-secondary: 68 85 84;
-    --color-accent: 140 144 163;
-  }
-
   :root[theme="funky"] {
     --color-background: 22 22 22;
     --color-content: 237 237 237;
