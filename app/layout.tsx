@@ -20,8 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de" className={`${inter.variable}`}>
-      <body className="bg-gradient-to-t from-background to-accent backdrop-blur-lg h-screen">
-        <main className="text-content p-3">
+      {/* <body className="bg-gradient-to-t from-background to-accent backdrop-blur-lg h-screen"> */}
+      <body className="bg-background h-screen">
+        <main className="text-content p-3 lg:pl-36 lg:pr-36">
           <Navbar />
           {children}
         </main>

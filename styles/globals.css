@@ -13,8 +13,8 @@
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --color-background: 22 22 22;
-      /* field 28 28 28 */
+      --color-background: 28 28 28;
+      --color-component: 22 22 22;
       --color-content: 237 237 237;
       --color-primary: 197 173 197;
       --color-secondary: 178 181 224;
@@ -30,28 +30,12 @@
     --color-accent: 61 102 179;
   }
 
-  :root[theme="red"] {
-    --color-background: 232 232 232;
-    --color-content: 18 18 18;
-    --color-primary: 190 69 69;
-    --color-secondary: 236 145 145;
-    --color-accent: 248 64 64;
-  }
-
   :root[theme="dark"] {
     --color-background: 22 22 22;
     --color-content: 237 237 237;
     --color-primary: 197 173 197;
     --color-secondary: 178 181 224;
     --color-accent: 75 116 194;
-  }
-
-  :root[theme="funky"] {
-    --color-background: 22 22 22;
-    --color-content: 237 237 237;
-    --color-primary: 254 125 131;
-    --color-secondary: 1 167 106;
-    --color-accent: 15 120 254;
   }
 }
 
