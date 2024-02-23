@@ -1,9 +1,4 @@
-import {
-  faGithub,
-  faInstagram,
-  faSpotify,
-} from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaGithub, FaInstagram, FaSpotify } from "react-icons/fa6";
 
 const socials = {
   instagram: "https://www.instagram.com/nilsbttr",
@@ -22,19 +17,19 @@ export default function Socials() {
         <ul>
           <li className="bg-component mb-2 p-2 rounded-lg border-2 border-component hover:border-accent">
             <a href={socials.instagram} className="flex items-center gap-4">
-              <FontAwesomeIcon icon={faInstagram} className="size-10" />
+              <FaInstagram className="size-10" />
               <p>Instagram</p>
             </a>
           </li>
           <li className="bg-component mb-2 p-2 rounded-lg border-2 border-component hover:border-accent">
             <a href={socials.spotify} className="flex items-center gap-4">
-              <FontAwesomeIcon icon={faSpotify} className="size-10" />
+              <FaSpotify className="size-10" />
               <p>Spotify</p>
             </a>
           </li>
           <li className="bg-component p-2 rounded-lg border-2 border-component hover:border-accent">
             <a href={socials.github} className="flex items-center gap-4">
-              <FontAwesomeIcon icon={faGithub} className="size-10" />
+              <FaGithub className="size-10" />
               <p>GitHub</p>
             </a>
           </li>

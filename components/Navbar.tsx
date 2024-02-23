@@ -1,12 +1,30 @@
-import { faGamepad, faUser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import Image from "next/image";
 import Link from "next/link";
+import { FaGamepad, FaUser } from "react-icons/fa6";
+import { LuAlignJustify } from "react-icons/lu";
+import { MdColorLens } from "react-icons/md";
 
-const Navbar = () => {
+const navLinks = [
+  { title: "Socials", path: "/socials", icon: <FaUser /> },
+  { title: "Gaming", path: "/gaming", icon: <FaGamepad /> },
+  { title: "Colors", path: "/colors", icon: <MdColorLens /> },
+];
+
+export default function Navbar() {
   return (
-    <nav className="bg-component w-full sticky rounded-lg border-2 border-content/30 p-3 flex gap-6 items-center">
-      <div className="rounded-lg hover:bg-accent hover:animate-pulse">
+    <nav className="bg-background w-full sticky rounded-lg border-2 border-border p-3 flex gap-6 items-center">
+      {/* Logo */}
+      <div className="rounded-lg text-transparent hover:bg-accent hover:animate-pulse hover:text-accent-foreground">
         <Link href="/" className="flex gap-3 items-center m-2">
           <Image
             src="/assets/logo.png"
@@ -15,28 +33,74 @@ const Navbar = () => {
             height={30}
             className="object-contain rounded-full"
           />
-          <p className="bg-gradient-to-r from-primary to-secondary font-semibold text-lg tracking-wide inline-block text-transparent bg-clip-text">
+          <p className="bg-gradient-to-r from-primary to-accent font-semibold text-lg tracking-wide inline-block bg-clip-text">
             nilsbtr.de
           </p>
         </Link>
       </div>
+      {/* Desktop */}
+      <div className="hidden md:block">
+        <ul className="flex items-center gap-6 tracking-wide">
+          {navLinks.map(({ title, path, icon }) => (
+            <li
+              key={title}
+              className="rounded-lg p-2 hover:bg-accent transition-all duration-300"
+            >
+              <Link
+                href={path}
+                className="text-foreground flex items-center gap-2"
+              >
+                {icon}
+                <p>{title}</p>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
 
-      <ul className="flex items-center gap-6 tracking-wide">
-        <li className="rounded-lg p-2 hover:bg-accent hover:scale-125 transition-all duration-300">
-          <a href="/socials" className="flex items-center gap-2">
-            <FontAwesomeIcon icon={faUser} className="text-content" />
-            <p>Socials</p>
-          </a>
-        </li>
-        <li className="rounded-lg p-2 hover:bg-accent hover:scale-125 transition-all duration-300">
-          <a href="/gaming" className="flex items-center gap-2">
-            <FontAwesomeIcon icon={faGamepad} className="text-content" />
-            <p>Gaming</p>
-          </a>
-        </li>
-      </ul>
+      <div className="absolute right-3 flex items-center gap-2">
+        {/* Theme Switcher */}
+        <ThemeSwitcher />
+        {/* Mobile */}
+        <div className="md:hidden flex items-center">
+          <NavbarSheet />
+        </div>
+      </div>
     </nav>
   );
-};
+}
 
-export default Navbar;
+function NavbarSheet() {
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button variant="outline" size="icon">
+          <LuAlignJustify className="h-[1.2rem] w-[1.2rem]" />
+        </Button>
+      </SheetTrigger>
+      <SheetContent>
+        <SheetHeader>
+          <SheetTitle>Navigate</SheetTitle>
+        </SheetHeader>
+        <ul className="grid gap-4 py-4">
+          {navLinks.map(({ title, path, icon }) => (
+            <li key={title} className="grid grid-cols-4 items-center gap-4">
+              <SheetClose asChild>
+                <Link
+                  href={path}
+                  className="text-foreground flex items-center gap-2"
+                >
+                  <p>{title}</p>
+                </Link>
+              </SheetClose>
+            </li>
+          ))}
+        </ul>
+        <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4"></div>
+          <div className="grid grid-cols-4 items-center gap-4"></div>
+        </div>
+      </SheetContent>
+    </Sheet>
+  );
+}
