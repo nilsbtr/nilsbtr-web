@@ -12,19 +12,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaGamepad, FaUser } from "react-icons/fa6";
 import { LuAlignJustify } from "react-icons/lu";
-import { MdColorLens } from "react-icons/md";
 
 const navLinks = [
   { title: "Socials", path: "/socials", icon: <FaUser /> },
   { title: "Gaming", path: "/gaming", icon: <FaGamepad /> },
-  { title: "Colors", path: "/colors", icon: <MdColorLens /> },
 ];
 
 export default function Navbar() {
   return (
     <nav className="bg-background w-full sticky rounded-lg border-2 border-border p-3 flex gap-6 items-center">
       {/* Logo */}
-      <div className="rounded-lg text-transparent hover:bg-accent hover:animate-pulse hover:text-accent-foreground">
+      <div className="rounded-md text-transparent hover:bg-accent hover:text-accent-foreground hover:animate-pulse">
         <Link href="/" className="flex gap-3 items-center m-2">
           <Image
             src="/assets/logo.png"
@@ -44,7 +42,7 @@ export default function Navbar() {
           {navLinks.map(({ title, path, icon }) => (
             <li
               key={title}
-              className="rounded-lg p-2 hover:bg-accent transition-all duration-300"
+              className="rounded-md p-2 hover:bg-accent hover:text-accent-foreground transition-all duration-300"
             >
               <Link
                 href={path}
