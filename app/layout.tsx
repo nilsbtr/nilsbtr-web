@@ -22,12 +22,7 @@ export default function RootLayout({
     <html lang="de" className={`${inter.variable}`} suppressHydrationWarning>
       {/* <body className="bg-gradient-to-t from-background to-accent backdrop-blur-lg h-screen"> */}
       <body className="bg-background h-screen">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <main className="text-content p-3 lg:pl-36 lg:pr-36">
             <Navbar />
             {children}

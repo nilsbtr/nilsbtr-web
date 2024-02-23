@@ -22,7 +22,7 @@ export default function Navbar() {
   return (
     <nav className="bg-background w-full sticky rounded-lg border-2 border-border p-3 flex gap-6 items-center">
       {/* Logo */}
-      <div className="rounded-md text-transparent hover:bg-accent hover:text-accent-foreground hover:animate-pulse">
+      <div className="rounded-md text-transparent hover:bg-accent hover:text-accent-foreground hover:animate-pulse transition-all duration-300">
         <Link href="/" className="flex gap-3 items-center m-2">
           <Image
             src="/assets/logo.png"
@@ -44,10 +44,7 @@ export default function Navbar() {
               key={title}
               className="rounded-md p-2 hover:bg-accent hover:text-accent-foreground transition-all duration-300"
             >
-              <Link
-                href={path}
-                className="text-foreground flex items-center gap-2"
-              >
+              <Link href={path} className="flex items-center gap-2">
                 {icon}
                 <p>{title}</p>
               </Link>
