@@ -1,8 +1,10 @@
-export default function Socials() {
+const Gaming = () => {
   return (
-    <main className="bg-background mt-3 p-3 rounded-lg text-content">
+    <div className="bg-background mt-3 p-3 rounded-lg text-content">
       <h1 className="text-xl font-semibold">Gaming Page</h1>
       <p className="">...</p>
-    </main>
+    </div>
   );
-}
+};
+
+export default Gaming;

@@ -18,7 +18,7 @@ const navLinks = [
   { title: "Gaming", path: "/gaming", icon: <FaGamepad /> },
 ];
 
-export default function Navbar() {
+const Navbar = () => {
   return (
     <nav className="bg-background w-full sticky rounded-lg border-2 border-border p-3 flex gap-6 items-center">
       {/* Logo */}
@@ -31,9 +31,9 @@ export default function Navbar() {
             height={30}
             className="object-contain rounded-full"
           />
-          <p className="bg-gradient-to-r from-primary to-accent font-semibold text-lg tracking-wide inline-block bg-clip-text">
+          <h1 className="font-mono text-xl font-bold tracking-wider bg-gradient-to-r from-primary to-accent inline-block bg-clip-text">
             nilsbtr.de
-          </p>
+          </h1>
         </Link>
       </div>
       {/* Desktop */}
@@ -63,9 +63,9 @@ export default function Navbar() {
       </div>
     </nav>
   );
-}
+};
 
-function NavbarSheet() {
+const NavbarSheet = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -98,4 +98,6 @@ function NavbarSheet() {
       </SheetContent>
     </Sheet>
   );
-}
+};
+
+export default Navbar;

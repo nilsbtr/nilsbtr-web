@@ -18,9 +18,9 @@ const socialLinks = [
   },
 ];
 
-export default function Socials() {
+const Socials = () => {
   return (
-    <main className="mt-3 rounded-lg border-2 border-border text-foreground lg:w-2/5">
+    <div className="mt-3 rounded-lg border-2 border-border text-foreground lg:w-2/5">
       <div className="rounded-t-lg p-3">
         <h1 className="text-xl font-semibold">My Socials</h1>
       </div>
@@ -39,6 +39,8 @@ export default function Socials() {
           ))}
         </ul>
       </div>
-    </main>
+    </div>
   );
-}
+};
+
+export default Socials;

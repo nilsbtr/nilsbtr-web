@@ -1,6 +1,6 @@
-export default function Home() {
+const Colors = () => {
   return (
-    <main className="mt-3 rounded-lg border-2 border-content/30 text-content">
+    <div className="mt-3 rounded-lg border-2 border-content/30 text-content">
       <div className="p-3">
         <p className="bg-background text-foreground p-3">
           --background / --foreground
@@ -30,6 +30,8 @@ export default function Home() {
         <p className="bg-input p-3">--input</p>
         <p className="bg-ring p-3">--ring</p>
       </div>
-    </main>
+    </div>
   );
-}
+};
+
+export default Colors;

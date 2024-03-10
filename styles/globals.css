@@ -75,6 +75,18 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground h-screen;
+  }
+  h1 {
+    @apply font-mono font-bold;
+  }
+  h2 {
+    @apply font-mono font-semibold;
+  }
+  h3 {
+    @apply font-mono font-semibold;
+  }
+  p {
+    @apply font-sans font-normal;
   }
 }
