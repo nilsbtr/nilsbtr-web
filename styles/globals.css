@@ -78,13 +78,13 @@
     @apply bg-background text-foreground h-screen;
   }
   h1 {
-    @apply font-mono font-bold;
+    @apply font-mono font-bold text-4xl;
   }
   h2 {
-    @apply font-mono font-semibold;
+    @apply font-mono font-semibold text-2xl;
   }
   h3 {
-    @apply font-mono font-semibold;
+    @apply font-mono font-semibold text-xl;
   }
   p {
     @apply font-sans font-normal;

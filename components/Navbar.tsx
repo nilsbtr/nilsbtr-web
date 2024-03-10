@@ -31,9 +31,9 @@ const Navbar = () => {
             height={30}
             className="object-contain rounded-full"
           />
-          <h1 className="font-mono text-xl font-bold tracking-wider bg-gradient-to-r from-primary to-accent inline-block bg-clip-text">
+          <h3 className="font-mono font-bold tracking-wider bg-gradient-to-r from-primary to-accent inline-block bg-clip-text">
             nilsbtr.de
-          </h1>
+          </h3>
         </Link>
       </div>
       {/* Desktop */}
@@ -75,17 +75,19 @@ const NavbarSheet = () => {
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Navigate</SheetTitle>
+          <SheetTitle>
+            <h2>Navigate</h2>
+          </SheetTitle>
         </SheetHeader>
         <ul className="grid gap-4 py-4">
           {navLinks.map(({ title, path, icon }) => (
             <li key={title} className="grid grid-cols-4 items-center gap-4">
               <SheetClose asChild>
-                <Link
-                  href={path}
-                  className="text-foreground flex items-center gap-2"
-                >
-                  <p>{title}</p>
+                <Link href={path} className="flex items-center gap-2">
+                  <div className="flex items-center gap-3 rounded-md p-2 hover:bg-accent hover:text-accent-foreground transition-all duration-300">
+                    {icon}
+                    <p>{title}</p>
+                  </div>
                 </Link>
               </SheetClose>
             </li>
