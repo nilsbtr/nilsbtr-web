@@ -13,12 +13,14 @@ const LinkedButton = ({
   text: string;
 }) => {
   return (
-    <Button asChild>
-      <Link href={link} className="flex items-center gap-2 w-full">
-        <div className="w-6 h-6 flex items-center justify-center">
-          {React.cloneElement(icon, { className: "size-10" })}
+    <Button asChild className="relative w-full">
+      <Link href={link} className="flex items-center w-full">
+        <div className="h-full w-8 absolute left-0 pl-2 flex items-center justify-center">
+          {React.cloneElement(icon, { className: "h-full w-full" })}
         </div>
-        <p>{text}</p>
+        <div className="flex flex-grow justify-center">
+          <p className="text-center">{text}</p>
+        </div>
       </Link>
     </Button>
   );

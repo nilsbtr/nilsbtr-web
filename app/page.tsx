@@ -1,16 +1,11 @@
 import LinkedButton from "@/components/LinkedButton";
 
-import {
-  FaChartSimple,
-  FaGithub,
-  FaInstagram,
-  FaSpotify,
-} from "react-icons/fa6";
+import { FaChartLine, FaGithub, FaInstagram, FaSpotify } from "react-icons/fa6";
 
 const Home = () => {
   return (
     <div className="flex flex-grow items-center justify-center">
-      <div className="md:w-1/3 grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div className="w-full md:w-2/5 max-w-[358.4px] grid grid-cols-1 md:grid-cols-2 gap-3">
         <div className="col-span-1 md:col-span-2">
           <LinkedButton
             link="https://www.instagram.com/nilsbttr"
@@ -28,7 +23,7 @@ const Home = () => {
         <div>
           <LinkedButton
             link="https://stats.fm/nilsbtr"
-            icon={<FaChartSimple />}
+            icon={<FaChartLine />}
             text="stats.fm"
           />
         </div>
