@@ -27,7 +27,7 @@ const RootLayout = ({
       suppressHydrationWarning
     >
       {/* <body className="bg-gradient-to-t from-background to-accent backdrop-blur-lg h-screen"> */}
-      <body className="h-screen pt-3">
+      <body className="h-screen !pt-3">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <main className="h-full max-w-4xl m-auto flex flex-col">
             <Navbar />
