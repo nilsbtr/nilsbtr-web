@@ -29,7 +29,7 @@ const RootLayout = ({
       {/* <body className="bg-gradient-to-t from-background to-accent backdrop-blur-lg h-screen"> */}
       <body className="h-screen !pt-3">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <main className="h-full max-w-4xl m-auto flex flex-col">
+          <main className="h-full max-w-4xl px-3 m-auto flex flex-col">
             <Navbar />
             {children}
           </main>
