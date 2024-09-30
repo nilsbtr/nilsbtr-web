@@ -23,7 +23,7 @@ const NavbarContent = ({
   hovered: React.ReactNode;
 }>) => {
   return (
-    <div className="bg-background w-full sticky rounded-lg border-2 border-border p-3 flex gap-6 items-center">
+    <div className={`transition-colors duration-500 ease-out bg-background w-full sticky rounded-lg border-2 p-3 flex gap-6 items-center ${hovered ? "border-primary" : "border-border"}`}>
       {/* Logo */}
       <div className="rounded-md text-transparent hover:bg-accent hover:text-accent-foreground hover:animate-pulse transition-all duration-300">
         <Link href="/" className="flex gap-3 items-center m-2">
