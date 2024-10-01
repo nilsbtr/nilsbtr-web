@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import ThemeSwitcher from "@/components/ThemeSwitcher";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,6 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { LuArrowUpRight, LuGamepad2 } from "react-icons/lu";
+import ThemeSwitcherNew from "@/components/ThemeSwitcher";
 
 const NavbarContent = ({
   hovered,
@@ -23,7 +23,9 @@ const NavbarContent = ({
   hovered: React.ReactNode;
 }>) => {
   return (
-    <div className={`transition-colors duration-500 ease-out bg-background w-full sticky rounded-lg border-2 p-3 flex gap-6 items-center ${hovered ? "border-primary" : "border-border"}`}>
+    <div
+      className={`transition-colors duration-500 ease-out bg-background w-full sticky rounded-lg border-2 p-3 flex gap-6 items-center ${hovered ? "border-primary" : "border-border"}`}
+    >
       {/* Logo */}
       <div className="rounded-md text-transparent hover:bg-accent hover:text-accent-foreground hover:animate-pulse transition-all duration-300">
         <Link href="/" className="flex gap-3 items-center m-2">
@@ -64,7 +66,7 @@ const NavbarContent = ({
           </GamingPageButton>
         </div>
         {/* Theme Switcher */}
-        <ThemeSwitcher />
+        <ThemeSwitcherNew />
       </div>
     </div>
   );

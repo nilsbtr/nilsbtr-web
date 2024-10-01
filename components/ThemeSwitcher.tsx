@@ -1,59 +1,50 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { LuMoon, LuSettings, LuSun } from "react-icons/lu";
+import { useTheme } from "next-themes";
+import { LuMoon, LuSun, LuTv2 } from "react-icons/lu";
+import { Button } from "@/components/ui/button";
 
-const ThemeSwitch = () => {
-  const [mounted, setMounted] = useState(false);
-  const { setTheme } = useTheme();
+type Theme = "light" | "dark" | "system";
+
+const ThemeSwitcher: React.FC = () => {
+  const { theme, setTheme, systemTheme } = useTheme();
+  const [mounted, setMounted] = useState<boolean>(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return null;
-  }
+  const handleThemeChange = () => {
+    let nextTheme: Theme;
+
+    if (systemTheme === "light") {
+      nextTheme =
+        theme === "system" ? "dark" : theme === "dark" ? "light" : "system";
+    } else if (systemTheme === "dark") {
+      nextTheme =
+        theme === "system" ? "light" : theme === "light" ? "dark" : "system";
+    } else {
+      nextTheme = "light"; // Fallback if systemTheme is neither light nor dark
+    }
+
+    setTheme(nextTheme);
+  };
+
+  if (!mounted) return null;
+
+  const currentTheme: Theme =
+    theme === "system" && (systemTheme === "light" || systemTheme === "dark")
+      ? "system"
+      : (theme as Theme);
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <LuSun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <LuMoon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          <div className="flex items-center gap-2">
-            <LuSun />
-            <p>Light</p>
-          </div>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          <div className="flex items-center gap-2">
-            <LuMoon />
-            <p>Dark</p>
-          </div>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          <div className="flex items-center gap-2">
-            <LuSettings />
-            <p>System</p>
-          </div>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Button variant="default" size="icon" onClick={handleThemeChange}>
+      {currentTheme === "light" && <LuSun />}
+      {currentTheme === "system" && <LuTv2 />}
+      {currentTheme === "dark" && <LuMoon />}
+    </Button>
   );
 };
 
-export default ThemeSwitch;
+export default ThemeSwitcher;

@@ -13,27 +13,16 @@ const LinkedButton = ({
   text: string;
 }) => {
   return (
-      <Button asChild variant="outline" className="relative w-full p-6">
-        <Link href={link} className="flex items-center w-full">
-          <div className="h-full w-8 absolute left-0 ml-6 pl-2 flex items-center justify-center">
-            {React.cloneElement(icon, {className: "h-full w-full"})}
-          </div>
-          <div className="flex flex-grow justify-center">
-            <h3 className="text-center">{text}</h3>
-          </div>
-        </Link>
-      </Button>
-
-      /*<Button asChild className="relative w-full">
-        <Link href={link} className="flex items-center w-full">
-          <div className="h-full w-8 absolute left-0 pl-2 flex items-center justify-center">
-            {React.cloneElement(icon, { className: "h-full w-full" })}
-          </div>
-          <div className="flex flex-grow justify-center">
-            <p className="text-center">{text}</p>
-          </div>
-        </Link>
-      </Button>*/
+    <Button asChild className="relative w-full">
+      <Link href={link} className="flex items-center w-full">
+        <div className="h-full w-8 absolute left-0 pl-2 flex items-center justify-center">
+          {React.cloneElement(icon, { className: "h-full w-full" })}
+        </div>
+        <div className="flex flex-grow justify-center">
+          <p className="text-center">{text}</p>
+        </div>
+      </Link>
+    </Button>
   );
 };
 
