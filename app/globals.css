@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+:root {
+  /* Theme foundation */
+  --theme-canvas: #ffe600;
+  --theme-ink: #000000;
+  --theme-stroke: #000000;
+  --theme-surface: #ffffff;
+
+  /* Provider card colors */
+  --provider-instagram-base: #ff4f8b;
+  --provider-instagram-hover: #e1306c;
+  --provider-instagram-ink: #1a0a11;
+  --provider-instagram-ink-hover: #1a0a11;
+
+  --provider-github-base: #f6f8fa;
+  --provider-github-hover: #e2e8f0;
+  --provider-github-ink: #111111;
+  --provider-github-ink-hover: #111111;
+
+  --provider-spotify-base: #35dd74;
+  --provider-spotify-hover: #1db954;
+  --provider-spotify-ink: #05220f;
+  --provider-spotify-ink-hover: #05220f;
+
+  --provider-statsfm-base: #ccff5a;
+  --provider-statsfm-hover: #9fd83f;
+  --provider-statsfm-ink: #111111;
+  --provider-statsfm-ink-hover: #111111;
+
+  --provider-twitter-base: #67c6ff;
+  --provider-twitter-hover: #1d9bf0;
+  --provider-twitter-ink: #00243a;
+  --provider-twitter-ink-hover: #00243a;
+
+  --provider-bluesky-base: #5a95ff;
+  --provider-bluesky-hover: #2f6ce5;
+  --provider-bluesky-ink: #ffffff;
+  --provider-bluesky-ink-hover: #ffffff;
+}
+
+@theme inline {
+  --color-theme-canvas: var(--theme-canvas);
+  --color-theme-ink: var(--theme-ink);
+  --color-theme-stroke: var(--theme-stroke);
+  --color-theme-surface: var(--theme-surface);
+
+  --color-provider-instagram-base: var(--provider-instagram-base);
+  --color-provider-instagram-hover: var(--provider-instagram-hover);
+  --color-provider-instagram-ink: var(--provider-instagram-ink);
+  --color-provider-instagram-ink-hover: var(--provider-instagram-ink-hover);
+
+  --color-provider-github-base: var(--provider-github-base);
+  --color-provider-github-hover: var(--provider-github-hover);
+  --color-provider-github-ink: var(--provider-github-ink);
+  --color-provider-github-ink-hover: var(--provider-github-ink-hover);
+
+  --color-provider-spotify-base: var(--provider-spotify-base);
+  --color-provider-spotify-hover: var(--provider-spotify-hover);
+  --color-provider-spotify-ink: var(--provider-spotify-ink);
+  --color-provider-spotify-ink-hover: var(--provider-spotify-ink-hover);
+
+  --color-provider-statsfm-base: var(--provider-statsfm-base);
+  --color-provider-statsfm-hover: var(--provider-statsfm-hover);
+  --color-provider-statsfm-ink: var(--provider-statsfm-ink);
+  --color-provider-statsfm-ink-hover: var(--provider-statsfm-ink-hover);
+
+  --color-provider-twitter-base: var(--provider-twitter-base);
+  --color-provider-twitter-hover: var(--provider-twitter-hover);
+  --color-provider-twitter-ink: var(--provider-twitter-ink);
+  --color-provider-twitter-ink-hover: var(--provider-twitter-ink-hover);
+
+  --color-provider-bluesky-base: var(--provider-bluesky-base);
+  --color-provider-bluesky-hover: var(--provider-bluesky-hover);
+  --color-provider-bluesky-ink: var(--provider-bluesky-ink);
+  --color-provider-bluesky-ink-hover: var(--provider-bluesky-ink-hover);
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-space-mono), "Roboto Mono", monospace;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--theme-canvas);
+  color: var(--theme-ink);
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+body {
+  min-height: 100%;
+}

@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# nilsbtr-links-next
 
-## Getting Started
+Production-grade Next.js App Router project for the `nilsbtr` social links page, ported from a drafted design with a Tailwind CSS v4 token system and SEO-focused metadata.
 
-First, run the development server:
+## Requirements
+
+- Node.js 20+
+- npm 10+
+
+## Local Development
+
+1. Copy the environment template:
+
+```bash
+cp .env.example .env.local
+```
+
+2. Start the dev server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- `NEXT_PUBLIC_SITE_URL`: public canonical base URL used by metadata, robots, sitemap, and schema (example: `https://nilsbtr.com`).
 
-## Learn More
+## Available Scripts
 
-To learn more about Next.js, take a look at the following resources:
+- `npm run dev`: run local development server
+- `npm run build`: create production build
+- `npm run start`: run production server
+- `npm run typecheck`: run TypeScript checks
+- `npm run lint`: run ESLint with zero-warning policy
+- `npm run lint:fix`: auto-fix lint issues where possible
+- `npm run format`: format all files with Prettier
+- `npm run format:check`: validate formatting
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- `app/`: App Router routes, metadata routes, global styles
+- `components/social/`: social page UI components
+- `content/`: typed content/data models
+- `lib/`: shared helpers and site configuration
 
-## Deploy on Vercel
+## SEO and Metadata
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Configured via:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- `app/layout.tsx`: global metadata, Open Graph, Twitter, robots directives
+- `app/robots.ts`: robots.txt
+- `app/sitemap.ts`: sitemap.xml
+- `app/opengraph-image.tsx`: dynamic OG image
+- `app/page.tsx`: JSON-LD Person schema
+
+## Deployment Notes
+
+- Ensure `NEXT_PUBLIC_SITE_URL` is set correctly in the deployment environment.
+- Run this quality gate before shipping:
+
+```bash
+npm run format:check && npm run typecheck && npm run lint && npm run build
+```

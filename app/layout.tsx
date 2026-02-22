@@ -1,45 +1,90 @@
-import Navbar from "@/components/Navbar";
-import ThemeProvider from "@/components/ThemeProvider";
-import "@/styles/globals.css";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import type { Metadata } from "next";
-import { Nunito, Open_Sans } from "next/font/google";
-import React from "react";
+import { Inter, Space_Mono } from "next/font/google";
 
-const nunito = Nunito({ subsets: ["latin"], variable: "--font-nunito" });
+import { siteConfig } from "@/lib/site";
 
-const opsans = Open_Sans({ subsets: ["latin"], variable: "--font-opsans" });
+import "./globals.css";
+import type { Metadata, Viewport } from "next";
+import type { ReactNode } from "react";
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const spaceMono = Space_Mono({
+  variable: "--font-space-mono",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+});
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#ffe600",
+};
+
+const metadataBase = new URL(siteConfig.url);
 
 export const metadata: Metadata = {
-  title: "Nils Boettcher",
-  description: "A personal space by nilsbtr.",
+  metadataBase,
+  title: siteConfig.title,
+  description: siteConfig.description,
+  keywords: [...siteConfig.keywords],
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [{ url: "/icon" }],
+    shortcut: [{ url: "/icon" }],
+    apple: [{ url: "/apple-icon" }],
+  },
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: siteConfig.locale,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
+    url: "/",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: siteConfig.title,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    creator: siteConfig.twitterHandle,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: ["/opengraph-image"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
-const RootLayout = ({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) => {
+type RootLayoutProps = Readonly<{
+  children: ReactNode;
+}>;
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html
-      lang="de"
-      className={`${nunito.variable} ${opsans.variable}`}
-      suppressHydrationWarning
-    >
-      {/* <body className="bg-gradient-to-t from-background to-accent backdrop-blur-lg h-screen"> */}
-      <body className="h-screen !pt-3">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <main className="h-full max-w-4xl px-3 m-auto flex flex-col">
-            <Navbar />
-            {children}
-          </main>
-        </ThemeProvider>
-        <Analytics />
-        <SpeedInsights />
-      </body>
+    <html lang="en">
+      <body className={`${inter.variable} ${spaceMono.variable}`}>{children}</body>
     </html>
   );
-};
-
-export default RootLayout;
+}
