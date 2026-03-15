@@ -1,6 +1,6 @@
-import { siteConfig } from "@/lib/site";
-
 import type { MetadataRoute } from "next";
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://nilsbtr.de";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -8,7 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    host: siteConfig.url,
-    sitemap: `${siteConfig.url}/sitemap.xml`,
+    sitemap: `${siteUrl}/sitemap.xml`,
   };
 }
