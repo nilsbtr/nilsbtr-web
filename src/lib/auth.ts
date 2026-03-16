@@ -5,6 +5,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 
 import * as schema from "./auth-schema";
 import { db } from "./db";
+import { getAuthUrl } from "./site-url";
 
 const authSecret = process.env.BETTER_AUTH_SECRET;
 
@@ -12,15 +13,9 @@ if (!authSecret) {
   throw new Error("Missing BETTER_AUTH_SECRET.");
 }
 
-const baseURL = (
-  process.env.BETTER_AUTH_URL ??
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000")
-).replace(/\/$/, "");
-
 export const auth = betterAuth({
   secret: authSecret,
-  baseURL,
+  baseURL: getAuthUrl(),
   database: drizzleAdapter(db, { provider: "pg", schema }),
   emailAndPassword: { enabled: true },
   socialProviders: {

@@ -7,6 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Navbar } from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { getSiteUrl } from "@/lib/site-url";
 
 import "./globals.css";
 
@@ -31,7 +32,7 @@ const fontMono = JetBrains_Mono({
   variable: "--font-mono",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://nilsbtr.de";
+const siteUrl = getSiteUrl();
 
 export const viewport: Viewport = {
   width: "device-width",
