@@ -21,16 +21,12 @@ jobs:
     env:
       NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
       BETTER_AUTH_URL: ${{ vars.BETTER_AUTH_URL }}
-      APPLE_CLIENT_ID: ${{ vars.APPLE_CLIENT_ID }}
       GITHUB_CLIENT_ID: ${{ vars.GITHUB_CLIENT_ID }}
       GOOGLE_CLIENT_ID: ${{ vars.GOOGLE_CLIENT_ID }}
-      MICROSOFT_CLIENT_ID: ${{ vars.MICROSOFT_CLIENT_ID }}
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
-      APPLE_CLIENT_SECRET: ${{ secrets.APPLE_CLIENT_SECRET }}
       GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
       GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-      MICROSOFT_CLIENT_SECRET: ${{ secrets.MICROSOFT_CLIENT_SECRET }}
 
     steps:
       - name: Checkout

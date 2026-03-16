@@ -9,6 +9,7 @@
     "env:pull": "pnpm dlx vercel@latest env pull .env.local --yes",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
+    "db:migrate:production": "bash ./scripts/migrate-production.sh",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "typecheck": "tsc --noEmit",

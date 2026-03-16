@@ -85,6 +85,18 @@ Apply migrations to your current `DATABASE_URL`:
 pnpm db:migrate
 ```
 
+Apply migrations to the linked Vercel project's Production environment:
+
+```bash
+pnpm db:migrate:production
+```
+
+Skip the confirmation prompt if needed:
+
+```bash
+pnpm db:migrate:production -- --yes
+```
+
 Recommended flow:
 
 1. Point local `.env.local` at the Neon `development` branch.
