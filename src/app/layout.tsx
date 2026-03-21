@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { Navbar } from "@/components/navbar";
+import { Providers } from "@/components/providers";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { getSiteUrl } from "@/lib/site-url";
@@ -115,10 +116,12 @@ export default function RootLayout({
         className={`${fontSans.variable} ${fontCursive.variable} ${fontSerif.variable} ${fontMono.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <TooltipProvider>
-            <Navbar />
-            <main>{children}</main>
-          </TooltipProvider>
+          <Providers>
+            <TooltipProvider>
+              <Navbar />
+              <main>{children}</main>
+            </TooltipProvider>
+          </Providers>
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />
