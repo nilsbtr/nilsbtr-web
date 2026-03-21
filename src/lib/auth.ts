@@ -4,11 +4,11 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { APIError, createAuthMiddleware } from "better-auth/api";
 import { admin } from "better-auth/plugins";
-import { eq, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 
 import * as schema from "./auth-schema";
 import { db } from "./db";
-import { consumeInviteCode, validateInviteCode } from "./invite";
+import { consumeInviteCode } from "./invite";
 import { getAuthUrl } from "./site-url";
 
 const authSecret = process.env.BETTER_AUTH_SECRET;
@@ -42,9 +42,11 @@ export const auth = betterAuth({
         });
       }
 
-      const result = await validateInviteCode(inviteCode);
-      if (!result.valid) {
-        throw new APIError("FORBIDDEN", { message: result.error });
+      const consumed = await consumeInviteCode(inviteCode);
+      if (!consumed) {
+        throw new APIError("FORBIDDEN", {
+          message: "This invite is invalid, expired, or fully used.",
+        });
       }
     }),
     after: createAuthMiddleware(async (ctx) => {
@@ -53,27 +55,12 @@ export const auth = betterAuth({
       const newSession = ctx.context.newSession;
       if (!newSession) return;
 
-      const hasAdmin = await db
-        .select({ id: schema.user.id })
-        .from(schema.user)
-        .where(eq(schema.user.role, "admin"))
-        .limit(1)
-        .then((rows) => rows.length > 0);
-
-      if (!hasAdmin) {
-        await db
-          .update(schema.user)
-          .set({ role: "admin" })
-          .where(
-            sql`${schema.user.id} = ${newSession.user.id} AND NOT EXISTS (SELECT 1 FROM "user" WHERE "role" = 'admin')`
-          );
-        return;
-      }
-
-      const inviteCode = ctx.headers?.get("x-invite-code");
-      if (inviteCode) {
-        await consumeInviteCode(inviteCode);
-      }
+      await db
+        .update(schema.user)
+        .set({ role: "admin" })
+        .where(
+          sql`${schema.user.id} = ${newSession.user.id} AND NOT EXISTS (SELECT 1 FROM "user" WHERE "role" = 'admin')`,
+        );
     }),
   },
 });

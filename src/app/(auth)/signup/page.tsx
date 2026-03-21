@@ -25,7 +25,7 @@ import { type SignupValues, signupSchema } from "@/lib/validations";
 async function checkSignupAccess(
   code: string | null
 ): Promise<{ valid: boolean; bootstrap?: boolean; error?: string }> {
-  const res = await fetch("/api/admin/invites/validate", {
+  const res = await fetch("/api/invites/validate", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ code: code ?? "" }),
