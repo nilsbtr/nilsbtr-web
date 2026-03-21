@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
-
-import { useRouter } from "next/navigation";
+import { Suspense, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
@@ -21,8 +20,13 @@ import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import { type LoginValues, loginSchema } from "@/lib/validations";
 
-export default function LoginPage() {
+function isSafeRedirect(url: string): boolean {
+  return url.startsWith("/") && !url.startsWith("//");
+}
+
+function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [serverError, setServerError] = useState<string | null>(null);
 
   const form = useForm<LoginValues>({
@@ -40,7 +44,8 @@ export default function LoginPage() {
       setServerError(error.message ?? "Failed to sign in.");
       return;
     }
-    router.push("/");
+    const redirect = searchParams.get("redirect");
+    router.push(redirect && isSafeRedirect(redirect) ? redirect : "/");
     router.refresh();
   }
 
@@ -104,5 +109,13 @@ export default function LoginPage() {
         </Button>
       </CardFooter>
     </Card>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
   );
 }

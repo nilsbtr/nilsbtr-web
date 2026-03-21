@@ -4,7 +4,7 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { APIError, createAuthMiddleware } from "better-auth/api";
 import { admin } from "better-auth/plugins";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 import * as schema from "./auth-schema";
 import { db } from "./db";
@@ -53,17 +53,20 @@ export const auth = betterAuth({
       const newSession = ctx.context.newSession;
       if (!newSession) return;
 
-      const userCount = await db
+      const hasAdmin = await db
         .select({ id: schema.user.id })
         .from(schema.user)
-        .limit(2)
-        .then((rows) => rows.length);
+        .where(eq(schema.user.role, "admin"))
+        .limit(1)
+        .then((rows) => rows.length > 0);
 
-      if (userCount === 1) {
+      if (!hasAdmin) {
         await db
           .update(schema.user)
           .set({ role: "admin" })
-          .where(eq(schema.user.id, newSession.user.id));
+          .where(
+            sql`${schema.user.id} = ${newSession.user.id} AND NOT EXISTS (SELECT 1 FROM "user" WHERE "role" = 'admin')`,
+          );
         return;
       }
 

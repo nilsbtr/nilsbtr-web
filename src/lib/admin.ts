@@ -8,12 +8,12 @@ export async function requireAdmin() {
   const session = await auth.api.getSession({ headers: await headers() });
 
   if (!session) {
-    return { session: null, error: "Not authenticated." } as const;
+    return { session: null, error: "Not authenticated.", status: 401 as const };
   }
 
   if (session.user.role !== "admin") {
-    return { session: null, error: "Forbidden." } as const;
+    return { session: null, error: "Forbidden.", status: 403 as const };
   }
 
-  return { session, error: null } as const;
+  return { session, error: null, status: 200 as const };
 }

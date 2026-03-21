@@ -1,7 +1,8 @@
 import "server-only";
 
 import { createHash, randomBytes } from "crypto";
-import { eq, sql } from "drizzle-orm";
+
+import { and, eq, gt, lt, sql } from "drizzle-orm";
 
 import { invitation } from "./auth-schema";
 import { db } from "./db";
@@ -33,11 +34,19 @@ export async function validateInviteCode(code: string) {
   return { valid: true, invite } as const;
 }
 
-export async function consumeInviteCode(code: string) {
+export async function consumeInviteCode(code: string): Promise<boolean> {
   const hash = hashInviteCode(code);
 
-  await db
+  const result = await db
     .update(invitation)
     .set({ useCount: sql`${invitation.useCount} + 1` })
-    .where(eq(invitation.codeHash, hash));
+    .where(
+      and(
+        eq(invitation.codeHash, hash),
+        lt(invitation.useCount, invitation.maxUses),
+        gt(invitation.expiresAt, new Date()),
+      ),
+    );
+
+  return (result.rowCount ?? 0) > 0;
 }

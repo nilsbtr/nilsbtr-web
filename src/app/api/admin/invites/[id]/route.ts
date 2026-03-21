@@ -7,8 +7,8 @@ import { invitation } from "@/lib/auth-schema";
 import { db } from "@/lib/db";
 
 export async function DELETE(_request: Request, { params }: { params: Promise<{ id: string }> }) {
-  const { error } = await requireAdmin();
-  if (error) return NextResponse.json({ error }, { status: 401 });
+  const { error, status } = await requireAdmin();
+  if (error) return NextResponse.json({ error }, { status });
 
   const { id } = await params;
 

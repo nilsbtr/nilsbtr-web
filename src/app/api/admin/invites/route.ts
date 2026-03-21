@@ -9,8 +9,8 @@ import { generateInviteToken, hashInviteCode } from "@/lib/invite";
 import { createInviteSchema } from "@/lib/validations";
 
 export async function GET() {
-  const { error } = await requireAdmin();
-  if (error) return NextResponse.json({ error }, { status: 401 });
+  const { error, status } = await requireAdmin();
+  if (error) return NextResponse.json({ error }, { status });
 
   const invites = await db.select().from(invitation).orderBy(desc(invitation.createdAt));
 
@@ -18,8 +18,8 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const { session, error } = await requireAdmin();
-  if (error || !session) return NextResponse.json({ error }, { status: 401 });
+  const { session, error, status } = await requireAdmin();
+  if (error || !session) return NextResponse.json({ error }, { status });
 
   const body = await request.json().catch(() => ({}));
   const parsed = createInviteSchema.safeParse(body);
