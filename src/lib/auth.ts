@@ -75,9 +75,7 @@ export const auth = betterAuth({
       await db
         .update(schema.user)
         .set({ role: "admin" })
-        .where(
-          sql`${schema.user.id} = (SELECT "id" FROM "user" ORDER BY "id" ASC LIMIT 1)`,
-        );
+        .where(sql`${schema.user.id} = (SELECT "id" FROM "user" ORDER BY "id" ASC LIMIT 1)`);
     }),
   },
 });

@@ -30,7 +30,7 @@ function getCodeFromFragment(): string | null {
 }
 
 async function checkSignupAccess(
-  code: string | null,
+  code: string | null
 ): Promise<{ valid: boolean; bootstrap?: boolean; error?: string }> {
   const res = await fetch("/api/invites/validate", {
     method: "POST",
