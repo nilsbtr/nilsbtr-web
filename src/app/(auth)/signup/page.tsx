@@ -23,7 +23,7 @@ import { authClient } from "@/lib/auth-client";
 import { type SignupValues, signupSchema } from "@/lib/validations";
 
 async function checkSignupAccess(
-  code: string | null,
+  code: string | null
 ): Promise<{ valid: boolean; bootstrap?: boolean; error?: string }> {
   const res = await fetch("/api/admin/invites/validate", {
     method: "POST",
@@ -63,7 +63,7 @@ function SignupForm() {
         email: values.email,
         password: values.password,
       },
-      code ? { headers: { "x-invite-code": code } } : undefined,
+      code ? { headers: { "x-invite-code": code } } : undefined
     );
 
     if (error) {
