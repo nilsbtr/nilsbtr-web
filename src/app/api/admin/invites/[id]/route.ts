@@ -2,14 +2,11 @@ import { NextResponse } from "next/server";
 
 import { eq } from "drizzle-orm";
 
+import { requireAdmin } from "@/lib/admin";
 import { invitation } from "@/lib/auth-schema";
 import { db } from "@/lib/db";
-import { requireAdmin } from "@/lib/admin";
 
-export async function DELETE(
-  _request: Request,
-  { params }: { params: Promise<{ id: string }> },
-) {
+export async function DELETE(_request: Request, { params }: { params: Promise<{ id: string }> }) {
   const { error } = await requireAdmin();
   if (error) return NextResponse.json({ error }, { status: 401 });
 

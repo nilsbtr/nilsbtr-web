@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Cancel01Icon,
   CheckmarkCircle01Icon,
@@ -12,7 +13,6 @@ import {
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -29,11 +29,25 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { authClient } from "@/lib/auth-client";
 import { type CreateInviteValues, createInviteSchema } from "@/lib/validations";
@@ -52,7 +66,9 @@ function UsersTab() {
       const res = await authClient.admin.listUsers({
         query: {
           limit: 100,
-          ...(search ? { searchValue: search, searchField: "email", searchOperator: "contains" } : {}),
+          ...(search
+            ? { searchValue: search, searchField: "email", searchOperator: "contains" }
+            : {}),
         },
       });
       return res.data;
@@ -121,16 +137,26 @@ function UsersTab() {
             {isLoading &&
               Array.from({ length: 3 }).map((_, i) => (
                 <TableRow key={i}>
-                  <TableCell><Skeleton className="h-4 w-24" /></TableCell>
-                  <TableCell><Skeleton className="h-4 w-36" /></TableCell>
-                  <TableCell><Skeleton className="h-4 w-14" /></TableCell>
-                  <TableCell><Skeleton className="h-4 w-14" /></TableCell>
-                  <TableCell><Skeleton className="h-4 w-20 ml-auto" /></TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-24" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-36" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-14" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-14" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="ml-auto h-4 w-20" />
+                  </TableCell>
                 </TableRow>
               ))}
             {!isLoading && users.length === 0 && (
               <TableRow>
-                <TableCell colSpan={5} className="text-center text-muted-foreground py-6">
+                <TableCell colSpan={5} className="py-6 text-center text-muted-foreground">
                   No users found.
                 </TableCell>
               </TableRow>
@@ -203,7 +229,8 @@ function UsersTab() {
                         <AlertDialogHeader>
                           <AlertDialogTitle>Remove user?</AlertDialogTitle>
                           <AlertDialogDescription>
-                            This will permanently delete {user.name}&apos;s account. This action cannot be undone.
+                            This will permanently delete {user.name}&apos;s account. This action
+                            cannot be undone.
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
@@ -263,7 +290,12 @@ function InvitesTab() {
         body: JSON.stringify(values),
       });
       if (!res.ok) throw new Error("Failed to create invite.");
-      return res.json() as Promise<{ id: string; token: string; expiresAt: string; maxUses: number }>;
+      return res.json() as Promise<{
+        id: string;
+        token: string;
+        expiresAt: string;
+        maxUses: number;
+      }>;
     },
     onSuccess: (data) => {
       const link = `${window.location.origin}/signup?code=${data.token}`;
@@ -375,11 +407,7 @@ function InvitesTab() {
               </Button>
             </div>
           )}
-          <Button
-            type="submit"
-            form="invite-form"
-            disabled={createMutation.isPending}
-          >
+          <Button type="submit" form="invite-form" disabled={createMutation.isPending}>
             {createMutation.isPending ? "Creating..." : "Create invite link"}
           </Button>
         </CardFooter>
@@ -400,16 +428,26 @@ function InvitesTab() {
             {isLoading &&
               Array.from({ length: 2 }).map((_, i) => (
                 <TableRow key={i}>
-                  <TableCell><Skeleton className="h-4 w-14" /></TableCell>
-                  <TableCell><Skeleton className="h-4 w-10" /></TableCell>
-                  <TableCell><Skeleton className="h-4 w-24" /></TableCell>
-                  <TableCell><Skeleton className="h-4 w-24" /></TableCell>
-                  <TableCell><Skeleton className="h-4 w-8 ml-auto" /></TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-14" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-10" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-24" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="h-4 w-24" />
+                  </TableCell>
+                  <TableCell>
+                    <Skeleton className="ml-auto h-4 w-8" />
+                  </TableCell>
                 </TableRow>
               ))}
             {!isLoading && invites.length === 0 && (
               <TableRow>
-                <TableCell colSpan={5} className="text-center text-muted-foreground py-6">
+                <TableCell colSpan={5} className="py-6 text-center text-muted-foreground">
                   No invites yet.
                 </TableCell>
               </TableRow>
@@ -421,7 +459,11 @@ function InvitesTab() {
                   <TableCell>
                     <Badge
                       variant={
-                        status === "active" ? "outline" : status === "used" ? "secondary" : "destructive"
+                        status === "active"
+                          ? "outline"
+                          : status === "used"
+                            ? "secondary"
+                            : "destructive"
                       }
                     >
                       {status}

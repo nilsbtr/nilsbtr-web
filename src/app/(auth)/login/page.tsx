@@ -1,13 +1,21 @@
 "use client";
 
 import { useState } from "react";
+
 import { useRouter } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
@@ -85,9 +93,7 @@ export default function LoginPage() {
         </form>
       </CardContent>
       <CardFooter className="flex-col gap-3">
-        {serverError && (
-          <p className="w-full text-sm text-destructive">{serverError}</p>
-        )}
+        {serverError && <p className="w-full text-sm text-destructive">{serverError}</p>}
         <Button
           type="submit"
           form="login-form"
