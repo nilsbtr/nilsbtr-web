@@ -65,7 +65,7 @@ export const auth = betterAuth({
           .update(schema.user)
           .set({ role: "admin" })
           .where(
-            sql`${schema.user.id} = ${newSession.user.id} AND NOT EXISTS (SELECT 1 FROM "user" WHERE "role" = 'admin')`,
+            sql`${schema.user.id} = ${newSession.user.id} AND NOT EXISTS (SELECT 1 FROM "user" WHERE "role" = 'admin')`
           );
         return;
       }

@@ -1,7 +1,6 @@
 import "server-only";
 
 import { createHash, randomBytes } from "crypto";
-
 import { and, eq, gt, lt, sql } from "drizzle-orm";
 
 import { invitation } from "./auth-schema";
@@ -44,8 +43,8 @@ export async function consumeInviteCode(code: string): Promise<boolean> {
       and(
         eq(invitation.codeHash, hash),
         lt(invitation.useCount, invitation.maxUses),
-        gt(invitation.expiresAt, new Date()),
-      ),
+        gt(invitation.expiresAt, new Date())
+      )
     );
 
   return (result.rowCount ?? 0) > 0;
