@@ -4,9 +4,12 @@ import { user } from "@/lib/auth-schema";
 import { db } from "@/lib/db";
 import { validateInviteCode } from "@/lib/invite";
 
+const MAX_INVITE_CODE_LENGTH = 128;
+
 export async function POST(request: Request) {
   const body = await request.json().catch(() => ({}));
-  const code = typeof body.code === "string" ? body.code.trim() : "";
+  const raw = typeof body.code === "string" ? body.code.trim() : "";
+  const code = raw.length <= MAX_INVITE_CODE_LENGTH ? raw : "";
 
   const userCount = await db
     .select({ id: user.id })

@@ -1,5 +1,5 @@
 {
-  "id": "fe44f474-1da6-4460-8920-5c4d36d3fa4d",
+  "id": "9bc11574-6881-40b6-89ec-b1d2ed6af24b",
   "prevId": "ef297835-01f0-43bd-ae30-26e9d8c7fa0c",
   "version": "7",
   "dialect": "postgresql",
@@ -110,8 +110,12 @@
           "name": "account_user_id_user_id_fk",
           "tableFrom": "account",
           "tableTo": "user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -194,8 +198,12 @@
           "name": "invitation_created_by_user_id_fk",
           "tableFrom": "invitation",
           "tableTo": "user",
-          "columnsFrom": ["created_by"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "created_by"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -205,7 +213,9 @@
         "invitation_code_hash_unique": {
           "name": "invitation_code_hash_unique",
           "nullsNotDistinct": false,
-          "columns": ["code_hash"]
+          "columns": [
+            "code_hash"
+          ]
         }
       },
       "policies": {},
@@ -294,8 +304,12 @@
           "name": "session_user_id_user_id_fk",
           "tableFrom": "session",
           "tableTo": "user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -305,7 +319,9 @@
         "session_token_unique": {
           "name": "session_token_unique",
           "nullsNotDistinct": false,
-          "columns": ["token"]
+          "columns": [
+            "token"
+          ]
         }
       },
       "policies": {},
@@ -351,13 +367,15 @@
           "name": "role",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": "'user'"
         },
         "banned": {
           "name": "banned",
           "type": "boolean",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true,
+          "default": false
         },
         "ban_reason": {
           "name": "ban_reason",
@@ -393,7 +411,9 @@
         "user_email_unique": {
           "name": "user_email_unique",
           "nullsNotDistinct": false,
-          "columns": ["email"]
+          "columns": [
+            "email"
+          ]
         }
       },
       "policies": {},

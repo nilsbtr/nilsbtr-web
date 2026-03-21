@@ -37,6 +37,7 @@ async function checkSignupAccess(
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ code: code ?? "" }),
   });
+  if (!res.ok) throw new Error("Failed to validate invite code.");
   return res.json();
 }
 
@@ -46,7 +47,11 @@ function SignupForm() {
 
   const [serverError, setServerError] = useState<string | null>(null);
 
-  const { data: codeCheck, isLoading: isCheckingCode } = useQuery({
+  const {
+    data: codeCheck,
+    isLoading: isCheckingCode,
+    isError: isCheckError,
+  } = useQuery({
     queryKey: ["signup-access", code],
     queryFn: () => checkSignupAccess(code),
     retry: false,
@@ -86,6 +91,19 @@ function SignupForm() {
         <CardHeader>
           <CardTitle>Verifying invite...</CardTitle>
           <CardDescription>Please wait while we validate your invite code.</CardDescription>
+        </CardHeader>
+      </Card>
+    );
+  }
+
+  if (isCheckError) {
+    return (
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle>Something went wrong</CardTitle>
+          <CardDescription>
+            Could not verify your invite code. Please try again later.
+          </CardDescription>
         </CardHeader>
       </Card>
     );
