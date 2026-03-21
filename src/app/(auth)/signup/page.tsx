@@ -22,11 +22,13 @@ import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import { type SignupValues, signupSchema } from "@/lib/validations";
 
-async function checkInviteCode(code: string): Promise<{ valid: boolean; error?: string }> {
+async function checkSignupAccess(
+  code: string | null,
+): Promise<{ valid: boolean; bootstrap?: boolean; error?: string }> {
   const res = await fetch("/api/admin/invites/validate", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ code }),
+    body: JSON.stringify({ code: code ?? "" }),
   });
   return res.json();
 }
@@ -39,9 +41,8 @@ function SignupForm() {
   const [serverError, setServerError] = useState<string | null>(null);
 
   const { data: codeCheck, isLoading: isCheckingCode } = useQuery({
-    queryKey: ["invite-validate", code],
-    queryFn: () => checkInviteCode(code!),
-    enabled: !!code,
+    queryKey: ["signup-access", code],
+    queryFn: () => checkSignupAccess(code),
     retry: false,
   });
 
@@ -50,8 +51,10 @@ function SignupForm() {
     defaultValues: { name: "", email: "", password: "", confirmPassword: "" },
   });
 
+  const isBootstrap = codeCheck?.bootstrap === true;
+
   async function onSubmit(values: SignupValues) {
-    if (!code || !codeCheck?.valid) return;
+    if (!codeCheck?.valid) return;
     setServerError(null);
 
     const { error } = await authClient.signUp.email(
@@ -60,9 +63,7 @@ function SignupForm() {
         email: values.email,
         password: values.password,
       },
-      {
-        headers: { "x-invite-code": code },
-      }
+      code ? { headers: { "x-invite-code": code } } : undefined,
     );
 
     if (error) {
@@ -71,19 +72,6 @@ function SignupForm() {
     }
     router.push("/");
     router.refresh();
-  }
-
-  if (!code) {
-    return (
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle>Invite required</CardTitle>
-          <CardDescription>
-            This site is invite-only. You need a valid invite link to sign up.
-          </CardDescription>
-        </CardHeader>
-      </Card>
-    );
   }
 
   if (isCheckingCode) {
@@ -98,13 +86,16 @@ function SignupForm() {
   }
 
   if (!codeCheck?.valid) {
+    const title = code ? "Invalid invite" : "Invite required";
+    const description = code
+      ? (codeCheck?.error ?? "This invite link is invalid or has expired.")
+      : "This site is invite-only. You need a valid invite link to sign up.";
+
     return (
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle>Invalid invite</CardTitle>
-          <CardDescription>
-            {codeCheck?.error ?? "This invite link is invalid or has expired."}
-          </CardDescription>
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{description}</CardDescription>
         </CardHeader>
       </Card>
     );
@@ -114,7 +105,9 @@ function SignupForm() {
     <Card className="w-full max-w-sm">
       <CardHeader>
         <CardTitle>Create account</CardTitle>
-        <CardDescription>You have been invited to join.</CardDescription>
+        <CardDescription>
+          {isBootstrap ? "Set up your owner account." : "You have been invited to join."}
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <form id="signup-form" onSubmit={form.handleSubmit(onSubmit)}>
