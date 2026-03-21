@@ -1,6 +1,7 @@
 import "server-only";
 
 import { createHash, randomBytes } from "crypto";
+
 import { and, eq, gt, lt, sql } from "drizzle-orm";
 
 import { invitation } from "./auth-schema";
@@ -48,4 +49,13 @@ export async function consumeInviteCode(code: string): Promise<boolean> {
     );
 
   return (result.rowCount ?? 0) > 0;
+}
+
+export async function rollbackInviteConsumption(code: string): Promise<void> {
+  const hash = hashInviteCode(code);
+
+  await db
+    .update(invitation)
+    .set({ useCount: sql`GREATEST(${invitation.useCount} - 1, 0)` })
+    .where(eq(invitation.codeHash, hash));
 }

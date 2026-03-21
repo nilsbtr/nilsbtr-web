@@ -1,8 +1,8 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { useState } from "react";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
@@ -22,8 +22,15 @@ import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import { type SignupValues, signupSchema } from "@/lib/validations";
 
+function getCodeFromFragment(): string | null {
+  if (typeof window === "undefined") return null;
+  const hash = window.location.hash;
+  if (!hash.startsWith("#code=")) return null;
+  return decodeURIComponent(hash.slice("#code=".length)) || null;
+}
+
 async function checkSignupAccess(
-  code: string | null
+  code: string | null,
 ): Promise<{ valid: boolean; bootstrap?: boolean; error?: string }> {
   const res = await fetch("/api/invites/validate", {
     method: "POST",
@@ -35,8 +42,7 @@ async function checkSignupAccess(
 
 function SignupForm() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const code = searchParams.get("code");
+  const [code] = useState(getCodeFromFragment);
 
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -202,9 +208,5 @@ function SignupForm() {
 }
 
 export default function SignupPage() {
-  return (
-    <Suspense>
-      <SignupForm />
-    </Suspense>
-  );
+  return <SignupForm />;
 }

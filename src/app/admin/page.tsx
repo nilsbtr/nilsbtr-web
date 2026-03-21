@@ -298,7 +298,7 @@ function InvitesTab() {
       }>;
     },
     onSuccess: (data) => {
-      const link = `${window.location.origin}/signup?code=${data.token}`;
+      const link = `${window.location.origin}/signup#code=${encodeURIComponent(data.token)}`;
       setGeneratedLink(link);
       queryClient.invalidateQueries({ queryKey: ["admin", "invites"] });
       toast.success("Invite created.");
@@ -328,9 +328,17 @@ function InvitesTab() {
     createMutation.mutate(values);
   }
 
-  function copyLink(link: string) {
-    navigator.clipboard.writeText(link);
-    toast.success("Link copied to clipboard.");
+  async function copyLink(link: string) {
+    if (!navigator?.clipboard?.writeText) {
+      toast.error("Clipboard is not supported in this browser.");
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(link);
+      toast.success("Link copied to clipboard.");
+    } catch {
+      toast.error("Failed to copy link to clipboard.");
+    }
   }
 
   const invites = data?.invites ?? [];
