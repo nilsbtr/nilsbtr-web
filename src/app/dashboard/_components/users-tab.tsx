@@ -71,15 +71,19 @@ export function UsersTab({ currentUserId }: { currentUserId: string }) {
   });
 
   const fetchUsers = useCallback(async () => {
-    const { data, error } = await authClient.admin.listUsers({
-      query: { limit: 100, sortBy: "createdAt", sortDirection: "desc" },
-    });
-    if (error) {
-      toast.error("Failed to load users.");
-      return;
+    try {
+      const { data, error } = await authClient.admin.listUsers({
+        query: { limit: 100, sortBy: "createdAt", sortDirection: "desc" },
+      });
+      if (error) {
+        setUsers([]);
+        toast.error("Failed to load users.");
+        return;
+      }
+      setUsers((data?.users as User[]) ?? []);
+    } finally {
+      setLoading(false);
     }
-    setUsers((data?.users as User[]) ?? []);
-    setLoading(false);
   }, []);
 
   const usersInit = useRef(false);
