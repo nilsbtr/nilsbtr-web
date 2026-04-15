@@ -164,7 +164,13 @@ export function CreateInviteDialog({
           </Field>
         </form>
         <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
+          <Button
+            variant="outline"
+            onClick={() => {
+              reset();
+              onOpenChange(false);
+            }}
+          >
             Cancel
           </Button>
           <Button type="submit" form="create-invite-form" disabled={isSubmitting}>
