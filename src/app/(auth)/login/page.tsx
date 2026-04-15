@@ -33,7 +33,9 @@ export default function LoginPage() {
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackURL = searchParams.get("callbackURL") ?? "/";
+  const rawCallback = searchParams.get("callbackURL") ?? "/";
+  const callbackURL =
+    rawCallback.startsWith("/") && !rawCallback.startsWith("//") ? rawCallback : "/";
 
   const { data: session, isPending: sessionLoading } = authClient.useSession();
   const [serverError, setServerError] = useState<string | null>(null);

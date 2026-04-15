@@ -182,7 +182,6 @@ export function InvitesTab() {
     [handleCancel, handleCopyLink]
   );
 
-  // eslint-disable-next-line react-hooks/incompatible-library -- useReactTable returns unstable refs by design
   const table = useReactTable({
     data: invites,
     columns,

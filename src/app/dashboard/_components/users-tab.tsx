@@ -220,7 +220,6 @@ export function UsersTab({ currentUserId }: { currentUserId: string }) {
     [currentUserId, handleBanToggle]
   );
 
-  // eslint-disable-next-line react-hooks/incompatible-library -- useReactTable returns unstable refs by design
   const table = useReactTable({
     data: users,
     columns,
