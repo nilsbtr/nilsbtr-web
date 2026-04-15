@@ -61,15 +61,18 @@ export function InvitesTab() {
   const [createOpen, setCreateOpen] = useState(false);
 
   const fetchInvites = useCallback(async () => {
-    const { data, error } = await authClient.invite.list({
-      query: { limit: 100, sortBy: "createdAt", sortDirection: "desc" },
-    });
-    if (error) {
-      toast.error("Failed to load invites.");
-      return;
+    try {
+      const { data, error } = await authClient.invite.list({
+        query: { limit: 100, sortBy: "createdAt", sortDirection: "desc" },
+      });
+      if (error) {
+        toast.error("Failed to load invites.");
+        return;
+      }
+      setInvites((data?.invitations as Invite[]) ?? []);
+    } finally {
+      setLoading(false);
     }
-    setInvites((data?.invitations as Invite[]) ?? []);
-    setLoading(false);
   }, []);
 
   const invitesInit = useRef(false);
