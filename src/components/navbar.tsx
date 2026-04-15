@@ -59,7 +59,7 @@ export function Navbar() {
       <div className="flex-1">
         <Link
           href="/"
-          className="font-cursive text-xl tracking-wide text-foreground transition-colors hover:text-primary"
+          className="font-cursive text-2xl tracking-wide text-foreground transition-colors hover:text-primary"
         >
           nilsbtr
         </Link>
