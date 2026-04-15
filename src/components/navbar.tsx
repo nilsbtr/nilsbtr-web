@@ -4,16 +4,18 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 import {
+  DashboardSquare01Icon,
   Login03Icon,
+  Logout03Icon,
   Menu02Icon,
   Moon02Icon,
-  Setting07Icon,
   Sun03Icon,
+  UserIcon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { useTheme } from "next-themes";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,6 +25,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
+import { authClient } from "@/lib/auth-client";
+import { ADMIN_ROLE } from "@/lib/permissions";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -32,10 +37,22 @@ const navLinks = [
   { href: "#", label: "Blog" },
 ];
 
+function getInitials(name: string) {
+  return name
+    .split(" ")
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+}
+
 export function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const { setTheme } = useTheme();
+  const { data: session, isPending } = authClient.useSession();
+
+  const isAdmin = session?.user?.role?.split(",").some((r) => r.trim() === ADMIN_ROLE);
 
   return (
     <nav className="fixed inset-x-0 top-0 z-50 flex h-14 animate-in items-center border-b border-border/50 bg-background/80 px-4 backdrop-blur-xl duration-500 fade-in-0 slide-in-from-top-2 sm:px-6">
@@ -90,35 +107,86 @@ export function Navbar() {
         </DropdownMenu>
 
         {/* Avatar dropdown */}
-        <DropdownMenu>
-          <DropdownMenuTrigger className="cursor-pointer rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring">
-            <Avatar size="sm">
-              <AvatarFallback className="text-xs">NB</AvatarFallback>
-            </Avatar>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" sideOffset={8}>
-            <DropdownMenuGroup>
-              <DropdownMenuLabel>Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => setTheme("light")} className="hidden dark:flex">
-                <HugeiconsIcon icon={Sun03Icon} strokeWidth={2} />
-                Light Mode
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => setTheme("dark")} className="flex dark:hidden">
-                <HugeiconsIcon icon={Moon02Icon} strokeWidth={2} />
-                Dark Mode
-              </DropdownMenuItem>
-              <DropdownMenuItem disabled>
-                <HugeiconsIcon icon={Login03Icon} strokeWidth={2} />
-                Login
-              </DropdownMenuItem>
-              <DropdownMenuItem disabled>
-                <HugeiconsIcon icon={Setting07Icon} strokeWidth={2} />
-                Settings
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {isPending ? (
+          <Skeleton className="size-6 rounded-full" />
+        ) : (
+          <DropdownMenu>
+            <DropdownMenuTrigger className="cursor-pointer rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              <Avatar size="sm">
+                {session?.user?.image && <AvatarImage src={session.user.image} />}
+                <AvatarFallback className="text-xs">
+                  {session?.user?.name ? (
+                    getInitials(session.user.name)
+                  ) : (
+                    <HugeiconsIcon icon={UserIcon} strokeWidth={1.5} className="size-4" />
+                  )}
+                </AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" sideOffset={8}>
+              {session ? (
+                <>
+                  <DropdownMenuGroup>
+                    <DropdownMenuLabel className="font-normal">
+                      <div className="flex flex-col gap-0.5">
+                        <span className="text-sm font-medium">{session.user.name}</span>
+                        <span className="text-xs text-muted-foreground">{session.user.email}</span>
+                      </div>
+                    </DropdownMenuLabel>
+                  </DropdownMenuGroup>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem
+                      onClick={() => setTheme("light")}
+                      className="hidden dark:flex"
+                    >
+                      <HugeiconsIcon icon={Sun03Icon} strokeWidth={2} />
+                      Light Mode
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setTheme("dark")} className="flex dark:hidden">
+                      <HugeiconsIcon icon={Moon02Icon} strokeWidth={2} />
+                      Dark Mode
+                    </DropdownMenuItem>
+                    {isAdmin && (
+                      <DropdownMenuItem onClick={() => router.push("/dashboard")}>
+                        <HugeiconsIcon icon={DashboardSquare01Icon} strokeWidth={2} />
+                        Dashboard
+                      </DropdownMenuItem>
+                    )}
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={async () => {
+                        await authClient.signOut();
+                        router.push("/");
+                        router.refresh();
+                      }}
+                    >
+                      <HugeiconsIcon icon={Logout03Icon} strokeWidth={2} />
+                      Sign out
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                </>
+              ) : (
+                <DropdownMenuGroup>
+                  <DropdownMenuLabel>Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => setTheme("light")} className="hidden dark:flex">
+                    <HugeiconsIcon icon={Sun03Icon} strokeWidth={2} />
+                    Light Mode
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setTheme("dark")} className="flex dark:hidden">
+                    <HugeiconsIcon icon={Moon02Icon} strokeWidth={2} />
+                    Dark Mode
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => router.push("/login")}>
+                    <HugeiconsIcon icon={Login03Icon} strokeWidth={2} />
+                    Login
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              )}
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </div>
     </nav>
   );
