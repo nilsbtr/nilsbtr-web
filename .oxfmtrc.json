@@ -1,0 +1,58 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "useTabs": false,
+  "tabWidth": 2,
+  "printWidth": 100,
+  "semi": true,
+  "singleQuote": false,
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "bracketSameLine": false,
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "sortImports": {
+    "customGroups": [
+      {
+        "groupName": "type-react",
+        "selector": "external",
+        "modifiers": ["type"],
+        "elementNamePattern": ["react", "react-dom"]
+      },
+      {
+        "groupName": "value-react",
+        "selector": "external",
+        "modifiers": ["value"],
+        "elementNamePattern": ["react", "react-dom"]
+      },
+      {
+        "groupName": "type-next",
+        "selector": "external",
+        "modifiers": ["type"],
+        "elementNamePattern": ["next", "next/**"]
+      },
+      {
+        "groupName": "value-next",
+        "selector": "external",
+        "modifiers": ["value"],
+        "elementNamePattern": ["next", "next/**"]
+      }
+    ],
+    "groups": [
+      "side_effect",
+      ["type-react", "value-react"],
+      ["type-next", "value-next"],
+      ["value-builtin", "value-external", "type-builtin", "type-external"],
+      ["type-internal", "value-internal"],
+      ["type-parent", "type-sibling", "type-index", "value-parent", "value-sibling", "value-index"],
+      "style",
+      "unknown"
+    ],
+    "sortSideEffects": false
+  },
+  "sortTailwindcss": {
+    "stylesheet": "./src/app/globals.css",
+    "functions": ["clsx", "cn"]
+  },
+  "sortPackageJson": true,
+  "ignorePatterns": [".next", "node_modules", "out", "build", "coverage", "package-lock.json"]
+}

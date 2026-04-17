@@ -1,3 +1,5 @@
+import "./globals.css";
+
 import type { Metadata, Viewport } from "next";
 import { Caveat, JetBrains_Mono, Merriweather, Outfit } from "next/font/google";
 
@@ -9,8 +11,6 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { getBaseUrl } from "@/lib/utils";
-
-import "./globals.css";
 
 const fontSans = Outfit({
   subsets: ["latin"],
