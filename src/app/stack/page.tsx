@@ -43,9 +43,7 @@ export default function StackPage() {
           {TECH_STACK.map((category, index) => (
             <TechStackSection key={category.id} delay={index * 0.06}>
               <div className="mb-6 flex flex-col gap-1.5">
-                <h2 className="font-serif text-xl text-foreground sm:text-2xl">
-                  {category.label}
-                </h2>
+                <h2 className="font-serif text-xl text-foreground sm:text-2xl">{category.label}</h2>
                 <p className="max-w-xl text-sm text-pretty text-muted-foreground">
                   {category.caption}
                 </p>

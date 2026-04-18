@@ -17,8 +17,7 @@ type TechChipProps = {
 };
 
 function MonogramBadge({ initials, size }: { initials: string; size: BadgeSize }) {
-  const sizeClass =
-    size === "sm" ? "size-5 text-[0.55rem]" : "size-6 text-[0.6rem]";
+  const sizeClass = size === "sm" ? "size-5 text-[0.55rem]" : "size-6 text-[0.6rem]";
   return (
     <span
       aria-hidden="true"
