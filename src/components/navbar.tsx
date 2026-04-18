@@ -30,12 +30,21 @@ import { authClient } from "@/lib/auth-client";
 import { ADMIN_ROLE } from "@/lib/permissions";
 import { cn } from "@/lib/utils";
 
-const navLinks = [
+type NavLink = {
+  href: string;
+  label: string;
+  disabled?: boolean;
+};
+
+const navLinks: NavLink[] = [
   { href: "/", label: "Home" },
   { href: "/social", label: "Social" },
-  { href: "#", label: "Projects" },
-  { href: "#", label: "Blog" },
+  { href: "/stack", label: "Stack" },
+  { href: "#", label: "Projects", disabled: true },
+  { href: "#", label: "Blog", disabled: true },
 ];
+
+const DISABLED_TITLE = "Coming soon";
 
 function getInitials(name: string) {
   return name
@@ -67,20 +76,35 @@ export function Navbar() {
 
       {/* Desktop nav links */}
       <div className="hidden items-center gap-1 md:flex">
-        {navLinks.map((link) => (
-          <Link
-            key={link.label}
-            href={link.href}
-            className={cn(
-              "rounded-md px-3 py-2 text-sm font-medium transition-colors",
-              pathname === link.href
-                ? "text-foreground"
-                : "text-muted-foreground hover:text-foreground"
-            )}
-          >
-            {link.label}
-          </Link>
-        ))}
+        {navLinks.map((link) => {
+          if (link.disabled) {
+            return (
+              <span
+                key={link.label}
+                role="link"
+                aria-disabled="true"
+                title={DISABLED_TITLE}
+                className="cursor-not-allowed rounded-md px-3 py-2 text-sm font-medium text-muted-foreground/40 select-none"
+              >
+                {link.label}
+              </span>
+            );
+          }
+          return (
+            <Link
+              key={link.label}
+              href={link.href}
+              className={cn(
+                "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                pathname === link.href
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              {link.label}
+            </Link>
+          );
+        })}
       </div>
 
       <div className="flex flex-1 items-center justify-end gap-1">
@@ -96,10 +120,16 @@ export function Navbar() {
               {navLinks.map((link) => (
                 <DropdownMenuItem
                   key={link.label}
-                  onClick={() => router.push(link.href)}
+                  disabled={link.disabled}
+                  onClick={link.disabled ? undefined : () => router.push(link.href)}
                   className={cn(pathname === link.href && "text-foreground")}
                 >
                   {link.label}
+                  {link.disabled && (
+                    <span className="ml-auto text-[0.65rem] tracking-wide text-muted-foreground uppercase">
+                      Soon
+                    </span>
+                  )}
                 </DropdownMenuItem>
               ))}
             </DropdownMenuGroup>

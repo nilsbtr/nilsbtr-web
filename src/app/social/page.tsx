@@ -1,16 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import {
-  ArrowUpRight01Icon,
-  BlueskyIcon,
-  GithubIcon,
-  InstagramIcon,
-  MusicNote01Icon,
-  NewTwitterIcon,
-  SpotifyIcon,
-} from "@hugeicons/core-free-icons";
+import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
+
+import { SOCIALS } from "@/config/socials";
 
 export const metadata: Metadata = {
   title: "Social",
@@ -22,45 +16,6 @@ export const metadata: Metadata = {
   },
 };
 
-const socials = [
-  {
-    name: "Instagram",
-    href: "https://instagram.com/nilsbttr",
-    handle: "@nilsbttr",
-    icon: InstagramIcon,
-  },
-  {
-    name: "Github",
-    href: "https://github.com/nilsbtr",
-    handle: "nilsbtr",
-    icon: GithubIcon,
-  },
-  {
-    name: "Spotify",
-    href: "https://open.spotify.com/user/0hxq229m6k3sbxi4q4mjk3n91",
-    handle: "nilsbtr",
-    icon: SpotifyIcon,
-  },
-  {
-    name: "stats.fm",
-    href: "https://stats.fm/nilsbtr",
-    handle: "nilsbtr",
-    icon: MusicNote01Icon,
-  },
-  {
-    name: "Twitter",
-    href: "https://twitter.com/digitalstave",
-    handle: "@digitalstave",
-    icon: NewTwitterIcon,
-  },
-  {
-    name: "Bluesky",
-    href: "https://bsky.app/profile/nilsbtr.bsky.social",
-    handle: "@nilsbtr.bsky.social",
-    icon: BlueskyIcon,
-  },
-];
-
 export default function SocialPage() {
   return (
     <div className="flex min-h-dvh items-center justify-center px-6 pt-20 pb-12">
@@ -69,7 +24,7 @@ export default function SocialPage() {
           Socials
         </h1>
         <div className="divide-y divide-border/50">
-          {socials.map((social, i) => (
+          {SOCIALS.map((social, i) => (
             <Link
               key={social.name}
               href={social.href}
