@@ -13,6 +13,7 @@ import {
   UserIcon,
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
+import { m } from "motion/react";
 import { useTheme } from "next-themes";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -27,6 +28,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
 import { authClient } from "@/lib/auth-client";
+import { SPRING } from "@/lib/motion";
 import { ADMIN_ROLE } from "@/lib/permissions";
 import { cn } from "@/lib/utils";
 
@@ -62,9 +64,15 @@ export function Navbar() {
   const { data: session, isPending } = authClient.useSession();
 
   const isAdmin = session?.user?.role?.split(",").some((r) => r.trim() === ADMIN_ROLE);
+  const isDashboard = pathname.startsWith("/dashboard");
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 flex h-14 animate-in items-center border-b border-border/50 bg-background/80 px-4 backdrop-blur-xl duration-500 fade-in-0 slide-in-from-top-2 sm:px-6">
+    <m.nav
+      initial={isDashboard ? false : { y: -16, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={SPRING.smooth}
+      className="fixed inset-x-0 top-0 z-50 flex h-14 items-center border-b border-border/50 bg-background/80 px-4 backdrop-blur-xl sm:px-6"
+    >
       <div className="flex-1">
         <Link
           href="/"
@@ -218,6 +226,6 @@ export function Navbar() {
           </DropdownMenu>
         )}
       </div>
-    </nav>
+    </m.nav>
   );
 }

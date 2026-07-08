@@ -4,6 +4,7 @@ import { Caveat, JetBrains_Mono, Merriweather, Outfit } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
+import { MotionProvider } from "@/components/motion";
 import { Navbar } from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
@@ -116,10 +117,12 @@ export default function RootLayout({
         className={`${fontSans.variable} ${fontCursive.variable} ${fontSerif.variable} ${fontMono.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <TooltipProvider>
-            <Navbar />
-            <main>{children}</main>
-          </TooltipProvider>
+          <MotionProvider>
+            <TooltipProvider>
+              <Navbar />
+              <main>{children}</main>
+            </TooltipProvider>
+          </MotionProvider>
           <Toaster />
         </ThemeProvider>
         <Analytics />

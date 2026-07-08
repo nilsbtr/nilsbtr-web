@@ -3,6 +3,7 @@
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
+
 :root {
   --background: oklch(0.9755 0.0067 97.351);
   --foreground: oklch(0.2178 0 0);
