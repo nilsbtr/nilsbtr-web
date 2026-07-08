@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 
+import { Reveal } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -53,42 +54,44 @@ export default function InviteActivationPage() {
 
   return (
     <div className="flex min-h-dvh items-center justify-center px-4 pt-14">
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle>
-            {status === "activating" && "Activating invite..."}
-            {status === "success" && "Invite activated"}
-            {status === "error" && "Invite failed"}
-          </CardTitle>
-          <CardDescription>
-            {status === "activating" && "Please wait while we verify your invitation."}
-            {status === "success" && (message || "Redirecting you to sign up...")}
-            {status === "error" && message}
-          </CardDescription>
-        </CardHeader>
-        {status === "error" && (
-          <>
+      <Reveal variant="scale" className="w-full max-w-sm">
+        <Card>
+          <CardHeader>
+            <CardTitle>
+              {status === "activating" && "Activating invite..."}
+              {status === "success" && "Invite activated"}
+              {status === "error" && "Invite failed"}
+            </CardTitle>
+            <CardDescription>
+              {status === "activating" && "Please wait while we verify your invitation."}
+              {status === "success" && (message || "Redirecting you to sign up...")}
+              {status === "error" && message}
+            </CardDescription>
+          </CardHeader>
+          {status === "error" && (
+            <>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  The invite link may have expired or already been used. Please contact the person
+                  who invited you for a new link.
+                </p>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" className="w-full" render={<Link href="/" />}>
+                  Back to home
+                </Button>
+              </CardFooter>
+            </>
+          )}
+          {status === "activating" && (
             <CardContent>
-              <p className="text-sm text-muted-foreground">
-                The invite link may have expired or already been used. Please contact the person who
-                invited you for a new link.
-              </p>
+              <div className="flex justify-center">
+                <div className="size-6 animate-spin rounded-full border-2 border-muted border-t-foreground" />
+              </div>
             </CardContent>
-            <CardFooter>
-              <Button variant="outline" className="w-full" render={<Link href="/" />}>
-                Back to home
-              </Button>
-            </CardFooter>
-          </>
-        )}
-        {status === "activating" && (
-          <CardContent>
-            <div className="flex justify-center">
-              <div className="size-6 animate-spin rounded-full border-2 border-muted border-t-foreground" />
-            </div>
-          </CardContent>
-        )}
-      </Card>
+          )}
+        </Card>
+      </Reveal>
     </div>
   );
 }

@@ -2,9 +2,11 @@ import Link from "next/link";
 
 import { HugeiconsIcon } from "@hugeicons/react";
 
+import { Reveal, RevealGroup, RevealItem, WriteOn } from "@/components/motion";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { SOCIALS } from "@/config/socials";
 import { HOME_HIGHLIGHTS } from "@/config/tech-stack";
+import { STAGGER } from "@/lib/motion";
 
 const INLINE_LINK_CLASS =
   "text-foreground underline decoration-1 decoration-foreground/30 underline-offset-4 transition-all duration-300 ease-out hover:text-primary hover:decoration-primary hover:underline-offset-[7px]";
@@ -17,37 +19,31 @@ const CATEGORY_LABEL_CLASS =
 
 export default function Home() {
   return (
-    <div className="mx-auto flex min-h-dvh max-w-xl flex-col justify-center px-6 pt-24 pb-20">
-      <p
-        className="animate-in font-serif text-lg leading-none font-light text-muted-foreground italic duration-700 fade-in-0 slide-in-from-bottom-1 sm:text-xl"
-        style={{ animationFillMode: "backwards" }}
+    <RevealGroup className="mx-auto flex min-h-dvh max-w-xl flex-col justify-center px-6 pt-24 pb-20">
+      <RevealItem
+        as="p"
+        className="font-serif text-lg leading-none font-light text-muted-foreground italic sm:text-xl"
       >
         Hi, I&apos;m
-      </p>
+      </RevealItem>
 
-      <h1
-        className="my-10 animate-in font-cursive text-[clamp(5rem,16vw,9.5rem)] leading-[0.9] text-foreground duration-1000 fade-in-0 slide-in-from-bottom-2 sm:my-12"
-        style={{ animationDelay: "220ms", animationFillMode: "backwards" }}
-      >
-        Nils<span className="text-primary">.</span>
+      <h1 className="my-10 font-cursive text-[clamp(5rem,16vw,9.5rem)] leading-[0.9] text-foreground sm:my-12">
+        <WriteOn delay={0.25}>Nils</WriteOn>
+        <Reveal as="span" variant="pop" delay={1.15} className="inline-block text-primary">
+          .
+        </Reveal>
         <span className="sr-only"> Böttcher — a developer from Germany</span>
       </h1>
 
       <div className="flex flex-col gap-5 text-[0.9375rem] leading-[1.75] text-pretty text-muted-foreground sm:text-base">
-        <p
-          className="animate-in duration-700 fade-in-0 slide-in-from-bottom-2"
-          style={{ animationDelay: "500ms", animationFillMode: "backwards" }}
-        >
+        <RevealItem as="p">
           A developer from Germany. I spend my days writing{" "}
           <span className="text-foreground">TypeScript</span> and{" "}
           <span className="text-foreground">Go</span>, training at the gym, listening to music, and
           fussing over the small details that make software feel considered.
-        </p>
+        </RevealItem>
 
-        <p
-          className="animate-in duration-700 fade-in-0 slide-in-from-bottom-2"
-          style={{ animationDelay: "660ms", animationFillMode: "backwards" }}
-        >
+        <RevealItem as="p">
           The rest of the site goes a little deeper —{" "}
           <Link href="/stack" className={INLINE_LINK_CLASS}>
             what I build with
@@ -57,16 +53,18 @@ export default function Home() {
             where else to find me
           </Link>
           . Say hi any time.
-        </p>
+        </RevealItem>
       </div>
 
       <TooltipProvider delay={250} closeDelay={100}>
-        <div
-          className="mt-12 animate-in duration-700 fade-in-0"
-          style={{ animationDelay: "820ms", animationFillMode: "backwards" }}
-        >
-          <p className={CATEGORY_LABEL_CLASS}>Stack</p>
-          <ul
+        <div className="mt-12">
+          <RevealItem as="p" variant="fade" className={CATEGORY_LABEL_CLASS}>
+            Stack
+          </RevealItem>
+          <RevealGroup
+            nested
+            as="ul"
+            stagger={STAGGER.tight}
             aria-label="What I build with"
             className="flex max-w-80 flex-wrap items-center gap-x-6 gap-y-4 sm:max-w-none sm:gap-y-3"
           >
@@ -91,25 +89,30 @@ export default function Home() {
                 </span>
               );
               return (
-                <li key={tech.id} className="flex">
+                <RevealItem as="li" key={tech.id} variant="scale" className="flex">
                   <Tooltip>
                     <TooltipTrigger render={trigger} />
                     <TooltipContent sideOffset={8}>{tech.name}</TooltipContent>
                   </Tooltip>
-                </li>
+                </RevealItem>
               );
             })}
-          </ul>
+          </RevealGroup>
         </div>
 
-        <div
-          className="mt-8 animate-in duration-700 fade-in-0"
-          style={{ animationDelay: "960ms", animationFillMode: "backwards" }}
-        >
-          <p className={CATEGORY_LABEL_CLASS}>Socials</p>
-          <ul aria-label="Where to find me" className="flex flex-wrap items-center gap-x-6 gap-y-3">
+        <div className="mt-8">
+          <RevealItem as="p" variant="fade" className={CATEGORY_LABEL_CLASS}>
+            Socials
+          </RevealItem>
+          <RevealGroup
+            nested
+            as="ul"
+            stagger={STAGGER.tight}
+            aria-label="Where to find me"
+            className="flex flex-wrap items-center gap-x-6 gap-y-3"
+          >
             {SOCIALS.map((social) => (
-              <li key={social.name} className="flex">
+              <RevealItem as="li" key={social.name} variant="scale" className="flex">
                 <Tooltip>
                   <TooltipTrigger
                     render={
@@ -126,11 +129,11 @@ export default function Home() {
                   />
                   <TooltipContent sideOffset={8}>{social.name}</TooltipContent>
                 </Tooltip>
-              </li>
+              </RevealItem>
             ))}
-          </ul>
+          </RevealGroup>
         </div>
       </TooltipProvider>
-    </div>
+    </RevealGroup>
   );
 }
