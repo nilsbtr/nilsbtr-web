@@ -14,10 +14,7 @@ export default function HomePage() {
         <Intro />
 
         <LabeledRow label="Stack" className="mt-12">
-          <FeaturedTechMarks
-            label="What I build with"
-            className="max-w-80 gap-y-4 sm:max-w-none sm:gap-y-3"
-          />
+          <FeaturedTechMarks label="What I build with" className="max-w-84 sm:max-w-none" />
         </LabeledRow>
 
         <LabeledRow label="Socials" className="mt-8">
