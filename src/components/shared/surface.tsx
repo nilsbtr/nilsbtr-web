@@ -10,7 +10,8 @@ import { cn } from "@/lib/utils";
  * headings and link lists flat on the page.
  *
  * `interactive` adds the hover lift for surfaces that are links. Its accent
- * color comes from `--surface-accent` and defaults to the primary color.
+ * color comes from `--surface-accent` and defaults to the brand color. Set
+ * `data-spotlight` on the element to have the pointer light it up.
  */
 const surfaceVariants = cva("border border-border/60 bg-card/40", {
   variants: {
@@ -19,7 +20,11 @@ const surfaceVariants = cva("border border-border/60 bg-card/40", {
       pill: "rounded-full",
     },
     interactive: {
-      true: "transition-[translate,border-color,background-color,box-shadow] duration-300 ease-out hover:-translate-y-0.5 hover:border-(--surface-accent) hover:bg-card motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+      true: [
+        "relative isolate transition-[translate,border-color,background-color,box-shadow] duration-300 hover:-translate-y-0.5 hover:border-(--surface-accent) hover:bg-card motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+        // A soft light in the accent color follows the pointer; see PointerSpotlight.
+        "before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-[inherit] before:bg-[radial-gradient(14rem_circle_at_var(--spot-x,50%)_var(--spot-y,50%),color-mix(in_oklch,var(--surface-accent)_14%,transparent),transparent_70%)] before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100",
+      ],
       false: "",
     },
   },

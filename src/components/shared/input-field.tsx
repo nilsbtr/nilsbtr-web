@@ -54,7 +54,11 @@ export function InputField({
         input
       )}
       {description && <FieldDescription id={descriptionId}>{description}</FieldDescription>}
-      <FieldError id={errorId} errors={[error]} />
+      <FieldError
+        id={errorId}
+        errors={[error]}
+        className="animate-in duration-300 fade-in-0 slide-in-from-top-1"
+      />
     </Field>
   );
 }

@@ -1,51 +1,65 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { CSSProperties } from "react";
 
 import { m, useReducedMotion } from "motion/react";
 
 import { cn } from "@/lib/utils";
 
-import { DURATION, EASE_OUT_EXPO } from "./tokens";
+import { DURATION, EASE } from "./tokens";
+import { LETTER_DURATION, LETTER_STAGGER } from "./write-on-timing";
 
 /*
- * Negative top/bottom insets keep ascenders and descenders of display
- * typefaces inside the clip; the left inset stays slightly negative so
- * leading flourishes of cursive glyphs are never cut off.
+ * Each letter is uncovered by a clip that sweeps left to right as `--write`
+ * goes from 0 to 1. The clip is measured in em rather than as a share of the
+ * letter's box, because a narrow slanted glyph (a cursive "l") reaches well
+ * outside its own box and a percentage would cut its top off.
  */
-const CLIP_HIDDEN = "inset(-25% 110% -25% -10%)";
-const CLIP_VISIBLE = "inset(-25% -10% -25% -10%)";
+const OVERHANG = { top: "0.35em", right: "0.35em", bottom: "0.35em", left: "0.25em" };
+const CLIP = `inset(-${OVERHANG.top} calc((1 - var(--write)) * (100% + ${OVERHANG.left} + ${OVERHANG.right}) - ${OVERHANG.right}) -${OVERHANG.bottom} -${OVERHANG.left})`;
 
 /**
- * Reveals text with a left-to-right clip sweep, as if being written or
- * uncovered — designed for hero-level display type. Renders statically
- * when the user prefers reduced motion.
+ * Reveals display type letter by letter with a left-to-right sweep, as if it
+ * were being written. Renders statically when reduced motion is requested.
  */
 export function WriteOn({
-  children,
+  text,
   delay = 0,
-  duration = DURATION.slow,
   className,
 }: {
-  children: ReactNode;
+  text: string;
   delay?: number;
-  duration?: number;
   className?: string;
 }) {
   const prefersReducedMotion = useReducedMotion();
 
   if (prefersReducedMotion) {
-    return <span className={cn("inline-block", className)}>{children}</span>;
+    return <span className={cn("inline-block", className)}>{text}</span>;
   }
 
   return (
-    <m.span
-      className={cn("inline-block", className)}
-      initial={{ clipPath: CLIP_HIDDEN }}
-      animate={{ clipPath: CLIP_VISIBLE }}
-      transition={{ duration, ease: EASE_OUT_EXPO, delay }}
-    >
-      {children}
-    </m.span>
+    <span className={cn("inline-block whitespace-nowrap", className)}>
+      <span className="sr-only">{text}</span>
+      {Array.from(text).map((letter, index) => {
+        const start = delay + index * LETTER_STAGGER;
+        return (
+          <m.span
+            key={index}
+            aria-hidden="true"
+            data-reveal=""
+            className="inline-block"
+            style={{ clipPath: CLIP } as CSSProperties}
+            initial={{ "--write": 0, opacity: 0 }}
+            animate={{ "--write": 1, opacity: 1 }}
+            transition={{
+              "--write": { duration: LETTER_DURATION, ease: EASE.inOut, delay: start },
+              opacity: { duration: DURATION.fast, delay: start },
+            }}
+          >
+            {letter}
+          </m.span>
+        );
+      })}
+    </span>
   );
 }

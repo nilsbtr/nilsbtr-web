@@ -1,8 +1,10 @@
 import type { ReactNode } from "react";
 
-import { RevealItem } from "@/components/motion";
+import { RevealItem, RevealWords } from "@/components/motion";
 import { eyebrowVariants } from "@/components/shared/eyebrow";
 import { cn } from "@/lib/utils";
+
+const TITLE_CLASS = "mt-4 font-serif text-3xl leading-tight text-foreground sm:text-4xl";
 
 /**
  * Page-level heading: eyebrow, serif title, then any supporting content.
@@ -25,12 +27,15 @@ export function PageHeader({
       <RevealItem as="p" variant="fade" className={eyebrowVariants()}>
         {eyebrow}
       </RevealItem>
-      <RevealItem
-        as="h1"
-        className="mt-4 font-serif text-3xl leading-tight text-foreground sm:text-4xl"
-      >
-        {title}
-      </RevealItem>
+      {typeof title === "string" ? (
+        <RevealWords as="h1" className={TITLE_CLASS}>
+          {title}
+        </RevealWords>
+      ) : (
+        <RevealItem as="h1" className={TITLE_CLASS}>
+          {title}
+        </RevealItem>
+      )}
       {children}
     </header>
   );

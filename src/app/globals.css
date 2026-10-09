@@ -195,6 +195,28 @@
   --text-2xs--line-height: 1rem;
 }
 
+/*
+ * Motion defaults for CSS transitions, matching the tokens in
+ * src/components/motion/tokens.ts: every `transition-*` utility decelerates on
+ * the same curve and takes 200ms unless it asks for something else.
+ */
+@theme {
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --default-transition-duration: 200ms;
+  --default-transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/*
+ * The theme switch is drawn by ThemeToggle as a circle growing from the
+ * button, so the default cross-fade of the view transition is turned off.
+ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

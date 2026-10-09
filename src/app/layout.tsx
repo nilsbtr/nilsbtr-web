@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { SiteHeader } from "@/components/layout/site-header";
 import { MAIN_CONTENT_ID, SkipLink } from "@/components/layout/skip-link";
+import { PointerSpotlight } from "@/components/motion";
 import { AppProviders } from "@/components/providers/app-providers";
 import { JsonLd } from "@/components/shared/json-ld";
 import { Toaster } from "@/components/ui/sonner";
@@ -73,6 +74,9 @@ const personSchema = {
   sameAs: SOCIALS.map((social) => social.href),
 };
 
+const NO_SCRIPT_STYLE =
+  "[data-reveal]{opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important}";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -82,6 +86,10 @@ export default function RootLayout({
     <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <JsonLd data={personSchema} />
+        {/* Entrances start hidden and are revealed by script; without it, show everything. */}
+        <noscript>
+          <style>{NO_SCRIPT_STYLE}</style>
+        </noscript>
       </head>
       <body className={`${fontVariables} antialiased`}>
         <AppProviders>
@@ -91,6 +99,7 @@ export default function RootLayout({
             {children}
           </main>
           <Toaster />
+          <PointerSpotlight />
         </AppProviders>
         <Analytics />
         <SpeedInsights />

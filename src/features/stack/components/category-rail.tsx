@@ -2,9 +2,13 @@
 
 import { useEffect, useState } from "react";
 
+import { Reveal } from "@/components/motion";
 import { cn } from "@/lib/utils";
 
 import type { CategoryNavItem } from "./category-nav";
+
+/** The rail fades in once the page header has played. */
+const RAIL_DELAY = 0.6;
 
 /** Height of the fixed site header, which covers the top of the viewport. */
 const HEADER_OFFSET = 56;
@@ -53,7 +57,7 @@ export function CategoryRail({ items }: { items: readonly CategoryNavItem[] }) {
       aria-label="Stack categories"
       className="fixed top-1/2 left-4 z-40 hidden -translate-y-1/2 lg:block"
     >
-      <ul>
+      <Reveal as="ul" variant="fade" delay={RAIL_DELAY}>
         {items.map((item) => {
           const isVisible = visible.has(item.id);
           return (
@@ -66,18 +70,18 @@ export function CategoryRail({ items }: { items: readonly CategoryNavItem[] }) {
                 <span
                   aria-hidden="true"
                   className={cn(
-                    "h-0.5 rounded-full transition-all duration-300 ease-out group-hover/tick:w-6 group-hover/tick:bg-brand group-focus-visible/tick:w-6 group-focus-visible/tick:bg-brand motion-reduce:transition-none",
+                    "h-0.5 rounded-full transition-all duration-300 group-hover/tick:w-6 group-hover/tick:bg-brand group-focus-visible/tick:w-6 group-focus-visible/tick:bg-brand motion-reduce:transition-none",
                     isVisible ? "w-5 bg-foreground" : "w-3 bg-muted-foreground/40"
                   )}
                 />
-                <span className="pointer-events-none absolute left-full ml-2 -translate-x-1 rounded-lg bg-popover px-3 py-1.5 text-sm font-medium whitespace-nowrap text-popover-foreground opacity-0 shadow-md ring-1 ring-foreground/10 transition-all duration-200 ease-out group-hover/tick:translate-x-0 group-hover/tick:opacity-100 group-focus-visible/tick:translate-x-0 group-focus-visible/tick:opacity-100 motion-reduce:transition-none">
+                <span className="pointer-events-none absolute left-full ml-2 -translate-x-1 rounded-lg bg-popover px-3 py-1.5 text-sm font-medium whitespace-nowrap text-popover-foreground opacity-0 shadow-md ring-1 ring-foreground/10 transition-all duration-200 group-hover/tick:translate-x-0 group-hover/tick:opacity-100 group-focus-visible/tick:translate-x-0 group-focus-visible/tick:opacity-100 motion-reduce:transition-none">
                   {item.label}
                 </span>
               </a>
             </li>
           );
         })}
-      </ul>
+      </Reveal>
     </nav>
   );
 }

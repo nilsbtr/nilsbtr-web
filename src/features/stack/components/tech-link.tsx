@@ -30,6 +30,7 @@ export function TechLink({
     return (
       <ExternalLink
         href={tech.href}
+        data-spotlight=""
         style={brand ? ({ "--surface-accent": brand } as CSSProperties) : undefined}
         className={cn("group/link", surfaceVariants({ shape, interactive: true }), className)}
       >

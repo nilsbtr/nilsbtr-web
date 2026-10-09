@@ -9,7 +9,7 @@ export function TextLink({ className, ...props }: ComponentProps<typeof Link>) {
   return (
     <Link
       className={cn(
-        "rounded-sm text-foreground underline decoration-foreground/30 decoration-1 underline-offset-4 transition-all duration-300 ease-out hover:text-brand hover:decoration-brand hover:underline-offset-[7px]",
+        "rounded-sm text-foreground underline decoration-foreground/30 decoration-1 underline-offset-4 transition-all duration-300 hover:text-brand hover:decoration-brand hover:underline-offset-[7px]",
         className
       )}
       {...props}
