@@ -8,13 +8,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import { InputField } from "@/components/shared/input-field";
-import { Button } from "@/components/ui/button";
+import { PasswordField } from "@/components/shared/password-field";
 import { authClient } from "@/lib/auth/client";
 
 import { useRedirectAuthenticated } from "../hooks/use-redirect-authenticated";
 import { getSafeCallbackUrl } from "../lib/callback-url";
 import { type LoginValues, loginSchema } from "../schemas";
-import { AuthFormError, AuthShell, AuthSwitchLink } from "./auth-shell";
+import { AuthFormError, AuthShell, AuthSubmitButton, AuthSwitchLink } from "./auth-shell";
 
 export function LoginForm() {
   const router = useRouter();
@@ -60,7 +60,7 @@ export function LoginForm() {
         </AuthSwitchLink>
       }
     >
-      <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
+      <form onSubmit={handleSubmit(onSubmit)} noValidate className="grid gap-4">
         {serverError && <AuthFormError>{serverError}</AuthFormError>}
         <InputField
           id="email"
@@ -71,18 +71,16 @@ export function LoginForm() {
           error={errors.email}
           {...register("email")}
         />
-        <InputField
+        <PasswordField
           id="password"
           label="Password"
-          type="password"
-          placeholder="••••••••"
           autoComplete="current-password"
           error={errors.password}
           {...register("password")}
         />
-        <Button type="submit" className="mt-2 w-full" disabled={isSubmitting}>
-          {isSubmitting ? "Signing in..." : "Sign in"}
-        </Button>
+        <AuthSubmitButton pending={isSubmitting} pendingLabel="Signing in…">
+          Sign in
+        </AuthSubmitButton>
       </form>
     </AuthShell>
   );
