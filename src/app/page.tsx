@@ -5,7 +5,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { Reveal, RevealGroup, RevealItem, WriteOn } from "@/components/motion";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { SOCIALS } from "@/config/socials";
-import { HOME_HIGHLIGHTS } from "@/config/tech-stack";
+import { FEATURED } from "@/config/tech-stack";
 import { STAGGER } from "@/lib/motion";
 
 const INLINE_LINK_CLASS =
@@ -68,7 +68,7 @@ export default function Home() {
             aria-label="What I build with"
             className="flex max-w-80 flex-wrap items-center gap-x-6 gap-y-4 sm:max-w-none sm:gap-y-3"
           >
-            {HOME_HIGHLIGHTS.map((tech) => {
+            {FEATURED.map((tech) => {
               const mark = tech.marks?.[0];
               if (!mark) return null;
               const Mark = mark.Component;
