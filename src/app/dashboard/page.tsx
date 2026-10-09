@@ -5,12 +5,11 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { InvitesTab } from "@/features/admin/components/invites-tab";
+import { DashboardSkeleton } from "@/features/admin/components/skeletons";
+import { UsersTab } from "@/features/admin/components/users-tab";
 import { authClient } from "@/lib/auth/client";
 import { ADMIN_ROLE, hasRole } from "@/lib/auth/permissions";
-
-import { InvitesTab } from "./_components/invites-tab";
-import { DashboardSkeleton } from "./_components/skeletons";
-import { UsersTab } from "./_components/users-tab";
 
 export default function DashboardPage() {
   const router = useRouter();

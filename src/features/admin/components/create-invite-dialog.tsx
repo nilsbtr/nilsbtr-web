@@ -21,12 +21,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/u
 import { authClient } from "@/lib/auth/client";
 import { USER_ROLE } from "@/lib/auth/permissions";
 import { getBaseUrl } from "@/lib/url";
-import {
-  type CreateInviteValues,
-  EXPIRY_OPTIONS,
-  createInviteSchema,
-} from "@/lib/validations/auth";
 
+import { type CreateInviteValues, EXPIRY_OPTIONS, createInviteSchema } from "../schemas";
 import { AVAILABLE_ROLES, getRoleLabel } from "../types";
 
 function getExpiryLabel(value: number) {
