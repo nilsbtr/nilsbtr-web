@@ -9,10 +9,10 @@ export function TechChip({ tech, className }: { tech: Tech; className?: string }
   return (
     <TechLink
       tech={tech}
+      shape="pill"
       as="span"
       className={cn(
-        "group/chip inline-flex h-9 items-center gap-2 rounded-full border border-border/60 bg-card/40 px-3.5 text-sm font-medium text-foreground/85 transition-all duration-300",
-        "hover:-translate-y-0.5 hover:border-(--chip-accent) hover:bg-card hover:text-foreground hover:shadow-sm",
+        "inline-flex h-9 items-center gap-2 px-3.5 text-sm font-medium text-foreground/85",
         className
       )}
     >

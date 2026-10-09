@@ -48,20 +48,33 @@
 
   --radius: 0.45rem;
 
-  --shadow-x: 0px;
-  --shadow-y: 8px;
-  --shadow-blur: 15px;
-  --shadow-spread: 0px;
-  --shadow-opacity: 0.05;
-  --shadow-color: #000000;
-  --shadow-2xs: 0px 8px 15px 0px hsl(0 0% 0% / 0.03);
-  --shadow-xs: 0px 8px 15px 0px hsl(0 0% 0% / 0.03);
-  --shadow-sm: 0px 8px 15px 0px hsl(0 0% 0% / 0.05), 0px 1px 2px -1px hsl(0 0% 0% / 0.05);
-  --shadow: 0px 8px 15px 0px hsl(0 0% 0% / 0.05), 0px 1px 2px -1px hsl(0 0% 0% / 0.05);
-  --shadow-md: 0px 8px 15px 0px hsl(0 0% 0% / 0.05), 0px 2px 4px -1px hsl(0 0% 0% / 0.05);
-  --shadow-lg: 0px 8px 15px 0px hsl(0 0% 0% / 0.05), 0px 4px 6px -1px hsl(0 0% 0% / 0.05);
-  --shadow-xl: 0px 8px 15px 0px hsl(0 0% 0% / 0.05), 0px 8px 10px -1px hsl(0 0% 0% / 0.05);
-  --shadow-2xl: 0px 8px 15px 0px hsl(0 0% 0% / 0.13);
+  /*
+   * Elevation. Resting surfaces are flat (border only). Shadows are reserved
+   * for layers that float above the page (menus, dialogs, toasts) and for the
+   * hover lift of interactive surfaces. The scale is defined once and scaled
+   * up in dark mode, where a shadow needs more weight to register.
+   */
+  --shadow-color: 30 12% 10%;
+  --shadow-strength: 1;
+  --shadow-2xs: 0 1px 1px 0 hsl(var(--shadow-color) / calc(0.03 * var(--shadow-strength)));
+  --shadow-xs: 0 1px 2px 0 hsl(var(--shadow-color) / calc(0.04 * var(--shadow-strength)));
+  --shadow-sm:
+    0 1px 2px 0 hsl(var(--shadow-color) / calc(0.04 * var(--shadow-strength))),
+    0 2px 6px -1px hsl(var(--shadow-color) / calc(0.05 * var(--shadow-strength)));
+  --shadow: var(--shadow-sm);
+  --shadow-md:
+    0 2px 4px -1px hsl(var(--shadow-color) / calc(0.04 * var(--shadow-strength))),
+    0 8px 18px -4px hsl(var(--shadow-color) / calc(0.08 * var(--shadow-strength)));
+  --shadow-lg:
+    0 4px 8px -2px hsl(var(--shadow-color) / calc(0.05 * var(--shadow-strength))),
+    0 16px 32px -8px hsl(var(--shadow-color) / calc(0.1 * var(--shadow-strength)));
+  --shadow-xl:
+    0 8px 16px -4px hsl(var(--shadow-color) / calc(0.06 * var(--shadow-strength))),
+    0 28px 56px -12px hsl(var(--shadow-color) / calc(0.14 * var(--shadow-strength)));
+  --shadow-2xl: 0 32px 72px -16px hsl(var(--shadow-color) / calc(0.22 * var(--shadow-strength)));
+
+  /* Accent of an interactive surface on hover; set per element to a brand color. */
+  --surface-accent: var(--primary);
 
   --tracking-normal: -0.02em;
   --spacing: 0.25rem;
@@ -103,27 +116,8 @@
   --sidebar-border: oklch(0.2901 0.0061 78.232);
   --sidebar-ring: oklch(0.8039 0.0702 84.7579);
 
-  --font-sans: Outfit, -apple-system, sans-serif;
-  --font-serif: Merriweather, ui-serif, serif;
-  --font-mono: JetBrains Mono, monospace;
-  --font-cursive: Caveat, cursive;
-
-  --radius: 0.45rem;
-
-  --shadow-x: 0px;
-  --shadow-y: 10px;
-  --shadow-blur: 25px;
-  --shadow-spread: 0px;
-  --shadow-opacity: 0.4;
-  --shadow-color: #000000;
-  --shadow-2xs: 0px 10px 25px 0px hsl(0 0% 0% / 0.2);
-  --shadow-xs: 0px 10px 25px 0px hsl(0 0% 0% / 0.2);
-  --shadow-sm: 0px 10px 25px 0px hsl(0 0% 0% / 0.4), 0px 1px 2px -1px hsl(0 0% 0% / 0.4);
-  --shadow: 0px 10px 25px 0px hsl(0 0% 0% / 0.4), 0px 1px 2px -1px hsl(0 0% 0% / 0.4);
-  --shadow-md: 0px 10px 25px 0px hsl(0 0% 0% / 0.4), 0px 2px 4px -1px hsl(0 0% 0% / 0.4);
-  --shadow-lg: 0px 10px 25px 0px hsl(0 0% 0% / 0.4), 0px 4px 6px -1px hsl(0 0% 0% / 0.4);
-  --shadow-xl: 0px 10px 25px 0px hsl(0 0% 0% / 0.4), 0px 8px 10px -1px hsl(0 0% 0% / 0.4);
-  --shadow-2xl: 0px 10px 25px 0px hsl(0 0% 0% / 1);
+  --shadow-color: 0 0% 0%;
+  --shadow-strength: 5;
 }
 
 @theme inline {
@@ -188,6 +182,11 @@
   --tracking-wide: calc(var(--tracking-normal) + 0.025em);
   --tracking-wider: calc(var(--tracking-normal) + 0.05em);
   --tracking-widest: calc(var(--tracking-normal) + 0.1em);
+  /* Letter-spacing for small uppercase labels. */
+  --tracking-caps: 0.2em;
+
+  --text-2xs: 0.625rem;
+  --text-2xs--line-height: 1rem;
 }
 
 @layer base {
@@ -198,6 +197,15 @@
   body {
     @apply bg-background text-foreground;
     letter-spacing: var(--tracking-normal);
+  }
+
+  /*
+   * Default focus indicator. Form controls and buttons replace it with their
+   * own ring; everything else (links, cards, custom triggers) uses this.
+   */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
   }
 
   button:not(:disabled),

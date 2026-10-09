@@ -8,11 +8,13 @@ import { cn } from "@/lib/utils";
  * Small uppercase label that sits above headings and groups. The variants are
  * exported so motion primitives can carry the same styling on their own tag.
  */
-const eyebrowVariants = cva("font-medium uppercase", {
+const eyebrowVariants = cva("font-medium tracking-caps text-muted-foreground uppercase", {
   variants: {
     size: {
-      sm: "text-[10px] tracking-[0.28em] text-muted-foreground/55",
-      md: "text-xs tracking-[0.2em] text-muted-foreground",
+      /** Labels a group within a page. */
+      sm: "text-2xs",
+      /** Sits above a page title. */
+      md: "text-xs",
     },
   },
   defaultVariants: {

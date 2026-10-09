@@ -6,7 +6,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { cn } from "@/lib/utils";
 
 const ICON_LINK_CLASS =
-  "inline-flex items-center justify-center text-muted-foreground/85 transition-all duration-300 ease-out hover:scale-110 hover:text-primary focus-visible:rounded-sm focus-visible:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary/60 motion-reduce:transition-none motion-reduce:hover:scale-100";
+  "inline-flex items-center justify-center rounded-sm text-muted-foreground/85 outline-offset-4 transition-all duration-300 ease-out hover:scale-110 hover:text-primary focus-visible:text-primary motion-reduce:transition-none motion-reduce:hover:scale-100";
 
 /**
  * A row of icon-only links that reveal in a tight stagger. Must be rendered

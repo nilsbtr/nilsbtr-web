@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
-import { RevealGroup, RevealItem } from "@/components/motion";
-import { eyebrowVariants } from "@/components/shared/eyebrow";
+import { PageHeader, PageHeaderDescription } from "@/components/layout/page-header";
+import { PageShell } from "@/components/layout/page-shell";
+import { RevealGroup } from "@/components/motion";
 import { siteConfig } from "@/config/site";
 import { SocialList } from "@/features/social/components/social-list";
-import { cn } from "@/lib/utils";
 
 const DESCRIPTION =
   "Find Nils Böttcher on Instagram, Github, Spotify, stats.fm, Twitter, and Bluesky.";
@@ -20,13 +20,15 @@ export const metadata: Metadata = {
 
 export default function SocialPage() {
   return (
-    <div className="flex min-h-dvh items-center justify-center px-6 pt-20 pb-12">
-      <RevealGroup stagger={0.09} className="w-full max-w-md">
-        <RevealItem as="h1" variant="fade" className={cn(eyebrowVariants(), "mb-8")}>
-          Socials
-        </RevealItem>
+    <PageShell size="md" align="center">
+      <RevealGroup stagger={0.09}>
+        <PageHeader eyebrow="Social" title="Where to find me" className="mb-8">
+          <PageHeaderDescription>
+            Everywhere else I&apos;m online. Say hi on whichever you prefer.
+          </PageHeaderDescription>
+        </PageHeader>
         <SocialList />
       </RevealGroup>
-    </div>
+    </PageShell>
   );
 }

@@ -24,7 +24,7 @@ export function MobileNav() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex size-9 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors outline-none hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring md:hidden">
+      <DropdownMenuTrigger className="flex size-9 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground md:hidden">
         <HugeiconsIcon icon={Menu02Icon} strokeWidth={2} className="size-5" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" sideOffset={8}>
@@ -40,7 +40,7 @@ export function MobileNav() {
             >
               {item.label}
               {item.disabled && (
-                <span className="ml-auto text-[0.65rem] tracking-wide text-muted-foreground uppercase">
+                <span className="ml-auto text-2xs tracking-wide text-muted-foreground uppercase">
                   Soon
                 </span>
               )}

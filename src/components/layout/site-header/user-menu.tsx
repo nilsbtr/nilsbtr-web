@@ -65,7 +65,7 @@ export function UserMenu() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="cursor-pointer rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring">
+      <DropdownMenuTrigger className="cursor-pointer rounded-full">
         <Avatar size="sm">
           {user?.image && <AvatarImage src={user.image} />}
           <AvatarFallback className="text-xs">

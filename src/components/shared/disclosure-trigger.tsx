@@ -14,7 +14,7 @@ export function DisclosureTrigger({
   return (
     <CollapsibleTrigger
       className={cn(
-        "group/trigger inline-flex items-center gap-1.5 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary/60",
+        "group/trigger inline-flex items-center gap-1.5 rounded-sm outline-offset-4",
         className
       )}
       {...props}

@@ -10,7 +10,7 @@ function Monogram({ initials, size }: { initials: string; size: MarkSize }) {
     <span
       aria-hidden="true"
       className={cn(
-        "inline-flex shrink-0 items-center justify-center rounded-[5px] bg-foreground/8 font-mono font-semibold tracking-wider text-foreground/70 ring-1 ring-foreground/10 ring-inset",
+        "inline-flex shrink-0 items-center justify-center rounded-md bg-foreground/8 font-mono font-semibold tracking-wider text-foreground/70 ring-1 ring-foreground/10 ring-inset",
         size === "sm" ? "size-5 text-[0.55rem]" : "size-6 text-[0.6rem]"
       )}
     >
@@ -46,7 +46,7 @@ export function TechMarks({ tech, size }: { tech: Tech; size: MarkSize }) {
 /** Small status label next to a tech name, e.g. "waiting for stable". */
 export function TechStatusBadge({ label }: { label: string }) {
   return (
-    <Badge variant="outline" className="h-4.5 px-1.5 text-[0.625rem] text-muted-foreground">
+    <Badge variant="outline" className="h-4.5 px-1.5 text-2xs text-muted-foreground">
       {label}
     </Badge>
   );
