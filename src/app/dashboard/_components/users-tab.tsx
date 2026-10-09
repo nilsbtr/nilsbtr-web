@@ -48,8 +48,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { authClient } from "@/lib/auth-client";
-import { formatDate } from "@/lib/utils";
+import { authClient } from "@/lib/auth/client";
+import { formatDate } from "@/lib/format";
 
 import type { User } from "../types";
 import { RoleBadge } from "./role-badge";

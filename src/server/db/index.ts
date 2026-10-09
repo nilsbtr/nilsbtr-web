@@ -3,7 +3,7 @@ import "server-only";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 
-import * as schema from "./auth-schema";
+import * as schema from "./schema";
 
 declare global {
   // Reuse the pool during hot reloads in development.

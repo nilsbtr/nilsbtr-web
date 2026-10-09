@@ -16,6 +16,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { m } from "motion/react";
 import { useTheme } from "next-themes";
 
+import { SPRING } from "@/components/motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -27,9 +28,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
-import { authClient } from "@/lib/auth-client";
-import { SPRING } from "@/lib/motion";
-import { ADMIN_ROLE } from "@/lib/permissions";
+import { authClient } from "@/lib/auth/client";
+import { ADMIN_ROLE, hasRole } from "@/lib/auth/permissions";
 import { cn } from "@/lib/utils";
 
 type NavLink = {
@@ -63,7 +63,7 @@ export function Navbar() {
   const { setTheme } = useTheme();
   const { data: session, isPending } = authClient.useSession();
 
-  const isAdmin = session?.user?.role?.split(",").some((r) => r.trim() === ADMIN_ROLE);
+  const isAdmin = hasRole(session?.user?.role, ADMIN_ROLE);
   const isDashboard = pathname.startsWith("/dashboard");
 
   return (

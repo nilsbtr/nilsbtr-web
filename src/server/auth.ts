@@ -7,10 +7,11 @@ import { admin } from "better-auth/plugins";
 import { invite } from "better-invite";
 import { eq } from "drizzle-orm";
 
-import * as schema from "./auth-schema";
+import { ADMIN_ROLE, USER_ROLE, ac, hasPermission, roles } from "@/lib/auth/permissions";
+import { getBaseUrl } from "@/lib/url";
+
 import { db } from "./db";
-import { ADMIN_ROLE, USER_ROLE, ac, hasPermission, roles } from "./permissions";
-import { getBaseUrl } from "./utils";
+import * as schema from "./db/schema";
 
 const authSecret = process.env.BETTER_AUTH_SECRET;
 

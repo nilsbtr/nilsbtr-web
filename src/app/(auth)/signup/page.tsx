@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/card";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth/client";
 import { type SignupValues, signupSchema } from "@/lib/validations/auth";
 
 export default function SignupPage() {

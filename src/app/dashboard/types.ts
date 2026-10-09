@@ -1,4 +1,4 @@
-import { ADMIN_ROLE, USER_ROLE } from "@/lib/permissions";
+import { ADMIN_ROLE, USER_ROLE } from "@/lib/auth/permissions";
 
 export const AVAILABLE_ROLES = [
   { value: USER_ROLE, label: "User" },

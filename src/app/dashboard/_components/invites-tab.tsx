@@ -36,8 +36,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { authClient } from "@/lib/auth-client";
-import { formatDate, getBaseUrl } from "@/lib/utils";
+import { authClient } from "@/lib/auth/client";
+import { formatDate } from "@/lib/format";
+import { getBaseUrl } from "@/lib/url";
 
 import type { Invite } from "../types";
 import { CreateInviteDialog } from "./create-invite-dialog";

@@ -18,9 +18,9 @@ import {
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
-import { authClient } from "@/lib/auth-client";
-import { USER_ROLE } from "@/lib/permissions";
-import { getBaseUrl } from "@/lib/utils";
+import { authClient } from "@/lib/auth/client";
+import { USER_ROLE } from "@/lib/auth/permissions";
+import { getBaseUrl } from "@/lib/url";
 import {
   type CreateInviteValues,
   EXPIRY_OPTIONS,

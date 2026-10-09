@@ -9,7 +9,7 @@ import { Navbar } from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { getBaseUrl } from "@/lib/utils";
+import { getBaseUrl } from "@/lib/url";
 
 import "./globals.css";
 

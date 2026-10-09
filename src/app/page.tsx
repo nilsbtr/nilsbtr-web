@@ -2,11 +2,10 @@ import Link from "next/link";
 
 import { HugeiconsIcon } from "@hugeicons/react";
 
-import { Reveal, RevealGroup, RevealItem, WriteOn } from "@/components/motion";
+import { Reveal, RevealGroup, RevealItem, STAGGER, WriteOn } from "@/components/motion";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { SOCIALS } from "@/config/socials";
 import { FEATURED } from "@/config/tech-stack";
-import { STAGGER } from "@/lib/motion";
 
 const INLINE_LINK_CLASS =
   "text-foreground underline decoration-1 decoration-foreground/30 underline-offset-4 transition-all duration-300 ease-out hover:text-primary hover:decoration-primary hover:underline-offset-[7px]";

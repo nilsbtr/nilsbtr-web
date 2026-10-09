@@ -3,12 +3,11 @@ import type { Metadata } from "next";
 import { ArrowDown01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 
-import { RevealGroup, RevealItem } from "@/components/motion";
+import { RevealGroup, RevealItem, STAGGER } from "@/components/motion";
 import { TechChip } from "@/components/tech-chip";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { FEATURED, LEARNING, TECH_STACK } from "@/config/tech-stack";
-import { STAGGER } from "@/lib/motion";
 import type { Tech, TechCategory, TechGroup } from "@/types/tech";
 
 const DESCRIPTION =

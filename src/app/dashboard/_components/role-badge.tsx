@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { ADMIN_ROLE } from "@/lib/permissions";
+import { ADMIN_ROLE } from "@/lib/auth/permissions";
 
 export function RoleBadge({ role }: { role: string | null }) {
   if (!role) return <Badge variant="outline">None</Badge>;

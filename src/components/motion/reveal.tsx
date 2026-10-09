@@ -5,7 +5,7 @@ import type { HTMLAttributes, ReactNode } from "react";
 import { m } from "motion/react";
 import type { TargetAndTransition, Transition, Variants } from "motion/react";
 
-import { DURATION, SPRING, STAGGER, VIEWPORT_ONCE } from "@/lib/motion";
+import { DURATION, SPRING, STAGGER, VIEWPORT_ONCE } from "./tokens";
 
 const MOTION_TAGS = {
   div: m.div,

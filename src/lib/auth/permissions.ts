@@ -30,6 +30,13 @@ export type PermissionMap = {
   [K in keyof typeof statement]?: (typeof statement)[K][number][];
 };
 
+export type Role = keyof typeof roles;
+
+/** Whether a (possibly comma-separated) role string includes the given role. */
+export function hasRole(roleNames: string | null | undefined, role: Role) {
+  return roleNames?.split(",").some((name) => name.trim() === role) ?? false;
+}
+
 export function hasPermission(roleNames: string | null | undefined, permissions: PermissionMap) {
   if (!roleNames) return false;
 

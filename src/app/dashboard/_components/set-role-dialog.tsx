@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select";
-import { USER_ROLE } from "@/lib/permissions";
+import { USER_ROLE } from "@/lib/auth/permissions";
 
 import { AVAILABLE_ROLES, type User, getRoleLabel } from "../types";
 
