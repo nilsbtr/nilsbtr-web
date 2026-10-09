@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { PageHeader, PageHeaderDescription } from "@/components/layout/page-header";
 import { RevealItem } from "@/components/motion";
+import { siteConfig } from "@/config/site";
 import { FeaturedTechMarks } from "@/features/stack/components/featured-tech-marks";
 import { LearningSection } from "@/features/stack/components/learning-section";
 import { TechCategorySection } from "@/features/stack/components/tech-category-section";
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   title: "Stack",
   description: DESCRIPTION,
   openGraph: {
-    title: "Stack · Nils Böttcher",
+    title: `Stack · ${siteConfig.name}`,
     description: DESCRIPTION,
   },
 };

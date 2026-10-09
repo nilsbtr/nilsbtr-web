@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { RevealGroup, RevealItem } from "@/components/motion";
 import { eyebrowVariants } from "@/components/shared/eyebrow";
+import { siteConfig } from "@/config/site";
 import { SocialList } from "@/features/social/components/social-list";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
   title: "Social",
   description: DESCRIPTION,
   openGraph: {
-    title: "Social · Nils Böttcher",
+    title: `Social · ${siteConfig.name}`,
     description: DESCRIPTION,
   },
 };

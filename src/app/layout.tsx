@@ -1,38 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Caveat, JetBrains_Mono, Merriweather, Outfit } from "next/font/google";
 
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-import { MotionProvider } from "@/components/motion";
-import { Navbar } from "@/components/navbar";
-import { ThemeProvider } from "@/components/theme-provider";
+import { SiteHeader } from "@/components/layout/site-header";
+import { AppProviders } from "@/components/providers/app-providers";
+import { JsonLd } from "@/components/shared/json-ld";
 import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { siteConfig } from "@/config/site";
+import { SOCIALS } from "@/features/social/data";
+import { fontVariables } from "@/lib/fonts";
 import { getBaseUrl } from "@/lib/url";
 
 import "./globals.css";
-
-const fontSans = Outfit({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
-
-const fontCursive = Caveat({
-  subsets: ["latin"],
-  variable: "--font-cursive",
-});
-
-const fontSerif = Merriweather({
-  subsets: ["latin"],
-  variable: "--font-serif",
-  weight: ["300", "400", "700", "900"],
-});
-
-const fontMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-});
 
 const siteUrl = getBaseUrl();
 
@@ -41,37 +21,34 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f5f3ee" },
-    { media: "(prefers-color-scheme: dark)", color: "#1a1917" },
+    { media: "(prefers-color-scheme: light)", color: siteConfig.themeColor.light },
+    { media: "(prefers-color-scheme: dark)", color: siteConfig.themeColor.dark },
   ],
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Nils Böttcher",
-    template: "%s · Nils Böttcher",
+    default: siteConfig.name,
+    template: `%s · ${siteConfig.name}`,
   },
-  description:
-    "Personal website of Nils Böttcher — developer & creator. Find my projects, social links, and more.",
-  keywords: ["Nils Böttcher", "nilsbtr", "developer", "personal website", "portfolio"],
-  authors: [{ name: "Nils Böttcher", url: siteUrl }],
-  creator: "Nils Böttcher",
+  description: siteConfig.description,
+  keywords: [...siteConfig.keywords],
+  authors: [{ name: siteConfig.name, url: siteUrl }],
+  creator: siteConfig.name,
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: siteConfig.locale,
     url: siteUrl,
-    siteName: "Nils Böttcher",
-    title: "Nils Böttcher",
-    description:
-      "Personal website of Nils Böttcher — developer & creator. Find my projects, social links, and more.",
+    siteName: siteConfig.name,
+    title: siteConfig.name,
+    description: siteConfig.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nils Böttcher",
-    description:
-      "Personal website of Nils Böttcher — developer & creator. Find my projects, social links, and more.",
-    creator: "@digitalstave",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    creator: siteConfig.twitterHandle,
   },
   robots: {
     index: true,
@@ -86,6 +63,15 @@ export const metadata: Metadata = {
   },
 };
 
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: siteConfig.name,
+  alternateName: siteConfig.handle,
+  url: siteUrl,
+  sameAs: SOCIALS.map((social) => social.href),
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -94,37 +80,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Nils Böttcher",
-              alternateName: "nilsbtr",
-              url: siteUrl,
-              sameAs: [
-                "https://github.com/nilsbtr",
-                "https://instagram.com/nilsbttr",
-                "https://twitter.com/digitalstave",
-                "https://bsky.app/profile/nilsbtr.bsky.social",
-              ],
-            }),
-          }}
-        />
+        <JsonLd data={personSchema} />
       </head>
-      <body
-        className={`${fontSans.variable} ${fontCursive.variable} ${fontSerif.variable} ${fontMono.variable} antialiased`}
-      >
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <MotionProvider>
-            <TooltipProvider>
-              <Navbar />
-              <main>{children}</main>
-            </TooltipProvider>
-          </MotionProvider>
+      <body className={`${fontVariables} antialiased`}>
+        <AppProviders>
+          <SiteHeader />
+          <main>{children}</main>
           <Toaster />
-        </ThemeProvider>
+        </AppProviders>
         <Analytics />
         <SpeedInsights />
       </body>
