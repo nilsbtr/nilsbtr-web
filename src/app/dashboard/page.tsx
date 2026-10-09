@@ -5,18 +5,17 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { authClient } from "@/lib/auth-client";
-import { ADMIN_ROLE } from "@/lib/permissions";
-
-import { InvitesTab } from "./_components/invites-tab";
-import { DashboardSkeleton } from "./_components/skeletons";
-import { UsersTab } from "./_components/users-tab";
+import { InvitesTab } from "@/features/admin/components/invites-tab";
+import { DashboardSkeleton } from "@/features/admin/components/skeletons";
+import { UsersTab } from "@/features/admin/components/users-tab";
+import { authClient } from "@/lib/auth/client";
+import { ADMIN_ROLE, hasRole } from "@/lib/auth/permissions";
 
 export default function DashboardPage() {
   const router = useRouter();
   const { data: session, isPending: sessionLoading } = authClient.useSession();
 
-  const isAdmin = session?.user?.role?.split(",").some((r) => r.trim() === ADMIN_ROLE);
+  const isAdmin = hasRole(session?.user?.role, ADMIN_ROLE);
 
   useEffect(() => {
     if (sessionLoading) return;

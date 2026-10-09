@@ -4,8 +4,9 @@ import type { ReactNode } from "react";
 
 import { m, useReducedMotion } from "motion/react";
 
-import { DURATION, EASE_OUT_EXPO } from "@/lib/motion";
 import { cn } from "@/lib/utils";
+
+import { DURATION, EASE_OUT_EXPO } from "./tokens";
 
 /*
  * Negative top/bottom insets keep ascenders and descenders of display
