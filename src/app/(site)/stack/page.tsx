@@ -6,6 +6,7 @@ import { RevealGroup, RevealItem } from "@/components/motion";
 import { surfaceVariants } from "@/components/shared/surface";
 import { siteConfig } from "@/config/site";
 import { CategoryNav } from "@/features/stack/components/category-nav";
+import { CategoryRail } from "@/features/stack/components/category-rail";
 import { FeaturedTechMarks } from "@/features/stack/components/featured-tech-marks";
 import { LEARNING_SECTION_ID, LearningSection } from "@/features/stack/components/learning-section";
 import { TechCategorySection } from "@/features/stack/components/tech-category-section";
@@ -32,6 +33,7 @@ const CATEGORY_NAV_ITEMS = [
 export default function StackPage() {
   return (
     <PageShell>
+      <CategoryRail items={CATEGORY_NAV_ITEMS} />
       <RevealGroup className="mb-16">
         <PageHeader eyebrow="Stack" title="What I build with">
           <PageHeaderDescription>
@@ -44,7 +46,8 @@ export default function StackPage() {
         <RevealItem className={cn(surfaceVariants(), "mt-10 px-6 py-5")}>
           <FeaturedTechMarks label="Featured tech" showTaglines />
         </RevealItem>
-        <RevealItem variant="fade" className="mt-8">
+        {/* Large screens use the side rail instead. */}
+        <RevealItem variant="fade" className="mt-8 lg:hidden">
           <CategoryNav items={CATEGORY_NAV_ITEMS} />
         </RevealItem>
       </RevealGroup>
