@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import { ArrowUpRight01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import type { Tech, TechMark } from "@/types/tech";
 
@@ -60,6 +61,14 @@ function MarkCluster({
   return null;
 }
 
+function StatusBadge({ label }: { label: string }) {
+  return (
+    <Badge variant="outline" className="h-4.5 px-1.5 text-[0.625rem] text-muted-foreground">
+      {label}
+    </Badge>
+  );
+}
+
 export function TechChip({ tech, variant = "compact", style, className }: TechChipProps) {
   const primaryBrand = tech.marks?.[0]?.brand ?? "var(--primary)";
   const chipStyle = {
@@ -67,23 +76,35 @@ export function TechChip({ tech, variant = "compact", style, className }: TechCh
     ...style,
   } as CSSProperties;
 
+  const hasHref = Boolean(tech.href);
+
   if (variant === "compact") {
-    return (
-      <span
-        style={chipStyle}
-        className={cn(
-          "group/chip inline-flex h-9 items-center gap-2 rounded-full border border-border/60 bg-card/40 px-3.5 text-sm font-medium text-foreground/85 transition-all duration-300",
-          "hover:-translate-y-0.5 hover:border-(--chip-accent) hover:bg-card hover:text-foreground hover:shadow-sm",
-          className
-        )}
-      >
+    const compactProps = {
+      style: chipStyle,
+      className: cn(
+        "group/chip inline-flex h-9 items-center gap-2 rounded-full border border-border/60 bg-card/40 px-3.5 text-sm font-medium text-foreground/85 transition-all duration-300",
+        "hover:-translate-y-0.5 hover:border-(--chip-accent) hover:bg-card hover:text-foreground hover:shadow-sm",
+        className
+      ),
+    };
+    const compactBody = (
+      <>
         <MarkCluster marks={tech.marks} initials={tech.initials} size="sm" />
         <span className="leading-none">{tech.name}</span>
-      </span>
+        {tech.badge && <StatusBadge label={tech.badge} />}
+      </>
     );
+
+    if (hasHref) {
+      return (
+        <a href={tech.href} target="_blank" rel="noopener noreferrer" {...compactProps}>
+          {compactBody}
+        </a>
+      );
+    }
+    return <span {...compactProps}>{compactBody}</span>;
   }
 
-  const hasHref = Boolean(tech.href);
   const commonProps = {
     style: chipStyle,
     className: cn(
@@ -106,7 +127,10 @@ export function TechChip({ tech, variant = "compact", style, className }: TechCh
         )}
       </div>
       <div className="flex flex-col gap-1.5">
-        <h3 className="text-sm leading-none font-medium text-foreground">{tech.name}</h3>
+        <div className="flex flex-wrap items-center gap-2">
+          <h3 className="text-sm leading-none font-medium text-foreground">{tech.name}</h3>
+          {tech.badge && <StatusBadge label={tech.badge} />}
+        </div>
         <p className="text-xs leading-relaxed text-muted-foreground">{tech.description}</p>
       </div>
     </>
