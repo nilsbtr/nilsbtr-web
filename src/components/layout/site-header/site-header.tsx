@@ -22,12 +22,12 @@ export function SiteHeader() {
       initial={isDashboard ? false : { y: -16, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={SPRING.smooth}
-      className="fixed inset-x-0 top-0 z-50 flex h-14 items-center border-b border-border/50 bg-background/80 px-4 backdrop-blur-xl sm:px-6"
+      className="fixed inset-x-0 top-0 z-50 flex h-14 items-center border-b border-border/60 bg-background/80 px-4 backdrop-blur-xl sm:px-6"
     >
       <div className="flex-1">
         <Link
           href="/"
-          className="font-cursive text-2xl tracking-wide text-foreground transition-colors hover:text-primary"
+          className="rounded-sm font-cursive text-2xl tracking-wide text-foreground outline-offset-4 transition-colors hover:text-primary"
         >
           {siteConfig.handle}
         </Link>
