@@ -9,13 +9,12 @@ import { useForm } from "react-hook-form";
 
 import { InputField } from "@/components/shared/input-field";
 import { Button } from "@/components/ui/button";
-import { CardContent, CardFooter } from "@/components/ui/card";
 import { authClient } from "@/lib/auth/client";
 
 import { useRedirectAuthenticated } from "../hooks/use-redirect-authenticated";
 import { getSafeCallbackUrl } from "../lib/callback-url";
 import { type LoginValues, loginSchema } from "../schemas";
-import { AuthCard, AuthFormError, AuthSwitchLink } from "./auth-card";
+import { AuthFormError, AuthShell, AuthSwitchLink } from "./auth-shell";
 
 export function LoginForm() {
   const router = useRouter();
@@ -52,38 +51,39 @@ export function LoginForm() {
   }
 
   return (
-    <AuthCard title="Sign in" description="Enter your credentials to continue.">
-      <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
-        <CardContent className="grid gap-4">
-          {serverError && <AuthFormError>{serverError}</AuthFormError>}
-          <InputField
-            id="email"
-            label="Email"
-            type="email"
-            placeholder="you@example.com"
-            autoComplete="email"
-            error={errors.email}
-            {...register("email")}
-          />
-          <InputField
-            id="password"
-            label="Password"
-            type="password"
-            placeholder="••••••••"
-            autoComplete="current-password"
-            error={errors.password}
-            {...register("password")}
-          />
-        </CardContent>
-        <CardFooter className="flex flex-col gap-3">
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? "Signing in..." : "Sign in"}
-          </Button>
-          <AuthSwitchLink prompt="Don't have an account?" href="/signup">
-            Sign up
-          </AuthSwitchLink>
-        </CardFooter>
+    <AuthShell
+      title="Sign in"
+      description="Enter your credentials to continue."
+      footer={
+        <AuthSwitchLink prompt="Don't have an account?" href="/signup">
+          Sign up
+        </AuthSwitchLink>
+      }
+    >
+      <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
+        {serverError && <AuthFormError>{serverError}</AuthFormError>}
+        <InputField
+          id="email"
+          label="Email"
+          type="email"
+          placeholder="you@example.com"
+          autoComplete="email"
+          error={errors.email}
+          {...register("email")}
+        />
+        <InputField
+          id="password"
+          label="Password"
+          type="password"
+          placeholder="••••••••"
+          autoComplete="current-password"
+          error={errors.password}
+          {...register("password")}
+        />
+        <Button type="submit" className="mt-2 w-full" disabled={isSubmitting}>
+          {isSubmitting ? "Signing in..." : "Sign in"}
+        </Button>
       </form>
-    </AuthCard>
+    </AuthShell>
   );
 }

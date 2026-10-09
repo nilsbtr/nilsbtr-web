@@ -5,11 +5,11 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
+import { Spinner } from "@/components/shared/spinner";
 import { Button } from "@/components/ui/button";
-import { CardContent, CardFooter } from "@/components/ui/card";
 import { authClient } from "@/lib/auth/client";
 
-import { AuthCard } from "./auth-card";
+import { AuthShell } from "./auth-shell";
 
 type Status = "activating" | "success" | "error";
 
@@ -59,29 +59,23 @@ export function InviteActivation({ token }: { token: string }) {
   };
 
   return (
-    <AuthCard title={TITLES[status]} description={descriptions[status]}>
+    <AuthShell title={TITLES[status]} description={descriptions[status]}>
       {status === "error" && (
-        <>
-          <CardContent>
-            <p className="text-sm text-muted-foreground">
-              The invite link may have expired or already been used. Please contact the person who
-              invited you for a new link.
-            </p>
-          </CardContent>
-          <CardFooter>
-            <Button variant="outline" className="w-full" render={<Link href="/" />}>
-              Back to home
-            </Button>
-          </CardFooter>
-        </>
+        <div className="grid gap-5">
+          <p className="text-sm text-muted-foreground">
+            The invite link may have expired or already been used. Please contact the person who
+            invited you for a new link.
+          </p>
+          <Button variant="outline" className="w-full" render={<Link href="/" />}>
+            Back to home
+          </Button>
+        </div>
       )}
       {status === "activating" && (
-        <CardContent>
-          <div className="flex justify-center">
-            <div className="size-6 animate-spin rounded-full border-2 border-muted border-t-foreground" />
-          </div>
-        </CardContent>
+        <div className="flex justify-center py-2">
+          <Spinner className="size-6 text-muted-foreground" />
+        </div>
       )}
-    </AuthCard>
+    </AuthShell>
   );
 }

@@ -1,3 +1,9 @@
+import { PageShell } from "@/components/layout/page-shell";
+
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
-  return <div className="flex min-h-dvh items-center justify-center px-4 pt-14">{children}</div>;
+  return (
+    <PageShell size="sm" align="center">
+      {children}
+    </PageShell>
+  );
 }
