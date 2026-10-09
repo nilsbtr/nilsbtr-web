@@ -1,53 +1,84 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { Menu02Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { Popover, PopoverContent, PopoverTitle, PopoverTrigger } from "@/components/ui/popover";
 import { NAV_ITEMS } from "@/config/navigation";
 import { cn } from "@/lib/utils";
 
-/** Navigation collapsed into a menu, shown below the `md` breakpoint. */
+import { HEADER_BUTTON_CLASS } from "./header-button";
+
+const ITEM_CLASS = "flex items-center rounded-sm px-2 py-2.5 text-sm";
+
+/**
+ * Navigation collapsed behind a button, shown below the `md` breakpoint. It is
+ * a popover holding a regular `<nav>` of links rather than a menu, so the links
+ * keep their semantics (current page, open in new tab) for assistive technology.
+ */
 export function MobileNav() {
   const pathname = usePathname();
-  const router = useRouter();
+  const [open, setOpen] = useState(false);
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger className="flex size-9 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground md:hidden">
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger
+        aria-label="Open navigation menu"
+        className={cn(HEADER_BUTTON_CLASS, "md:hidden")}
+      >
         <HugeiconsIcon icon={Menu02Icon} strokeWidth={2} className="size-5" />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" sideOffset={8}>
-        <DropdownMenuGroup>
-          <DropdownMenuLabel>Navigation</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          {NAV_ITEMS.map((item) => (
-            <DropdownMenuItem
-              key={item.label}
-              disabled={item.disabled}
-              onClick={item.disabled ? undefined : () => router.push(item.href)}
-              className={cn(pathname === item.href && "text-foreground")}
-            >
-              {item.label}
-              {item.disabled && (
-                <span className="ml-auto text-2xs tracking-wide text-muted-foreground uppercase">
-                  Soon
-                </span>
-              )}
-            </DropdownMenuItem>
-          ))}
-        </DropdownMenuGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </PopoverTrigger>
+      <PopoverContent align="end" sideOffset={8} className="w-48 gap-0 p-1">
+        <PopoverTitle className="px-2 py-1.5 text-xs text-muted-foreground">
+          Navigation
+        </PopoverTitle>
+        <div aria-hidden="true" className="-mx-1 my-1 h-px bg-border" />
+        <nav aria-label="Main">
+          <ul>
+            {NAV_ITEMS.map((item) => {
+              if (item.disabled) {
+                return (
+                  <li key={item.label}>
+                    <span
+                      aria-disabled="true"
+                      className={cn(ITEM_CLASS, "justify-between text-muted-foreground/60")}
+                    >
+                      {item.label}
+                      <span className="text-2xs tracking-wide uppercase">Soon</span>
+                    </span>
+                  </li>
+                );
+              }
+
+              const isCurrent = pathname === item.href;
+              return (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    aria-current={isCurrent ? "page" : undefined}
+                    onClick={() => setOpen(false)}
+                    className={cn(
+                      ITEM_CLASS,
+                      "justify-between outline-offset-0 transition-colors hover:bg-accent hover:text-accent-foreground",
+                      isCurrent && "font-medium"
+                    )}
+                  >
+                    {item.label}
+                    {isCurrent && (
+                      <span aria-hidden="true" className="size-1.5 rounded-full bg-current" />
+                    )}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+      </PopoverContent>
+    </Popover>
   );
 }

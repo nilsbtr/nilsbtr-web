@@ -10,15 +10,16 @@ import { siteConfig } from "@/config/site";
 
 import { MainNav } from "./main-nav";
 import { MobileNav } from "./mobile-nav";
+import { ThemeToggle } from "./theme-toggle";
 import { UserMenu } from "./user-menu";
 
-/** Fixed top bar: brand, primary navigation and the account menu. */
+/** Fixed top bar: brand, primary navigation, theme switch and the account control. */
 export function SiteHeader() {
   const pathname = usePathname();
   const isDashboard = pathname.startsWith("/dashboard");
 
   return (
-    <m.nav
+    <m.header
       initial={isDashboard ? false : { y: -16, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={SPRING.smooth}
@@ -27,7 +28,8 @@ export function SiteHeader() {
       <div className="flex-1">
         <Link
           href="/"
-          className="rounded-sm font-cursive text-2xl tracking-wide text-foreground outline-offset-4 transition-colors hover:text-primary"
+          aria-label={`${siteConfig.handle}, home`}
+          className="rounded-sm font-cursive text-2xl tracking-wide text-foreground outline-offset-4 transition-colors hover:text-brand"
         >
           {siteConfig.handle}
         </Link>
@@ -35,10 +37,11 @@ export function SiteHeader() {
 
       <MainNav />
 
-      <div className="flex flex-1 items-center justify-end gap-1">
+      <div className="flex flex-1 items-center justify-end gap-0.5">
+        <ThemeToggle />
         <MobileNav />
         <UserMenu />
       </div>
-    </m.nav>
+    </m.header>
   );
 }

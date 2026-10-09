@@ -1,17 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import {
-  DashboardSquare01Icon,
-  Login03Icon,
-  Logout03Icon,
-  Moon02Icon,
-  Sun03Icon,
-  UserIcon,
-} from "@hugeicons/core-free-icons";
+import { DashboardSquare01Icon, Logout03Icon, UserIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
-import { useTheme } from "next-themes";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -20,42 +13,53 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuLinkItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { authClient } from "@/lib/auth/client";
 import { ADMIN_ROLE, hasRole } from "@/lib/auth/permissions";
 import { getInitials } from "@/lib/format";
+import { cn } from "@/lib/utils";
 
-/** Offers the opposite of the active theme; the inactive entry is hidden with CSS. */
-function ThemeMenuItems() {
-  const { setTheme } = useTheme();
+import { HEADER_BUTTON_CLASS } from "./header-button";
 
-  return (
-    <>
-      <DropdownMenuItem onClick={() => setTheme("light")} className="hidden dark:flex">
-        <HugeiconsIcon icon={Sun03Icon} strokeWidth={2} />
-        Light Mode
-      </DropdownMenuItem>
-      <DropdownMenuItem onClick={() => setTheme("dark")} className="flex dark:hidden">
-        <HugeiconsIcon icon={Moon02Icon} strokeWidth={2} />
-        Dark Mode
-      </DropdownMenuItem>
-    </>
-  );
-}
-
-/** Avatar menu with theme switching and the session-dependent account actions. */
+/**
+ * Account control at the end of the header. Signed-out visitors get a direct
+ * link to the login page; signed-in users get a menu with their account actions.
+ */
 export function UserMenu() {
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
 
   if (isPending) {
-    return <Skeleton className="size-6 rounded-full" />;
+    return (
+      <div className="flex size-9 items-center justify-center">
+        <Skeleton className="size-6 rounded-full" />
+      </div>
+    );
   }
 
   const user = session?.user;
+
+  if (!user) {
+    return (
+      <Tooltip>
+        <TooltipTrigger
+          render={<Link href="/login" aria-label="Sign in" className={HEADER_BUTTON_CLASS} />}
+        >
+          <Avatar size="sm">
+            <AvatarFallback>
+              <HugeiconsIcon icon={UserIcon} strokeWidth={1.5} className="size-4" />
+            </AvatarFallback>
+          </Avatar>
+        </TooltipTrigger>
+        <TooltipContent sideOffset={8}>Sign in</TooltipContent>
+      </Tooltip>
+    );
+  }
 
   async function signOut() {
     await authClient.signOut();
@@ -65,11 +69,14 @@ export function UserMenu() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="cursor-pointer rounded-full">
+      <DropdownMenuTrigger
+        aria-label="Open account menu"
+        className={cn(HEADER_BUTTON_CLASS, "rounded-full")}
+      >
         <Avatar size="sm">
-          {user?.image && <AvatarImage src={user.image} />}
+          {user.image && <AvatarImage src={user.image} alt="" />}
           <AvatarFallback className="text-xs">
-            {user?.name ? (
+            {user.name ? (
               getInitials(user.name)
             ) : (
               <HugeiconsIcon icon={UserIcon} strokeWidth={1.5} className="size-4" />
@@ -77,44 +84,28 @@ export function UserMenu() {
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" sideOffset={8}>
-        {user ? (
-          <>
-            <DropdownMenuGroup>
-              <DropdownMenuLabel className="font-normal">
-                <div className="flex flex-col gap-0.5">
-                  <span className="text-sm font-medium">{user.name}</span>
-                  <span className="text-xs text-muted-foreground">{user.email}</span>
-                </div>
-              </DropdownMenuLabel>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <ThemeMenuItems />
-              {hasRole(user.role, ADMIN_ROLE) && (
-                <DropdownMenuItem onClick={() => router.push("/dashboard")}>
-                  <HugeiconsIcon icon={DashboardSquare01Icon} strokeWidth={2} />
-                  Dashboard
-                </DropdownMenuItem>
-              )}
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={signOut}>
-                <HugeiconsIcon icon={Logout03Icon} strokeWidth={2} />
-                Sign out
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-          </>
-        ) : (
-          <DropdownMenuGroup>
-            <DropdownMenuLabel>Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <ThemeMenuItems />
-            <DropdownMenuItem onClick={() => router.push("/login")}>
-              <HugeiconsIcon icon={Login03Icon} strokeWidth={2} />
-              Login
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-        )}
+      <DropdownMenuContent align="end" sideOffset={8} className="min-w-48">
+        <DropdownMenuGroup>
+          <DropdownMenuLabel className="font-normal">
+            <div className="flex flex-col gap-0.5">
+              <span className="text-sm font-medium text-foreground">{user.name}</span>
+              <span className="text-xs text-muted-foreground">{user.email}</span>
+            </div>
+          </DropdownMenuLabel>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          {hasRole(user.role, ADMIN_ROLE) && (
+            <DropdownMenuLinkItem render={<Link href="/dashboard" />}>
+              <HugeiconsIcon icon={DashboardSquare01Icon} strokeWidth={2} />
+              Dashboard
+            </DropdownMenuLinkItem>
+          )}
+          <DropdownMenuItem onClick={signOut}>
+            <HugeiconsIcon icon={Logout03Icon} strokeWidth={2} />
+            Sign out
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );
