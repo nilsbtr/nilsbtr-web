@@ -94,7 +94,7 @@ import {
   SiZshHex,
 } from "@icons-pack/react-simple-icons";
 
-import type { Tech, TechCategory } from "@/types/tech";
+import type { Tech, TechCategory } from "./types";
 
 // Fallback accent for monochrome / black-brand icons so hover borders stay visible on dark backgrounds.
 const ACCENT_MUTED = "var(--foreground)";

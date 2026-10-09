@@ -7,7 +7,7 @@ import {
   SpotifyIcon,
 } from "@hugeicons/core-free-icons";
 
-import type { Social } from "@/types/social";
+import type { Social } from "./types";
 
 export const SOCIALS: readonly Social[] = [
   {
