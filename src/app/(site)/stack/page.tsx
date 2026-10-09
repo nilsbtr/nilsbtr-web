@@ -34,7 +34,7 @@ export default function StackPage() {
   return (
     <PageShell>
       <CategoryRail items={CATEGORY_NAV_ITEMS} />
-      <RevealGroup className="mb-16">
+      <RevealGroup lead className="mb-16">
         <PageHeader eyebrow="Stack" title="What I build with">
           <PageHeaderDescription>
             I mostly work fullstack in TypeScript with a framework. I use Go for backends when

@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
  * with the surrounding text.
  */
 const ICON_LINK_CLASS =
-  "inline-flex size-9 items-center justify-center rounded-md text-muted-foreground/85 transition-all duration-300 ease-out hover:scale-110 hover:text-brand focus-visible:text-brand motion-reduce:transition-none motion-reduce:hover:scale-100";
+  "inline-flex size-9 items-center justify-center rounded-md text-muted-foreground/85 transition-all duration-300 hover:scale-110 hover:text-brand focus-visible:text-brand motion-reduce:transition-none motion-reduce:hover:scale-100";
 
 /**
  * A row of icon-only links that reveal in a tight stagger. Must be rendered

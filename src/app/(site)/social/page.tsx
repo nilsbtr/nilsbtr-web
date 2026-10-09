@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export default function SocialPage() {
   return (
     <PageShell size="md" align="center">
-      <RevealGroup stagger={0.09}>
+      <RevealGroup>
         <PageHeader eyebrow="Social" title="Where to find me" className="mb-8">
           <PageHeaderDescription>
             Everywhere else I&apos;m online. Say hi on whichever you prefer.

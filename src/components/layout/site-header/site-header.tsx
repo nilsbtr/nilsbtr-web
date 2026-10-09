@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 import { m } from "motion/react";
 
-import { SPRING } from "@/components/motion";
+import { DURATION, EASE } from "@/components/motion";
 import { siteConfig } from "@/config/site";
 
 import { MainNav } from "./main-nav";
@@ -20,9 +20,10 @@ export function SiteHeader() {
 
   return (
     <m.header
-      initial={isDashboard ? false : { y: -16, opacity: 0 }}
+      data-reveal=""
+      initial={isDashboard ? false : { y: -12, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={SPRING.smooth}
+      transition={{ duration: DURATION.enter, ease: EASE.out }}
       className="fixed inset-x-0 top-0 z-50 flex h-14 items-center border-b border-border/60 bg-background/80 px-4 backdrop-blur-xl sm:px-6"
     >
       <div className="flex-1">

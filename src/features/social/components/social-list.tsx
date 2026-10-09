@@ -11,7 +11,7 @@ function SocialListItem({ social }: { social: Social }) {
   return (
     <ExternalLink
       href={social.href}
-      className="group/link flex items-center gap-4 rounded-md py-4 transition-transform duration-300 ease-out hover:translate-x-1 motion-reduce:transition-none motion-reduce:hover:translate-x-0"
+      className="group/link flex items-center gap-4 rounded-md py-4 transition-transform duration-300 hover:translate-x-1 motion-reduce:transition-none motion-reduce:hover:translate-x-0"
     >
       <div
         aria-hidden="true"
