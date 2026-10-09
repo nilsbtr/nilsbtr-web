@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
 
-import { RevealGroup, RevealItem } from "@/components/motion";
+import { RevealItem } from "@/components/motion";
 import { eyebrowVariants } from "@/components/shared/eyebrow";
 import { cn } from "@/lib/utils";
 
 /**
  * Page-level heading: eyebrow, serif title, then any supporting content.
- * Children are revealed in sequence, so wrap them in RevealItem (or use
- * PageHeaderDescription) to take part in the stagger.
+ * Must be rendered inside a RevealGroup; each part joins its stagger, so the
+ * page decides how the header and the content below it are sequenced.
  */
 export function PageHeader({
   eyebrow,
@@ -16,12 +16,12 @@ export function PageHeader({
   children,
 }: {
   eyebrow: string;
-  title: string;
+  title: ReactNode;
   className?: string;
   children?: ReactNode;
 }) {
   return (
-    <RevealGroup as="header" className={className}>
+    <header className={className}>
       <RevealItem as="p" variant="fade" className={eyebrowVariants()}>
         {eyebrow}
       </RevealItem>
@@ -32,7 +32,7 @@ export function PageHeader({
         {title}
       </RevealItem>
       {children}
-    </RevealGroup>
+    </header>
   );
 }
 
