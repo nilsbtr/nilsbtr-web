@@ -12,19 +12,22 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.2178 0 0);
   --primary: oklch(0.7414 0.0738 84.5946);
-  --primary-foreground: oklch(1 0 0);
+  --primary-foreground: oklch(0.2178 0 0);
   --secondary: oklch(0.9096 0.0167 91.5611);
   --secondary-foreground: oklch(0.2178 0 0);
   --muted: oklch(0.9459 0.0165 91.5544);
   --muted-foreground: oklch(0.5022 0.0278 85.7741);
   --accent: oklch(0.7414 0.0738 84.5946);
-  --accent-foreground: oklch(1 0 0);
-  --destructive: oklch(0.568 0.2002 26.4057);
+  --accent-foreground: oklch(0.2178 0 0);
+  --destructive: oklch(0.53 0.2002 26.4057);
   --destructive-foreground: oklch(1 0 0);
 
   --border: oklch(0.8986 0.0258 97.1423);
-  --input: oklch(0.8986 0.0258 97.1423);
-  --ring: oklch(0.7414 0.0738 84.5946);
+  --input: oklch(0.64 0.03 95);
+  --ring: oklch(0.52 0.075 84.6);
+
+  /* The primary hue, darkened until it reads as text or an icon on the page (4.5:1). */
+  --brand: oklch(0.52 0.075 84.6);
 
   --chart-1: oklch(0.7414 0.0738 84.5946);
   --chart-2: oklch(0.3738 0.0116 258.366);
@@ -35,7 +38,7 @@
   --sidebar: oklch(0.9459 0.0165 91.5544);
   --sidebar-foreground: oklch(0.2178 0 0);
   --sidebar-primary: oklch(0.7414 0.0738 84.5946);
-  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-primary-foreground: oklch(0.2178 0 0);
   --sidebar-accent: oklch(0.8986 0.0258 97.1423);
   --sidebar-accent-foreground: oklch(0.2178 0 0);
   --sidebar-border: oklch(0.8986 0.0258 97.1423);
@@ -74,7 +77,7 @@
   --shadow-2xl: 0 32px 72px -16px hsl(var(--shadow-color) / calc(0.22 * var(--shadow-strength)));
 
   /* Accent of an interactive surface on hover; set per element to a brand color. */
-  --surface-accent: var(--primary);
+  --surface-accent: var(--brand);
 
   --tracking-normal: -0.02em;
   --spacing: 0.25rem;
@@ -95,11 +98,13 @@
   --muted-foreground: oklch(0.7006 0.0154 84.5911);
   --accent: oklch(0.8039 0.0702 84.7579);
   --accent-foreground: oklch(0.1904 0.004 106.7692);
-  --destructive: oklch(0.6368 0.2078 25.3313);
+  --destructive: oklch(0.7 0.19 25.3313);
   --destructive-foreground: oklch(0.9755 0.0067 97.351);
   --border: oklch(0.2901 0.0061 78.232);
-  --input: oklch(0.2901 0.0061 78.232);
+  --input: oklch(0.5 0.008 80);
   --ring: oklch(0.8039 0.0702 84.7579);
+
+  --brand: oklch(0.8039 0.0702 84.7579);
 
   --chart-1: oklch(0.8039 0.0702 84.7579);
   --chart-2: oklch(0.5498 0.0111 252.878);
@@ -141,6 +146,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-brand: var(--brand);
 
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
@@ -192,6 +198,17 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+
+  html {
+    /* Keep anchor targets and focused elements clear of the fixed header. */
+    scroll-padding-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {

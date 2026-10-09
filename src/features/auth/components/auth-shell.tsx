@@ -2,8 +2,10 @@ import type { ReactNode } from "react";
 
 import { PageHeader, PageHeaderDescription } from "@/components/layout/page-header";
 import { RevealGroup, RevealItem } from "@/components/motion";
+import { Spinner } from "@/components/shared/spinner";
 import { Surface } from "@/components/shared/surface";
 import { TextLink } from "@/components/shared/text-link";
+import { Button } from "@/components/ui/button";
 
 /**
  * Shared frame of every auth screen. It uses the same page header as the rest
@@ -43,7 +45,27 @@ export function AuthShell({
 /** Message shown above the fields when the server rejects a submission. */
 export function AuthFormError({ children }: { children: ReactNode }) {
   return (
-    <p className="rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive">{children}</p>
+    <p role="alert" className="rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive">
+      {children}
+    </p>
+  );
+}
+
+/** Full-width submit button that shows progress while the request is in flight. */
+export function AuthSubmitButton({
+  pending,
+  pendingLabel,
+  children,
+}: {
+  pending: boolean;
+  pendingLabel: string;
+  children: ReactNode;
+}) {
+  return (
+    <Button type="submit" size="lg" className="mt-2 w-full" disabled={pending} aria-busy={pending}>
+      {pending && <Spinner aria-hidden="true" data-icon="inline-start" />}
+      {pending ? pendingLabel : children}
+    </Button>
   );
 }
 

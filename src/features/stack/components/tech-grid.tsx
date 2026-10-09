@@ -21,18 +21,20 @@ export function TechGrid({
 }) {
   if (!animated) {
     return (
-      <div className={GRID_CLASS}>
+      <ul className={GRID_CLASS}>
         {items.map((tech) => (
-          <TechCard key={tech.id} tech={tech} className={cardClassName} />
+          <li key={tech.id}>
+            <TechCard tech={tech} className={cardClassName} />
+          </li>
         ))}
-      </div>
+      </ul>
     );
   }
 
   return (
-    <RevealGroup nested stagger={STAGGER.tight} className={GRID_CLASS}>
+    <RevealGroup nested as="ul" stagger={STAGGER.tight} className={GRID_CLASS}>
       {items.map((tech) => (
-        <RevealItem key={tech.id} variant="scale">
+        <RevealItem as="li" key={tech.id} variant="scale">
           <TechCard tech={tech} className={cardClassName} />
         </RevealItem>
       ))}

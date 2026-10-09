@@ -14,7 +14,7 @@ export function DisclosureTrigger({
   return (
     <CollapsibleTrigger
       className={cn(
-        "group/trigger inline-flex items-center gap-1.5 rounded-sm outline-offset-4",
+        "group/trigger relative inline-flex items-center gap-1.5 rounded-sm outline-offset-4 after:absolute after:-inset-x-2 after:-inset-y-3",
         className
       )}
       {...props}
@@ -23,6 +23,7 @@ export function DisclosureTrigger({
       <HugeiconsIcon
         icon={ArrowDown01Icon}
         strokeWidth={1.5}
+        aria-hidden="true"
         className={cn(
           "size-3.5 transition-transform duration-300 group-data-panel-open/trigger:rotate-180 motion-reduce:transition-none",
           iconClassName

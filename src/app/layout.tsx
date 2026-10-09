@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { SiteHeader } from "@/components/layout/site-header";
+import { MAIN_CONTENT_ID, SkipLink } from "@/components/layout/skip-link";
 import { AppProviders } from "@/components/providers/app-providers";
 import { JsonLd } from "@/components/shared/json-ld";
 import { Toaster } from "@/components/ui/sonner";
@@ -78,14 +79,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <JsonLd data={personSchema} />
       </head>
       <body className={`${fontVariables} antialiased`}>
         <AppProviders>
+          <SkipLink />
           <SiteHeader />
-          <main>{children}</main>
+          <main id={MAIN_CONTENT_ID} tabIndex={-1} className="outline-none">
+            {children}
+          </main>
           <Toaster />
         </AppProviders>
         <Analytics />

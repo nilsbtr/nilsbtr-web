@@ -9,13 +9,16 @@ import { TechGrid } from "./tech-grid";
 
 /** One category of the stack: heading, core tech grid and optional extras. */
 export function TechCategorySection({ category }: { category: TechCategory }) {
+  const headingId = `${category.id}-heading`;
+
   // A collapsed category mounts its content on open, outside the scroll reveal.
   if (category.collapsed) {
     return (
-      <RevealGroup as="section" inView>
+      <RevealGroup as="section" inView id={category.id} aria-labelledby={headingId}>
         <Collapsible>
           <RevealItem>
             <SectionHeader
+              id={headingId}
               title={
                 <DisclosureTrigger
                   className="gap-2 text-left"
@@ -30,7 +33,7 @@ export function TechCategorySection({ category }: { category: TechCategory }) {
           <CollapsibleContent>
             <div className="flex flex-col gap-5 pt-6 pb-1">
               <TechGrid items={category.core} />
-              {category.more && <MoreTech groups={category.more} />}
+              {category.more && <MoreTech category={category.label} groups={category.more} />}
             </div>
           </CollapsibleContent>
         </Collapsible>
@@ -39,14 +42,14 @@ export function TechCategorySection({ category }: { category: TechCategory }) {
   }
 
   return (
-    <RevealGroup as="section" inView>
+    <RevealGroup as="section" inView id={category.id} aria-labelledby={headingId}>
       <RevealItem className="mb-6">
-        <SectionHeader title={category.label} description={category.caption} />
+        <SectionHeader id={headingId} title={category.label} description={category.caption} />
       </RevealItem>
       <TechGrid items={category.core} animated />
       {category.more && (
         <RevealItem variant="fade" className="mt-5">
-          <MoreTech groups={category.more} />
+          <MoreTech category={category.label} groups={category.more} />
         </RevealItem>
       )}
     </RevealGroup>

@@ -23,7 +23,7 @@ function Monogram({ initials, size }: { initials: string; size: MarkSize }) {
 export function TechMarks({ tech, size }: { tech: Tech; size: MarkSize }) {
   if (tech.marks && tech.marks.length > 0) {
     return (
-      <span className="flex shrink-0 items-center gap-1.5">
+      <span aria-hidden="true" className="flex shrink-0 items-center gap-1.5">
         {tech.marks.map((mark) => (
           <mark.Component
             key={mark.label}
