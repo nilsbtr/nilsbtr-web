@@ -15,6 +15,13 @@
       "when": 1776282785446,
       "tag": "0001_sparkling_zombie",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791633787684,
+      "tag": "0002_yielding_shen",
+      "breakpoints": true
     }
   ]
 }

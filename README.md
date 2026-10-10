@@ -19,6 +19,7 @@ src/
 │   ├── (site)/      Public pages
 │   ├── (auth)/      Login, sign-up and invite flows
 │   ├── dashboard/   Admin area
+│   ├── profile/     Account settings
 │   └── api/
 ├── features/        One folder per domain: its components, data, schemas, hooks and types
 ├── components/

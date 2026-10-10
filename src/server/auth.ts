@@ -3,11 +3,12 @@ import "server-only";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { APIError, createAuthMiddleware } from "better-auth/api";
-import { admin } from "better-auth/plugins";
+import { admin, username } from "better-auth/plugins";
 import { invite } from "better-invite";
 import { eq } from "drizzle-orm";
 
 import { ADMIN_ROLE, USER_ROLE, ac, hasPermission, roles } from "@/lib/auth/permissions";
+import { USERNAME_MAX_LENGTH, USERNAME_MIN_LENGTH, isValidUsername } from "@/lib/auth/username";
 import { getBaseUrl } from "@/lib/url";
 
 import { db } from "./db";
@@ -55,19 +56,34 @@ export const auth = betterAuth({
           await db.update(schema.user).set({ role: ADMIN_ROLE }).where(eq(schema.user.id, user.id));
         },
       },
+      update: {
+        // The plugin's separate display username is not used; keep it in step with the username.
+        before: async (user) => {
+          if (typeof user.username !== "string") return;
+
+          return { data: { displayUsername: user.username } };
+        },
+      },
     },
   },
   hooks: {
     before: createAuthMiddleware(async (ctx) => {
       if (ctx.path !== "/sign-up/email" || !ctx.request) return;
 
-      if (!(await hasAnyUsers())) return;
+      const isInvited = !(await hasAnyUsers()) || hasInviteTokenCookie(ctx.request);
 
-      if (hasInviteTokenCookie(ctx.request)) return;
+      if (!isInvited) {
+        throw new APIError("FORBIDDEN", {
+          message: "An invitation is required to sign up.",
+        });
+      }
 
-      throw new APIError("FORBIDDEN", {
-        message: "An invitation is required to sign up.",
-      });
+      // The plugin treats usernames as optional; here every account has one.
+      if (typeof ctx.body?.username !== "string") {
+        throw new APIError("BAD_REQUEST", {
+          message: "A username is required.",
+        });
+      }
     }),
   },
   plugins: [
@@ -75,6 +91,11 @@ export const auth = betterAuth({
       ac,
       roles,
       defaultRole: USER_ROLE,
+    }),
+    username({
+      minUsernameLength: USERNAME_MIN_LENGTH,
+      maxUsernameLength: USERNAME_MAX_LENGTH,
+      usernameValidator: isValidUsername,
     }),
     invite({
       defaultMaxUses: 1,
