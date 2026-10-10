@@ -20,6 +20,7 @@ import {
 } from "@tanstack/react-table";
 import { toast } from "sonner";
 
+import { UserAvatar } from "@/components/shared/user-avatar";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -49,6 +50,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { authClient } from "@/lib/auth/client";
+import { getAvatarSeed } from "@/lib/avatar";
 import { formatDate } from "@/lib/format";
 
 import type { User } from "../types";
@@ -141,8 +143,18 @@ export function UsersTab({ currentUserId }: { currentUserId: string }) {
     () => [
       {
         accessorKey: "name",
-        header: "Name",
-        cell: ({ row }) => <span className="font-medium">{row.original.name}</span>,
+        header: "User",
+        cell: ({ row }) => (
+          <div className="flex items-center gap-2.5">
+            <UserAvatar size="sm" seed={getAvatarSeed(row.original)} />
+            <div className="flex flex-col">
+              <span className="font-medium">{row.original.name}</span>
+              {row.original.username && (
+                <span className="text-xs text-muted-foreground">@{row.original.username}</span>
+              )}
+            </div>
+          </div>
+        ),
       },
       {
         accessorKey: "email",

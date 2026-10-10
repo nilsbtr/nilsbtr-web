@@ -252,6 +252,11 @@
     cursor: pointer;
   }
 
+  /* Password fields bring their own show/hide toggle; drop the one Edge adds. */
+  input::-ms-reveal {
+    display: none;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

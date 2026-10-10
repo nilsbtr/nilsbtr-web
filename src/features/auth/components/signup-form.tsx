@@ -5,15 +5,19 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 
+import { FormError } from "@/components/shared/form-error";
+import { IdentityPreview } from "@/components/shared/identity-preview";
 import { InputField } from "@/components/shared/input-field";
 import { PasswordField } from "@/components/shared/password-field";
+import { UsernameField } from "@/components/shared/username-field";
 import { authClient } from "@/lib/auth/client";
+import { USERNAME_TAKEN_CODE, USERNAME_TAKEN_MESSAGE } from "@/lib/auth/username";
 
 import { useRedirectAuthenticated } from "../hooks/use-redirect-authenticated";
 import { type SignupValues, signupSchema } from "../schemas";
-import { AuthFormError, AuthShell, AuthSubmitButton, AuthSwitchLink } from "./auth-shell";
+import { AuthShell, AuthSubmitButton, AuthSwitchLink } from "./auth-shell";
 
 export function SignupForm() {
   const router = useRouter();
@@ -23,12 +27,15 @@ export function SignupForm() {
 
   const {
     register,
+    control,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<SignupValues>({
     resolver: zodResolver(signupSchema),
-    defaultValues: { name: "", email: "", password: "" },
+    defaultValues: { username: "", name: "", email: "", password: "" },
   });
+  const [username, name] = useWatch({ control, name: ["username", "name"] });
 
   if (isRedirecting) {
     return null;
@@ -38,6 +45,11 @@ export function SignupForm() {
     setServerError(null);
 
     const { error } = await authClient.signUp.email(values);
+
+    if (error?.code === USERNAME_TAKEN_CODE) {
+      setError("username", { message: USERNAME_TAKEN_MESSAGE }, { shouldFocus: true });
+      return;
+    }
 
     if (error) {
       setServerError(error.message ?? "Failed to create account.");
@@ -58,7 +70,9 @@ export function SignupForm() {
       }
     >
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="grid gap-4">
-        {serverError && <AuthFormError>{serverError}</AuthFormError>}
+        <IdentityPreview username={username} name={name} />
+        {serverError && <FormError>{serverError}</FormError>}
+        <UsernameField username={username} error={errors.username} {...register("username")} />
         <InputField
           id="name"
           label="Name"

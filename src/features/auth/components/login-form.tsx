@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
+import { FormError } from "@/components/shared/form-error";
 import { InputField } from "@/components/shared/input-field";
 import { PasswordField } from "@/components/shared/password-field";
 import { authClient } from "@/lib/auth/client";
@@ -14,7 +15,7 @@ import { authClient } from "@/lib/auth/client";
 import { useRedirectAuthenticated } from "../hooks/use-redirect-authenticated";
 import { getSafeCallbackUrl } from "../lib/callback-url";
 import { type LoginValues, loginSchema } from "../schemas";
-import { AuthFormError, AuthShell, AuthSubmitButton, AuthSwitchLink } from "./auth-shell";
+import { AuthShell, AuthSubmitButton, AuthSwitchLink } from "./auth-shell";
 
 export function LoginForm() {
   const router = useRouter();
@@ -30,17 +31,20 @@ export function LoginForm() {
     formState: { errors, isSubmitting },
   } = useForm<LoginValues>({
     resolver: zodResolver(loginSchema),
-    defaultValues: { email: "", password: "" },
+    defaultValues: { identifier: "", password: "" },
   });
 
   if (isRedirecting) {
     return null;
   }
 
-  async function onSubmit(values: LoginValues) {
+  async function onSubmit({ identifier, password }: LoginValues) {
     setServerError(null);
 
-    const { error } = await authClient.signIn.email(values);
+    // Usernames never contain an "@", so it tells the two apart.
+    const { error } = identifier.includes("@")
+      ? await authClient.signIn.email({ email: identifier, password })
+      : await authClient.signIn.username({ username: identifier.toLowerCase(), password });
 
     if (error) {
       setServerError(error.message ?? "Failed to sign in.");
@@ -61,15 +65,18 @@ export function LoginForm() {
       }
     >
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="grid gap-4">
-        {serverError && <AuthFormError>{serverError}</AuthFormError>}
+        {serverError && <FormError>{serverError}</FormError>}
         <InputField
-          id="email"
-          label="Email"
-          type="email"
+          id="identifier"
+          label="Email or username"
+          type="text"
           placeholder="you@example.com"
-          autoComplete="email"
-          error={errors.email}
-          {...register("email")}
+          autoComplete="username"
+          autoCapitalize="none"
+          autoCorrect="off"
+          spellCheck={false}
+          error={errors.identifier}
+          {...register("identifier")}
         />
         <PasswordField
           id="password"

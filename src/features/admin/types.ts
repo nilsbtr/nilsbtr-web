@@ -12,6 +12,7 @@ export function getRoleLabel(value: string) {
 export type User = {
   id: string;
   name: string;
+  username?: string | null;
   email: string;
   role: string | null;
   banned: boolean | null;
