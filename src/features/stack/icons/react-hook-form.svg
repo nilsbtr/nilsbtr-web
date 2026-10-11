@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none">
-  <path d="M9 4.5H7C5.61929 4.5 4.5 5.61929 4.5 7V19C4.5 20.3807 5.61929 21.5 7 21.5H17C18.3807 21.5 19.5 20.3807 19.5 19V7C19.5 5.61929 18.3807 4.5 17 4.5H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-  <path d="M9 4.5C9 3.11929 10.3431 2 12 2C13.6569 2 15 3.11929 15 4.5V5.5H9V4.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-  <path d="M8 11H10.5M13.5 11H16M8 15.5H10.5M13.5 15.5H16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M6.25 4L17.75 4C18.99 4 20 5.01 20 6.25L20 19.25C20 20.49 18.99 21.5 17.75 21.5L6.25 21.5C5.01 21.5 4 20.49 4 19.25L4 6.25C4 5.01 5.01 4 6.25 4Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M8.75 4V5C8.75 6.1 9.65 7 10.75 7H13.25C14.35 7 15.25 6.1 15.25 5V4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M10.5 4C10.5 3.17 11.17 2.5 12 2.5 12.83 2.5 13.5 3.17 13.5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M7.25 11.5H10.75M13.25 11.5H16.75M7.25 16.5H10.75M13.25 16.5H16.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 </svg>
