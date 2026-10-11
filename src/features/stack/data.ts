@@ -1,99 +1,71 @@
 import {
-  SiApachemaven,
-  SiApachemavenHex,
-  SiAstral,
-  SiAstro,
-  SiAstroHex,
-  SiBaseui,
-  SiBetterauth,
-  SiCloudflarepages,
-  SiCloudflarepagesHex,
-  SiConvex,
-  SiConvexHex,
-  SiDocker,
-  SiDockerHex,
-  SiDrizzle,
-  SiDrizzleHex,
-  SiEslint,
-  SiEslintHex,
-  SiFastapi,
-  SiFastapiHex,
-  SiFlask,
-  SiFlutter,
-  SiFlutterHex,
-  SiFramer,
-  SiFramerHex,
-  SiGin,
-  SiGinHex,
-  SiGit,
-  SiGitHex,
-  SiGithub,
-  SiGithubactions,
-  SiGithubactionsHex,
-  SiGo,
-  SiGoHex,
-  SiGsap,
-  SiGsapHex,
-  SiHetzner,
-  SiHetznerHex,
-  SiJinja,
-  SiJinjaHex,
-  SiNextdotjs,
-  SiOpenjdk,
-  SiOxc,
-  SiOxcHex,
-  SiPnpm,
-  SiPnpmHex,
-  SiPostgresql,
-  SiPostgresqlHex,
-  SiPrettier,
-  SiPrettierHex,
-  SiPydantic,
-  SiPydanticHex,
-  SiPytest,
-  SiPytestHex,
-  SiPython,
-  SiPythonHex,
-  SiRadixui,
-  SiRailway,
-  SiReact,
-  SiReactHex,
-  SiReacthookform,
-  SiReacthookformHex,
-  SiReactquery,
-  SiReactqueryHex,
-  SiRuff,
-  SiRuffHex,
-  SiShadcnui,
-  SiSpringboot,
-  SiSpringbootHex,
-  SiSqlalchemy,
-  SiSqlalchemyHex,
-  SiTailwindcss,
-  SiTailwindcssHex,
-  SiTanstack,
-  SiTanstackHex,
-  SiTurborepo,
-  SiTurborepoHex,
-  SiTypescript,
-  SiTypescriptHex,
-  SiUv,
-  SiUvHex,
-  SiVaadin,
-  SiVaadinHex,
-  SiVercel,
-  SiVite,
-  SiViteHex,
-  SiVitest,
-  SiVitestHex,
-  SiZedindustries,
-  SiZedindustriesHex,
-  SiZod,
-  SiZodHex,
-  SiZsh,
-  SiZshHex,
-} from "@icons-pack/react-simple-icons";
+  AiCloud01Icon,
+  CheckListIcon,
+  Chemistry02Icon,
+  ComputerTerminal01Icon,
+  FeatherIcon,
+  FramerIcon,
+  GithubIcon,
+  Globe02Icon,
+  JavaIcon,
+  MagicWand01Icon,
+  MaskTheater02Icon,
+  PotionIcon,
+  PythonIcon,
+  ReactIcon,
+  ShadcnIcon,
+  SqlIcon,
+  TailwindcssIcon,
+  Typescript01Icon,
+  VisualStudioCodeIcon,
+  Wrench01Icon,
+  ZshIcon,
+} from "@hugeicons/core-free-icons";
 
+import {
+  AstralIcon,
+  AstroIcon,
+  BaseUiIcon,
+  BetterAuthIcon,
+  CloudflarePagesIcon,
+  ConvexIcon,
+  DockerIcon,
+  DrizzleIcon,
+  EslintIcon,
+  FastapiIcon,
+  FlaskIcon,
+  FlutterIcon,
+  GinIcon,
+  GitIcon,
+  GithubActionsIcon,
+  GoIcon,
+  GsapIcon,
+  HetznerIcon,
+  JinjaIcon,
+  NextjsIcon,
+  OxcIcon,
+  PnpmIcon,
+  PostgresqlIcon,
+  PrettierIcon,
+  PydanticIcon,
+  PytestIcon,
+  RadixUiIcon,
+  RailwayIcon,
+  ReactHookFormIcon,
+  RuffIcon,
+  SpringBootIcon,
+  TanstackIcon,
+  TanstackQueryIcon,
+  TurborepoIcon,
+  UvIcon,
+  VaadinIcon,
+  VercelIcon,
+  ViteIcon,
+  VitestIcon,
+  ZedIcon,
+  ZodIcon,
+  ZustandIcon,
+} from "./icons";
 import type { Tech, TechCategory } from "./types";
 
 // Fallback accent for monochrome / black-brand icons so hover borders stay visible on dark backgrounds.
@@ -104,7 +76,7 @@ const ACCENT_MUTED = "var(--foreground)";
 const TYPESCRIPT: Tech = {
   id: "typescript",
   name: "TypeScript",
-  marks: [{ Component: SiTypescript, brand: SiTypescriptHex, label: "TypeScript" }],
+  marks: [{ icon: Typescript01Icon, brand: "#3178C6", label: "TypeScript" }],
   description: "My main language, used across the whole stack.",
   tagline: "Main language, fullstack by default",
   href: "https://www.typescriptlang.org",
@@ -113,7 +85,7 @@ const TYPESCRIPT: Tech = {
 const REACT: Tech = {
   id: "react",
   name: "React",
-  marks: [{ Component: SiReact, brand: SiReactHex, label: "React" }],
+  marks: [{ icon: ReactIcon, brand: "#61DAFB", label: "React" }],
   description: "UI layer for most of my projects.",
   tagline: "UI layer for most projects",
   href: "https://react.dev",
@@ -122,7 +94,7 @@ const REACT: Tech = {
 const NEXTJS: Tech = {
   id: "nextjs",
   name: "Next.js",
-  marks: [{ Component: SiNextdotjs, brand: ACCENT_MUTED, label: "Next.js" }],
+  marks: [{ icon: NextjsIcon, brand: ACCENT_MUTED, label: "Next.js" }],
   description: "Fullstack React apps with the App Router.",
   tagline: "Fullstack React apps",
   href: "https://nextjs.org",
@@ -131,7 +103,7 @@ const NEXTJS: Tech = {
 const ASTRO: Tech = {
   id: "astro",
   name: "Astro",
-  marks: [{ Component: SiAstro, brand: SiAstroHex, label: "Astro" }],
+  marks: [{ icon: AstroIcon, brand: "#BC52EE", label: "Astro" }],
   description: "Content-driven and static sites.",
   tagline: "Content-driven and static sites",
   href: "https://astro.build",
@@ -140,7 +112,7 @@ const ASTRO: Tech = {
 const TAILWIND: Tech = {
   id: "tailwind",
   name: "Tailwind CSS",
-  marks: [{ Component: SiTailwindcss, brand: SiTailwindcssHex, label: "Tailwind CSS" }],
+  marks: [{ icon: TailwindcssIcon, brand: "#06B6D4", label: "Tailwind CSS" }],
   description: "Utility-first styling, paired with shadcn/ui.",
   tagline: "Styling, paired with shadcn/ui",
   href: "https://tailwindcss.com",
@@ -149,7 +121,7 @@ const TAILWIND: Tech = {
 const SHADCN: Tech = {
   id: "shadcn",
   name: "shadcn/ui",
-  marks: [{ Component: SiShadcnui, brand: ACCENT_MUTED, label: "shadcn/ui" }],
+  marks: [{ icon: ShadcnIcon, brand: ACCENT_MUTED, label: "shadcn/ui" }],
   description: "Component primitives I own in my codebase.",
   href: "https://ui.shadcn.com",
 };
@@ -157,7 +129,7 @@ const SHADCN: Tech = {
 const DRIZZLE: Tech = {
   id: "drizzle",
   name: "Drizzle ORM",
-  marks: [{ Component: SiDrizzle, brand: SiDrizzleHex, label: "Drizzle ORM" }],
+  marks: [{ icon: DrizzleIcon, brand: "#C5F74F", label: "Drizzle ORM" }],
   description: "Type-safe, SQL-first ORM for TypeScript.",
   href: "https://orm.drizzle.team",
 };
@@ -165,7 +137,7 @@ const DRIZZLE: Tech = {
 const BETTER_AUTH: Tech = {
   id: "better-auth",
   name: "better-auth",
-  marks: [{ Component: SiBetterauth, brand: ACCENT_MUTED, label: "better-auth" }],
+  marks: [{ icon: BetterAuthIcon, brand: ACCENT_MUTED, label: "better-auth" }],
   description: "Sessions, OAuth, JWT, 2FA and passkeys.",
   href: "https://www.better-auth.com",
 };
@@ -173,14 +145,14 @@ const BETTER_AUTH: Tech = {
 const LUMOS: Tech = {
   id: "lumos",
   name: "Lumos Framework",
-  initials: "Lu",
+  marks: [{ icon: MagicWand01Icon, label: "Lumos Framework" }],
   description: "shadcn-style component collection for Astro.",
 };
 
 const BASE_UI: Tech = {
   id: "base-ui",
   name: "Base UI",
-  marks: [{ Component: SiBaseui, brand: ACCENT_MUTED, label: "Base UI" }],
+  marks: [{ icon: BaseUiIcon, brand: ACCENT_MUTED, label: "Base UI" }],
   description: "Unstyled, accessible React components.",
   href: "https://base-ui.com",
 };
@@ -188,7 +160,7 @@ const BASE_UI: Tech = {
 const RADIX_UI: Tech = {
   id: "radix-ui",
   name: "Radix UI",
-  marks: [{ Component: SiRadixui, brand: ACCENT_MUTED, label: "Radix UI" }],
+  marks: [{ icon: RadixUiIcon, brand: ACCENT_MUTED, label: "Radix UI" }],
   description: "Unstyled, accessible React primitives.",
   href: "https://www.radix-ui.com",
 };
@@ -196,7 +168,7 @@ const RADIX_UI: Tech = {
 const MOTION: Tech = {
   id: "motion",
   name: "Motion",
-  marks: [{ Component: SiFramer, brand: SiFramerHex, label: "Motion" }],
+  marks: [{ icon: FramerIcon, brand: "#0055FF", label: "Motion" }],
   description: "Declarative animations for React.",
   href: "https://motion.dev",
 };
@@ -204,7 +176,7 @@ const MOTION: Tech = {
 const TANSTACK_QUERY: Tech = {
   id: "tanstack-query",
   name: "TanStack Query",
-  marks: [{ Component: SiReactquery, brand: SiReactqueryHex, label: "TanStack Query" }],
+  marks: [{ icon: TanstackQueryIcon, brand: "#FF4154", label: "TanStack Query" }],
   description: "Async server state with caching and invalidation.",
   href: "https://tanstack.com/query",
 };
@@ -212,7 +184,7 @@ const TANSTACK_QUERY: Tech = {
 const ZUSTAND: Tech = {
   id: "zustand",
   name: "Zustand",
-  initials: "Zu",
+  marks: [{ icon: ZustandIcon, label: "Zustand" }],
   description: "Small client state store with a minimal API.",
   href: "https://zustand.docs.pmnd.rs",
 };
@@ -220,7 +192,7 @@ const ZUSTAND: Tech = {
 const REACT_HOOK_FORM: Tech = {
   id: "react-hook-form",
   name: "React Hook Form",
-  marks: [{ Component: SiReacthookform, brand: SiReacthookformHex, label: "React Hook Form" }],
+  marks: [{ icon: ReactHookFormIcon, brand: "#EC5990", label: "React Hook Form" }],
   description: "Form state with minimal re-renders.",
   href: "https://react-hook-form.com",
 };
@@ -228,7 +200,7 @@ const REACT_HOOK_FORM: Tech = {
 const ZOD: Tech = {
   id: "zod",
   name: "Zod",
-  marks: [{ Component: SiZod, brand: SiZodHex, label: "Zod" }],
+  marks: [{ icon: ZodIcon, brand: "#408AFF", label: "Zod" }],
   description: "Schema validation that infers back into TypeScript.",
   href: "https://zod.dev",
 };
@@ -236,7 +208,7 @@ const ZOD: Tech = {
 const VITEST: Tech = {
   id: "vitest",
   name: "Vitest",
-  marks: [{ Component: SiVitest, brand: SiVitestHex, label: "Vitest" }],
+  marks: [{ icon: VitestIcon, brand: "#00FF74", label: "Vitest" }],
   description: "Unit and integration tests.",
   href: "https://vitest.dev",
 };
@@ -244,7 +216,7 @@ const VITEST: Tech = {
 const PLAYWRIGHT: Tech = {
   id: "playwright",
   name: "Playwright",
-  initials: "Pw",
+  marks: [{ icon: MaskTheater02Icon, label: "Playwright" }],
   description: "End-to-end browser tests.",
   href: "https://playwright.dev",
 };
@@ -254,7 +226,7 @@ const PLAYWRIGHT: Tech = {
 const PNPM: Tech = {
   id: "pnpm",
   name: "pnpm",
-  marks: [{ Component: SiPnpm, brand: SiPnpmHex, label: "pnpm" }],
+  marks: [{ icon: PnpmIcon, brand: "#F69220", label: "pnpm" }],
   description: "Default package manager.",
   href: "https://pnpm.io",
 };
@@ -262,7 +234,7 @@ const PNPM: Tech = {
 const NUB: Tech = {
   id: "nub",
   name: "Nub",
-  initials: "Nu",
+  marks: [{ icon: Wrench01Icon, label: "Nub" }],
   description: "TypeScript-first toolchain for Node.js.",
   href: "https://nubjs.com",
 };
@@ -270,7 +242,7 @@ const NUB: Tech = {
 const TURBOREPO: Tech = {
   id: "turborepo",
   name: "Turborepo",
-  marks: [{ Component: SiTurborepo, brand: SiTurborepoHex, label: "Turborepo" }],
+  marks: [{ icon: TurborepoIcon, brand: "#FF1E56", label: "Turborepo" }],
   description: "Monorepo task running and caching.",
   href: "https://turborepo.com",
 };
@@ -278,7 +250,7 @@ const TURBOREPO: Tech = {
 const VITE: Tech = {
   id: "vite",
   name: "Vite",
-  marks: [{ Component: SiVite, brand: SiViteHex, label: "Vite" }],
+  marks: [{ icon: ViteIcon, brand: "#9135FF", label: "Vite" }],
   description: "Dev server and bundler outside of Next.js.",
   href: "https://vite.dev",
 };
@@ -286,7 +258,7 @@ const VITE: Tech = {
 const ESLINT: Tech = {
   id: "eslint",
   name: "ESLint",
-  marks: [{ Component: SiEslint, brand: SiEslintHex, label: "ESLint" }],
+  marks: [{ icon: EslintIcon, brand: "#4B32C3", label: "ESLint" }],
   description: "Linting, enforced in CI.",
   href: "https://eslint.org",
 };
@@ -294,7 +266,7 @@ const ESLINT: Tech = {
 const PRETTIER: Tech = {
   id: "prettier",
   name: "Prettier",
-  marks: [{ Component: SiPrettier, brand: SiPrettierHex, label: "Prettier" }],
+  marks: [{ icon: PrettierIcon, brand: "#F7B93E", label: "Prettier" }],
   description: "Consistent code formatting.",
   href: "https://prettier.io",
 };
@@ -302,7 +274,7 @@ const PRETTIER: Tech = {
 const OXLINT: Tech = {
   id: "oxlint",
   name: "Oxlint",
-  marks: [{ Component: SiOxc, brand: SiOxcHex, label: "Oxc" }],
+  marks: [{ icon: OxcIcon, brand: "#00F7F1", label: "Oxc" }],
   description: "Rust-based linter for JavaScript and TypeScript.",
   href: "https://oxc.rs",
 };
@@ -310,7 +282,7 @@ const OXLINT: Tech = {
 const OXFMT: Tech = {
   id: "oxfmt",
   name: "Oxfmt",
-  marks: [{ Component: SiOxc, brand: SiOxcHex, label: "Oxc" }],
+  marks: [{ icon: OxcIcon, brand: "#00F7F1", label: "Oxc" }],
   description: "Rust-based formatter for JavaScript and TypeScript.",
   href: "https://oxc.rs",
 };
@@ -320,7 +292,7 @@ const OXFMT: Tech = {
 const GO: Tech = {
   id: "go",
   name: "Go",
-  marks: [{ Component: SiGo, brand: SiGoHex, label: "Go" }],
+  marks: [{ icon: GoIcon, brand: "#00ADD8", label: "Go" }],
   description: "Backend language when performance matters.",
   tagline: "Backends where performance matters",
   href: "https://go.dev",
@@ -329,7 +301,7 @@ const GO: Tech = {
 const GIN: Tech = {
   id: "gin",
   name: "Gin",
-  marks: [{ Component: SiGin, brand: SiGinHex, label: "Gin" }],
+  marks: [{ icon: GinIcon, brand: "#008ECF", label: "Gin" }],
   description: "HTTP framework for Go APIs.",
   href: "https://gin-gonic.com",
 };
@@ -337,7 +309,7 @@ const GIN: Tech = {
 const NET_HTTP: Tech = {
   id: "net-http",
   name: "net/http",
-  marks: [{ Component: SiGo, brand: SiGoHex, label: "Go standard library" }],
+  marks: [{ icon: GoIcon, brand: "#00ADD8", label: "Go standard library" }],
   description: "HTTP server and client from the Go standard library.",
   href: "https://pkg.go.dev/net/http",
 };
@@ -345,7 +317,7 @@ const NET_HTTP: Tech = {
 const GORM: Tech = {
   id: "gorm",
   name: "GORM",
-  marks: [{ Component: SiGo, brand: SiGoHex, label: "GORM (Go ORM)" }],
+  marks: [{ icon: GoIcon, brand: "#00ADD8", label: "GORM (Go ORM)" }],
   description: "ORM for Go with migrations and relations.",
   href: "https://gorm.io",
 };
@@ -355,7 +327,7 @@ const GORM: Tech = {
 const PYTHON: Tech = {
   id: "python",
   name: "Python",
-  marks: [{ Component: SiPython, brand: SiPythonHex, label: "Python" }],
+  marks: [{ icon: PythonIcon, brand: "#3776AB", label: "Python" }],
   description: "For when I need its ecosystem.",
   tagline: "AI features and scripting",
   href: "https://www.python.org",
@@ -364,7 +336,7 @@ const PYTHON: Tech = {
 const FASTAPI: Tech = {
   id: "fastapi",
   name: "FastAPI",
-  marks: [{ Component: SiFastapi, brand: SiFastapiHex, label: "FastAPI" }],
+  marks: [{ icon: FastapiIcon, brand: "#009688", label: "FastAPI" }],
   description: "Typed Python APIs.",
   tagline: "Python APIs",
   href: "https://fastapi.tiangolo.com",
@@ -373,7 +345,7 @@ const FASTAPI: Tech = {
 const PYDANTIC: Tech = {
   id: "pydantic",
   name: "Pydantic",
-  marks: [{ Component: SiPydantic, brand: SiPydanticHex, label: "Pydantic" }],
+  marks: [{ icon: PydanticIcon, brand: "#E92063", label: "Pydantic" }],
   description: "Data validation and settings from type hints.",
   href: "https://docs.pydantic.dev",
 };
@@ -381,7 +353,7 @@ const PYDANTIC: Tech = {
 const UV: Tech = {
   id: "uv",
   name: "uv",
-  marks: [{ Component: SiUv, brand: SiUvHex, label: "uv" }],
+  marks: [{ icon: UvIcon, brand: "#DE5FE9", label: "uv" }],
   description: "Package and project manager for Python.",
   href: "https://docs.astral.sh/uv",
 };
@@ -389,7 +361,7 @@ const UV: Tech = {
 const FLASK: Tech = {
   id: "flask",
   name: "Flask",
-  marks: [{ Component: SiFlask, brand: ACCENT_MUTED, label: "Flask" }],
+  marks: [{ icon: FlaskIcon, brand: ACCENT_MUTED, label: "Flask" }],
   description: "Lightweight web framework.",
   href: "https://flask.palletsprojects.com",
 };
@@ -397,7 +369,7 @@ const FLASK: Tech = {
 const SQLALCHEMY: Tech = {
   id: "sqlalchemy",
   name: "SQLAlchemy",
-  marks: [{ Component: SiSqlalchemy, brand: SiSqlalchemyHex, label: "SQLAlchemy" }],
+  marks: [{ icon: PotionIcon, brand: "#D71F00", label: "SQLAlchemy" }],
   description: "SQL toolkit and ORM.",
   href: "https://www.sqlalchemy.org",
 };
@@ -405,7 +377,7 @@ const SQLALCHEMY: Tech = {
 const ALEMBIC: Tech = {
   id: "alembic",
   name: "Alembic",
-  initials: "Al",
+  marks: [{ icon: Chemistry02Icon, label: "Alembic" }],
   description: "Database migrations for SQLAlchemy.",
   href: "https://alembic.sqlalchemy.org",
 };
@@ -413,7 +385,7 @@ const ALEMBIC: Tech = {
 const JINJA: Tech = {
   id: "jinja",
   name: "Jinja2",
-  marks: [{ Component: SiJinja, brand: SiJinjaHex, label: "Jinja2" }],
+  marks: [{ icon: JinjaIcon, brand: "#7E0C1B", label: "Jinja2" }],
   description: "Server-rendered HTML templates.",
   href: "https://jinja.palletsprojects.com",
 };
@@ -421,7 +393,7 @@ const JINJA: Tech = {
 const HTTPX: Tech = {
   id: "httpx",
   name: "httpx",
-  initials: "hx",
+  marks: [{ icon: Globe02Icon, label: "httpx" }],
   description: "Sync and async HTTP client.",
   href: "https://www.python-httpx.org",
 };
@@ -429,7 +401,7 @@ const HTTPX: Tech = {
 const RUFF: Tech = {
   id: "ruff",
   name: "ruff",
-  marks: [{ Component: SiRuff, brand: SiRuffHex, label: "ruff" }],
+  marks: [{ icon: RuffIcon, brand: "#D7FF64", label: "ruff" }],
   description: "Linter and formatter.",
   href: "https://docs.astral.sh/ruff",
 };
@@ -437,7 +409,7 @@ const RUFF: Tech = {
 const PYTEST: Tech = {
   id: "pytest",
   name: "pytest",
-  marks: [{ Component: SiPytest, brand: SiPytestHex, label: "pytest" }],
+  marks: [{ icon: PytestIcon, brand: "#0A9EDC", label: "pytest" }],
   description: "Test framework.",
   href: "https://docs.pytest.org",
 };
@@ -445,7 +417,7 @@ const PYTEST: Tech = {
 const TY: Tech = {
   id: "ty",
   name: "ty",
-  marks: [{ Component: SiAstral, brand: ACCENT_MUTED, label: "Astral" }],
+  marks: [{ icon: AstralIcon, brand: ACCENT_MUTED, label: "Astral" }],
   description: "Type checker from Astral.",
   badge: "waiting for stable",
   href: "https://docs.astral.sh/ty",
@@ -456,7 +428,7 @@ const TY: Tech = {
 const VERCEL_AI_SDK: Tech = {
   id: "vercel-ai-sdk",
   name: "Vercel AI SDK",
-  marks: [{ Component: SiVercel, brand: ACCENT_MUTED, label: "Vercel" }],
+  marks: [{ icon: VercelIcon, brand: ACCENT_MUTED, label: "Vercel" }],
   description: "AI features in TypeScript apps.",
   href: "https://ai-sdk.dev",
 };
@@ -464,7 +436,7 @@ const VERCEL_AI_SDK: Tech = {
 const PYDANTIC_AI: Tech = {
   id: "pydantic-ai",
   name: "Pydantic AI",
-  marks: [{ Component: SiPydantic, brand: SiPydanticHex, label: "Pydantic" }],
+  marks: [{ icon: PydanticIcon, brand: "#E92063", label: "Pydantic" }],
   description: "Typed agents and LLM workflows in Python.",
   href: "https://ai.pydantic.dev",
 };
@@ -472,7 +444,7 @@ const PYDANTIC_AI: Tech = {
 const LLMAAS: Tech = {
   id: "llmaas",
   name: "LLMaaS",
-  initials: "AI",
+  marks: [{ icon: AiCloud01Icon, label: "LLMaaS" }],
   description: "LLM as a Service: hosted model providers.",
 };
 
@@ -481,7 +453,7 @@ const LLMAAS: Tech = {
 const POSTGRESQL: Tech = {
   id: "postgresql",
   name: "PostgreSQL",
-  marks: [{ Component: SiPostgresql, brand: SiPostgresqlHex, label: "PostgreSQL" }],
+  marks: [{ icon: PostgresqlIcon, brand: "#4169E1", label: "PostgreSQL" }],
   description: "My default database.",
   tagline: "Default database",
   href: "https://www.postgresql.org",
@@ -490,7 +462,7 @@ const POSTGRESQL: Tech = {
 const SQL: Tech = {
   id: "sql",
   name: "SQL",
-  initials: "SQL",
+  marks: [{ icon: SqlIcon, label: "SQL" }],
   description: "Queries, schema design and migrations.",
 };
 
@@ -499,7 +471,7 @@ const SQL: Tech = {
 const DOCKER: Tech = {
   id: "docker",
   name: "Docker",
-  marks: [{ Component: SiDocker, brand: SiDockerHex, label: "Docker" }],
+  marks: [{ icon: DockerIcon, brand: "#2496ED", label: "Docker" }],
   description: "Local dev and self-hosted deployments.",
   tagline: "Local dev and self-hosted deployments",
   href: "https://www.docker.com",
@@ -514,7 +486,7 @@ const DOCKER_COMPOSE: Tech = {
 const GITHUB_ACTIONS: Tech = {
   id: "github-actions",
   name: "GitHub Actions",
-  marks: [{ Component: SiGithubactions, brand: SiGithubactionsHex, label: "GitHub Actions" }],
+  marks: [{ icon: GithubActionsIcon, brand: "#2088FF", label: "GitHub Actions" }],
   description: "CI for linting, type checks and tests.",
   href: "https://github.com/features/actions",
 };
@@ -522,7 +494,7 @@ const GITHUB_ACTIONS: Tech = {
 const VERCEL: Tech = {
   id: "vercel",
   name: "Vercel",
-  marks: [{ Component: SiVercel, brand: ACCENT_MUTED, label: "Vercel" }],
+  marks: [{ icon: VercelIcon, brand: ACCENT_MUTED, label: "Vercel" }],
   description: "Primary hosting for web apps.",
   tagline: "Primary hosting for web apps",
   href: "https://vercel.com",
@@ -531,7 +503,7 @@ const VERCEL: Tech = {
 const HETZNER: Tech = {
   id: "hetzner",
   name: "Hetzner",
-  marks: [{ Component: SiHetzner, brand: SiHetznerHex, label: "Hetzner" }],
+  marks: [{ icon: HetznerIcon, brand: "#D50C2D", label: "Hetzner" }],
   description: "Self-hosted services via Docker.",
   href: "https://www.hetzner.com",
 };
@@ -539,7 +511,7 @@ const HETZNER: Tech = {
 const CLOUDFLARE_PAGES: Tech = {
   id: "cloudflare-pages",
   name: "Cloudflare Pages",
-  marks: [{ Component: SiCloudflarepages, brand: SiCloudflarepagesHex, label: "Cloudflare Pages" }],
+  marks: [{ icon: CloudflarePagesIcon, brand: "#F38020", label: "Cloudflare Pages" }],
   description: "Static and edge hosting.",
   href: "https://pages.cloudflare.com",
 };
@@ -547,7 +519,7 @@ const CLOUDFLARE_PAGES: Tech = {
 const RAILWAY: Tech = {
   id: "railway",
   name: "Railway",
-  marks: [{ Component: SiRailway, brand: ACCENT_MUTED, label: "Railway" }],
+  marks: [{ icon: RailwayIcon, brand: ACCENT_MUTED, label: "Railway" }],
   description: "Managed app and database hosting.",
   href: "https://railway.com",
 };
@@ -557,7 +529,7 @@ const RAILWAY: Tech = {
 const GITHUB: Tech = {
   id: "github",
   name: "GitHub",
-  marks: [{ Component: SiGithub, brand: ACCENT_MUTED, label: "GitHub" }],
+  marks: [{ icon: GithubIcon, brand: ACCENT_MUTED, label: "GitHub" }],
   description: "Version control and CI.",
   tagline: "Version control and CI",
   href: "https://github.com/nilsbtr",
@@ -566,7 +538,7 @@ const GITHUB: Tech = {
 const GIT: Tech = {
   id: "git",
   name: "Git",
-  marks: [{ Component: SiGit, brand: SiGitHex, label: "Git" }],
+  marks: [{ icon: GitIcon, brand: "#F05032", label: "Git" }],
   description: "Version control.",
   href: "https://git-scm.com",
 };
@@ -574,7 +546,7 @@ const GIT: Tech = {
 const VSCODE: Tech = {
   id: "vscode",
   name: "VS Code",
-  initials: "VS",
+  marks: [{ icon: VisualStudioCodeIcon, label: "VS Code" }],
   description: "Code editor.",
   href: "https://code.visualstudio.com",
 };
@@ -582,7 +554,7 @@ const VSCODE: Tech = {
 const ZED: Tech = {
   id: "zed",
   name: "Zed",
-  marks: [{ Component: SiZedindustries, brand: SiZedindustriesHex, label: "Zed" }],
+  marks: [{ icon: ZedIcon, brand: "#084CCF", label: "Zed" }],
   description: "Code editor.",
   href: "https://zed.dev",
 };
@@ -590,7 +562,7 @@ const ZED: Tech = {
 const ZSH: Tech = {
   id: "zsh",
   name: "zsh",
-  marks: [{ Component: SiZsh, brand: SiZshHex, label: "zsh" }],
+  marks: [{ icon: ZshIcon, brand: "#F15A24", label: "zsh" }],
   description: "Shell, plus bash basics.",
   href: "https://www.zsh.org",
 };
@@ -598,7 +570,7 @@ const ZSH: Tech = {
 const SSH: Tech = {
   id: "ssh",
   name: "SSH",
-  initials: "SSH",
+  marks: [{ icon: ComputerTerminal01Icon, label: "SSH" }],
   description: "Remote access to servers.",
 };
 
@@ -607,7 +579,7 @@ const SSH: Tech = {
 const JAVA: Tech = {
   id: "java",
   name: "Java",
-  marks: [{ Component: SiOpenjdk, brand: ACCENT_MUTED, label: "Java" }],
+  marks: [{ icon: JavaIcon, brand: ACCENT_MUTED, label: "Java" }],
   description: "General-purpose, object-oriented language.",
   href: "https://dev.java",
 };
@@ -615,7 +587,7 @@ const JAVA: Tech = {
 const SPRING_BOOT: Tech = {
   id: "spring-boot",
   name: "Spring Boot",
-  marks: [{ Component: SiSpringboot, brand: SiSpringbootHex, label: "Spring Boot" }],
+  marks: [{ icon: SpringBootIcon, brand: "#6DB33F", label: "Spring Boot" }],
   description: "Java web apps and APIs.",
   href: "https://spring.io/projects/spring-boot",
 };
@@ -623,7 +595,7 @@ const SPRING_BOOT: Tech = {
 const MAVEN: Tech = {
   id: "maven",
   name: "Maven",
-  marks: [{ Component: SiApachemaven, brand: SiApachemavenHex, label: "Maven" }],
+  marks: [{ icon: FeatherIcon, brand: "#C71A36", label: "Maven" }],
   description: "Build and dependency management.",
   href: "https://maven.apache.org",
 };
@@ -631,7 +603,7 @@ const MAVEN: Tech = {
 const VAADIN: Tech = {
   id: "vaadin",
   name: "Vaadin",
-  marks: [{ Component: SiVaadin, brand: SiVaadinHex, label: "Vaadin" }],
+  marks: [{ icon: VaadinIcon, brand: "#00B4F0", label: "Vaadin" }],
   description: "Web UIs written in Java.",
   href: "https://vaadin.com",
 };
@@ -639,7 +611,7 @@ const VAADIN: Tech = {
 const CHECKSTYLE: Tech = {
   id: "checkstyle",
   name: "Checkstyle",
-  initials: "Cs",
+  marks: [{ icon: CheckListIcon, label: "Checkstyle" }],
   description: "Code style checks.",
   href: "https://checkstyle.org",
 };
@@ -649,7 +621,7 @@ const CHECKSTYLE: Tech = {
 const TANSTACK_START: Tech = {
   id: "tanstack-start",
   name: "TanStack Start",
-  marks: [{ Component: SiTanstack, brand: SiTanstackHex, label: "TanStack Start" }],
+  marks: [{ icon: TanstackIcon, brand: ACCENT_MUTED, label: "TanStack Start" }],
   description: "Fullstack React framework.",
   href: "https://tanstack.com/start",
 };
@@ -657,7 +629,7 @@ const TANSTACK_START: Tech = {
 const CONVEX: Tech = {
   id: "convex",
   name: "Convex",
-  marks: [{ Component: SiConvex, brand: SiConvexHex, label: "Convex" }],
+  marks: [{ icon: ConvexIcon, brand: "#EE342F", label: "Convex" }],
   description: "Reactive backend and database.",
   href: "https://convex.dev",
 };
@@ -665,7 +637,7 @@ const CONVEX: Tech = {
 const GSAP: Tech = {
   id: "gsap",
   name: "GSAP",
-  marks: [{ Component: SiGsap, brand: SiGsapHex, label: "GSAP" }],
+  marks: [{ icon: GsapIcon, brand: "#0AE448", label: "GSAP" }],
   description: "Advanced web animation.",
   href: "https://gsap.com",
 };
@@ -673,7 +645,7 @@ const GSAP: Tech = {
 const FLUTTER: Tech = {
   id: "flutter",
   name: "Flutter",
-  marks: [{ Component: SiFlutter, brand: SiFlutterHex, label: "Flutter" }],
+  marks: [{ icon: FlutterIcon, brand: "#02569B", label: "Flutter" }],
   description: "Cross-platform mobile apps.",
   href: "https://flutter.dev",
 };

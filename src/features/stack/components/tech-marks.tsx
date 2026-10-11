@@ -1,46 +1,27 @@
+import { HugeiconsIcon } from "@hugeicons/react";
+
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 import type { Tech } from "../types";
 
-type MarkSize = "sm" | "md";
-
-function Monogram({ initials, size }: { initials: string; size: MarkSize }) {
+/** Marks of a tech, drawn as Hugeicons or custom icons in the same style. */
+export function TechMarks({ tech, size }: { tech: Tech; size: "sm" | "md" }) {
   return (
-    <span
-      aria-hidden="true"
-      className={cn(
-        "inline-flex shrink-0 items-center justify-center rounded-md bg-foreground/8 font-mono font-semibold tracking-wider text-foreground/70 ring-1 ring-foreground/10 ring-inset",
-        size === "sm" ? "size-5 text-[0.55rem]" : "size-6 text-[0.6rem]"
-      )}
-    >
-      {initials}
+    <span aria-hidden="true" className="flex shrink-0 items-center gap-1.5">
+      {tech.marks.map((mark) => (
+        <HugeiconsIcon
+          key={mark.label}
+          icon={mark.icon}
+          strokeWidth={1.5}
+          className={cn(
+            size === "md" ? "size-[1.125rem]" : "size-4",
+            "text-foreground/80 transition-colors duration-300"
+          )}
+        />
+      ))}
     </span>
   );
-}
-
-/** Brand marks of a tech, falling back to a monogram when it has no icon. */
-export function TechMarks({ tech, size }: { tech: Tech; size: MarkSize }) {
-  if (tech.marks && tech.marks.length > 0) {
-    return (
-      <span aria-hidden="true" className="flex shrink-0 items-center gap-1.5">
-        {tech.marks.map((mark) => (
-          <mark.Component
-            key={mark.label}
-            title={mark.label}
-            className={cn(
-              size === "md" ? "size-[1.125rem]" : "size-4",
-              "text-foreground/80 transition-colors duration-300"
-            )}
-          />
-        ))}
-      </span>
-    );
-  }
-  if (tech.initials) {
-    return <Monogram initials={tech.initials} size={size} />;
-  }
-  return null;
 }
 
 /** Small status label next to a tech name, e.g. "waiting for stable". */
