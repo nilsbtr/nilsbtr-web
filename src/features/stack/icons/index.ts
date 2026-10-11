@@ -63,7 +63,7 @@ export const AstroIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M8.75 16.2C9.8 16.9 10.9 17.1 12 17.1 13.2 17.1 14.3 16.9 15.35 16.2 15.5 17.6 14.9 18.5 13.9 19.2 13.1 19.8 12.6 20.4 12.75 21.5 11.9 21.1 11.35 20.4 11.35 19.5 11.35 18.75 11 18.35 10.4 18.35 9.95 18.35 9.6 18.6 9.45 19 8.85 18.2 8.6 17.3 8.75 16.2Z",
+      d: "M9 16.5C10 17 11 17.15 12 17.15 13 17.15 14 17 15 16.5 15 18.4 13.9 19.9 12 21.25 10.1 19.9 9 18.4 9 16.5Z",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -155,28 +155,6 @@ export const CloudflarePagesIcon: IconSvgElement = [
       strokeLinecap: "round",
       strokeLinejoin: "round",
       key: "2",
-    },
-  ],
-  [
-    "path",
-    {
-      d: "M7 7.5H7.01",
-      stroke: "currentColor",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round",
-      key: "3",
-    },
-  ],
-  [
-    "path",
-    {
-      d: "M9 7.5H9.01",
-      stroke: "currentColor",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round",
-      key: "4",
     },
   ],
 ];
@@ -356,7 +334,7 @@ export const FlaskIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M2.85 7.75L10.5 4.45C10.8 4.35 11 4.5 11 4.75 11 5.9 11.25 8.35 11.35 9.2L11.5 10.2C11.9 11.75 12.05 12.1 12.15 12.4L12.55 13.3C13.1 14.4 13.8 15.2 14.55 15.8 16.15 17.1 18 17.15 19.1 17L20.55 16.35 21.25 17.1C21.45 17.4 21.25 17.6 21.15 17.65L19.35 18.3C15.85 19.6 13.1 19.55 10.9 18.75 9.35 18.15 8.1 17.15 7.1 16.1L6.45 15.3C5.85 14.6 5.4 13.85 5.05 13.1L4.6 12.2C4.15 11.45 3.85 10.4 3.65 9.55L2.55 8.3Z",
+      d: "M3 7.75L10.75 4.5C11 6.5 11.4 9.3 12 11.7 13.2 15.5 15.8 17.6 20.5 17 20.95 16.95 21.15 17.4 20.8 17.7 17 20.1 11.5 20.2 8 16.6 5.6 14.2 4 11.1 3 7.75Z",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -367,7 +345,7 @@ export const FlaskIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M4.85 12.65L11.45 9.7",
+      d: "M4.7 12.3L11.35 9.35",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -378,7 +356,7 @@ export const FlaskIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M6.8 15.7L12.35 12.85",
+      d: "M6.85 15.45L12.6 12.9",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -437,9 +415,11 @@ export const GinIcon: IconSvgElement = [
     },
   ],
   [
-    "path",
+    "circle",
     {
-      d: "M5.45 10.5H18.55",
+      cx: "9.75",
+      cy: "13.5",
+      r: "1.5",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -450,38 +430,14 @@ export const GinIcon: IconSvgElement = [
   [
     "circle",
     {
-      cx: "9.75",
-      cy: "14.25",
-      r: "1.25",
+      cx: "14.25",
+      cy: "13.5",
+      r: "1.5",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
       strokeLinejoin: "round",
       key: "3",
-    },
-  ],
-  [
-    "circle",
-    {
-      cx: "14.25",
-      cy: "14.25",
-      r: "1.25",
-      stroke: "currentColor",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round",
-      key: "4",
-    },
-  ],
-  [
-    "path",
-    {
-      d: "M12 17.25H12.01",
-      stroke: "currentColor",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round",
-      key: "5",
     },
   ],
 ];
@@ -669,41 +625,6 @@ export const GithubActionsIcon: IconSvgElement = [
       key: "9",
     },
   ],
-  [
-    "path",
-    {
-      d: "M10.9 18.75H12.6",
-      stroke: "currentColor",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round",
-      key: "10",
-    },
-  ],
-  [
-    "path",
-    {
-      d: "M15.25 18.75H16.25",
-      stroke: "currentColor",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round",
-      key: "11",
-    },
-  ],
-  [
-    "circle",
-    {
-      cx: "18.75",
-      cy: "18.75",
-      r: "2.5",
-      stroke: "currentColor",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round",
-      key: "12",
-    },
-  ],
 ];
 
 export const GoIcon: IconSvgElement = [
@@ -840,7 +761,7 @@ export const JinjaIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M4.5 10.5L19.5 10.5C19.78 10.5 20 10.72 20 11L20 13C20 13.28 19.78 13.5 19.5 13.5L4.5 13.5C4.22 13.5 4 13.28 4 13L4 11C4 10.72 4.22 10.5 4.5 10.5Z",
+      d: "M4 11.5H20",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -851,7 +772,7 @@ export const JinjaIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M7.25 7.25V10.5M16.75 7.25V10.5M12 7.25V10.5M7.25 13.5V21M16.75 13.5V21",
+      d: "M7.25 7.25V21M16.75 7.25V21M12 7.25V11.5",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -1008,7 +929,7 @@ export const PostgresqlIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M10.05 3.8C9.4 3.55 6.3 2.5 4.45 3.85 3.4 4.6 2.9 5.9 3 7.8 3.05 8.45 3.4 10.4 3.95 12.25 4.5 14.1 5.35 16.1 6.4 16.4 6.75 16.5 7.25 16.5 7.85 15.85 8.45 15.1 9.05 14.45 9.35 14.15 9.7 14.3 10.05 14.4 10.4 14.4 10 14.95 9.9 15.05 9.05 15.25 8.8 15.3 8.2 15.4 8.2 15.85 8.15 16.3 8.7 16.55 9.05 16.6 10.05 16.85 11 16.7 11.65 16.1 11.65 17.8 11.7 19.5 11.9 20.05 12.1 20.45 12.5 21.5 13.8 21.5 14 21.5 14.25 21.5 14.45 21.45 15.85 21.15 16.45 20.5 16.7 19.2 16.8 18.5 17 16.95 17.1 16L17.15 15.9C17.35 15.95 17.55 15.95 17.7 15.95 18.35 16 19.2 15.85 19.65 15.6 20.15 15.4 21.05 14.8 20.9 14.3 20.8 14 20.5 13.95 20.1 14.05 18.8 14.3 18.3 14.15 18.15 14.05 19.15 12.45 20 10.55 20.5 8.75 20.7 7.95 21.1 6 20.6 5.1 19.45 3.6 18 2.95 16.2 2.9 15.05 2.9 14.1 3.2 13.8 3.3 13.4 3.2 12.9 3.1 12.4 3.1 11.5 3.1 10.7 3.35 10.05 3.8Z",
+      d: "M10 3.75C8.5 3.1 6 2.75 4.5 3.9 3.3 4.8 2.9 6.3 3.1 8 3.4 10.6 4.4 14.1 5.6 15.7 6.4 16.8 7.4 16.4 8.2 15.4L9.5 14C10.6 14.6 11.5 15.2 11.6 16.5V19C11.6 20.5 12.6 21.5 14 21.5 15.6 21.5 16.6 20.5 16.75 19L17 16C18.5 16 20.3 15.5 20.75 14.5 20.9 14.1 20.6 13.9 20 14 19.2 14.15 18.6 14.2 18.2 14 19.8 11.5 20.8 9.5 21 7.2 21.2 5 19.5 3 16.5 2.9 15.5 2.9 14.5 3.1 13.75 3.35 12.5 3 11 3.1 10 3.75Z",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -1019,7 +940,7 @@ export const PostgresqlIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M10.05 3.8C8.2 5.4 7.95 8.5 7.95 8.7 7.95 9.4 8.05 10.25 7.9 11.2 7.8 12.1 8.05 13 8.65 13.6L9.35 14.15",
+      d: "M10 3.75C8.4 5.4 8 7.6 8.05 9.5 8.1 11 8.4 12.8 9.5 14",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -1030,7 +951,7 @@ export const PostgresqlIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M13.8 3.3C15 3.95 16 4.85 16.45 5.6 17.1 6.4 17.45 7.15 17.55 7.55 17.6 8.4 17.4 9.25 17.42 9.9 17.45 10.9 17.75 12 17.4 12.9L18.15 14.05",
+      d: "M13.75 3.35C16 4.4 17.5 6 17.6 8.5 17.7 10.6 17.6 12.4 18.2 14",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -1041,7 +962,7 @@ export const PostgresqlIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M10.6 9H10.61M15.6 9H15.61",
+      d: "M10.75 9H10.76M15.25 9H15.26",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -1055,7 +976,7 @@ export const PrettierIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M4.25 3H15",
+      d: "M4.25 3.5H15",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -1066,7 +987,7 @@ export const PrettierIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M4.25 6H6.5M9 6H17.75",
+      d: "M4.25 7H7M10 7H18",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -1077,7 +998,7 @@ export const PrettierIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M4.25 9H8.5M15.75 9H19.75",
+      d: "M4.25 10.5H9M16 10.5H19.75",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -1088,7 +1009,7 @@ export const PrettierIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M4.25 12H4.5M7 12H9.25M11.75 12H18.75",
+      d: "M4.25 14H6M9 14H16",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -1099,7 +1020,7 @@ export const PrettierIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M4.25 15H4.5M7 15H15",
+      d: "M4.25 17.5H8.5",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -1110,23 +1031,12 @@ export const PrettierIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M4.25 18H5.5M8 18H8.25",
+      d: "M4.25 21H6.5",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
       strokeLinejoin: "round",
       key: "5",
-    },
-  ],
-  [
-    "path",
-    {
-      d: "M4.25 21H8.25",
-      stroke: "currentColor",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round",
-      key: "6",
     },
   ],
 ];
@@ -1171,7 +1081,7 @@ export const PytestIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M5.1 2.75H6.3M9.3 2.75H10.5M13.45 2.75H14.65M17.6 2.75H18.8",
+      d: "M3.5 3.75H20.5",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -1182,23 +1092,12 @@ export const PytestIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M3.5 5.25H20.5",
+      d: "M5.7 7V20.75M9.9 7V17.5M14.05 7V14.25M18.2 7V11",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
       strokeLinejoin: "round",
       key: "1",
-    },
-  ],
-  [
-    "path",
-    {
-      d: "M5.7 8V21.25M9.9 8V18.25M14.05 8V14M18.2 8V11",
-      stroke: "currentColor",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round",
-      key: "2",
     },
   ],
 ];
@@ -1460,7 +1359,7 @@ export const TanstackIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M12 8.25C11.6 7 10.9 6.1 9.75 5.5M12 8.25C12.4 7 13.1 6.1 14.25 5.5M12 8.25C10.9 7.6 9.5 7.6 8 8M12 8.25C13.1 7.6 14.5 7.6 16 8M12 8.25C10.8 8.8 9.6 9.7 8.75 10.75M12 8.25C13.2 8.8 14.4 9.7 15.25 10.75",
+      d: "M12 7.75C10.6 5.9 8.2 5.6 6.75 7.25M12 7.75C13.4 5.9 15.8 5.6 17.25 7.25M12 7.75C10.4 8 9 9.1 8.5 10.75M12 7.75C13.6 8 15 9.1 15.5 10.75",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -1471,7 +1370,7 @@ export const TanstackIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M12 8.25V14.75",
+      d: "M12 7.75V15.25",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -1482,23 +1381,12 @@ export const TanstackIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M7.75 15.25C9.25 15.25 9.25 14.75 10.6 14.75 11.6 14.75 11.75 15.25 12 15.25 12.25 15.25 12.4 14.75 13.4 14.75 14.75 14.75 14.75 15.25 16.25 15.25",
+      d: "M7.75 16.25C9.25 16.25 9.25 15.5 10.6 15.5 11.6 15.5 11.75 16.25 12 16.25 12.25 16.25 12.4 15.5 13.4 15.5 14.75 15.5 14.75 16.25 16.25 16.25",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
       strokeLinejoin: "round",
       key: "3",
-    },
-  ],
-  [
-    "path",
-    {
-      d: "M7.75 18C9.25 18 9.25 17.5 10.6 17.5 11.6 17.5 11.75 18 12 18 12.25 18 12.4 17.5 13.4 17.5 14.75 17.5 14.75 18 16.25 18",
-      stroke: "currentColor",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round",
-      key: "4",
     },
   ],
 ];
@@ -1659,7 +1547,7 @@ export const ZedIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M6.5 14.25V7.5C6.5 6.95 6.95 6.5 7.5 6.5H17.5",
+      d: "M6.75 14V7.75C6.75 7.2 7.2 6.75 7.75 6.75H17.25",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
@@ -1670,34 +1558,12 @@ export const ZedIcon: IconSvgElement = [
   [
     "path",
     {
-      d: "M17.5 9.75V16.5C17.5 17.05 17.05 17.5 16.5 17.5H6.5",
+      d: "M17.25 10V16.25C17.25 16.8 16.8 17.25 16.25 17.25H6.75",
       stroke: "currentColor",
       strokeWidth: "1.5",
       strokeLinecap: "round",
       strokeLinejoin: "round",
       key: "2",
-    },
-  ],
-  [
-    "path",
-    {
-      d: "M9.75 11.25V9.75H14.25",
-      stroke: "currentColor",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round",
-      key: "3",
-    },
-  ],
-  [
-    "path",
-    {
-      d: "M14.25 12.75V14.25H9.75",
-      stroke: "currentColor",
-      strokeWidth: "1.5",
-      strokeLinecap: "round",
-      strokeLinejoin: "round",
-      key: "4",
     },
   ],
 ];
