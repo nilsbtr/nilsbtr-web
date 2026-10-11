@@ -28,9 +28,6 @@ importers:
       "@icons-pack/react-simple-icons":
         specifier: ^13.13.0
         version: 13.13.0(react@19.2.3)
-      "@tanstack/react-table":
-        specifier: ^8.21.3
-        version: 8.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       "@vercel/analytics":
         specifier: ^2.0.1
         version: 2.0.1(next@16.2.3(@babel/core@7.29.0)(@opentelemetry/api@1.9.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
@@ -2950,23 +2947,6 @@ packages:
       {
         integrity: sha512-n4goKQbW8RVXIbNKRB/45LzyUqN451deQK0nzIeauVEqjlI49slUlgKYJM2QyUzap/PcpnS7kzSUmPb1sCRvYQ==,
       }
-
-  "@tanstack/react-table@8.21.3":
-    resolution:
-      {
-        integrity: sha512-5nNMTSETP4ykGegmVkhjcS8tTLW6Vl4axfEGQN3v0zdHYbK4UfoqfPChclTrJ4EoK9QynqAu9oUf8VEmrpZ5Ww==,
-      }
-    engines: { node: ">=12" }
-    peerDependencies:
-      react: ">=16.8"
-      react-dom: ">=16.8"
-
-  "@tanstack/table-core@8.21.3":
-    resolution:
-      {
-        integrity: sha512-ldZXEhOBb8Is7xLs01fR3YEc3DERiz5silj8tnGkFZytt1abEvl/GhUmCE0PMLaMPTa3Jk4HbKmRlHmu+gCftg==,
-      }
-    engines: { node: ">=12" }
 
   "@trivago/prettier-plugin-sort-imports@6.0.2":
     resolution:
@@ -9386,14 +9366,6 @@ snapshots:
       "@tailwindcss/oxide": 4.2.2
       postcss: 8.5.9
       tailwindcss: 4.2.2
-
-  "@tanstack/react-table@8.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)":
-    dependencies:
-      "@tanstack/table-core": 8.21.3
-      react: 19.2.3
-      react-dom: 19.2.3(react@19.2.3)
-
-  "@tanstack/table-core@8.21.3": {}
 
   "@trivago/prettier-plugin-sort-imports@6.0.2(prettier@3.8.3)":
     dependencies:

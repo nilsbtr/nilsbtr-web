@@ -1,61 +1,41 @@
-"use client";
+import { CreateInviteButton } from "@/features/admin/components/invites/create-invite-dialog";
+import { OpenInvitesPanel } from "@/features/admin/components/overview/open-invites-panel";
+import { RecentUsersPanel } from "@/features/admin/components/overview/recent-users-panel";
+import { StatTiles } from "@/features/admin/components/overview/stat-tiles";
+import {
+  DashboardPage,
+  DashboardPageHeader,
+  DashboardSection,
+} from "@/features/admin/components/shell/dashboard-page";
+import { listOpenInvites } from "@/features/admin/server/invites";
+import { getDashboardStats } from "@/features/admin/server/stats";
+import { listRecentUsers } from "@/features/admin/server/users";
 
-import { useEffect } from "react";
+/** How many rows each of the overview's excerpts shows. */
+const EXCERPT_LENGTH = 5;
 
-import { useRouter } from "next/navigation";
-
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { InvitesTab } from "@/features/admin/components/invites-tab";
-import { DashboardSkeleton } from "@/features/admin/components/skeletons";
-import { UsersTab } from "@/features/admin/components/users-tab";
-import { authClient } from "@/lib/auth/client";
-import { ADMIN_ROLE, hasRole } from "@/lib/auth/permissions";
-
-export default function DashboardPage() {
-  const router = useRouter();
-  const { data: session, isPending: sessionLoading } = authClient.useSession();
-
-  const isAdmin = hasRole(session?.user?.role, ADMIN_ROLE);
-
-  useEffect(() => {
-    if (sessionLoading) return;
-    if (!session) {
-      router.replace("/login?callbackURL=/dashboard");
-      return;
-    }
-    if (!isAdmin) {
-      router.replace("/");
-    }
-  }, [session, sessionLoading, isAdmin, router]);
-
-  if (sessionLoading) {
-    return <DashboardSkeleton />;
-  }
-
-  if (!session || !isAdmin) {
-    return null;
-  }
+export default async function DashboardOverviewPage() {
+  const [stats, recentUsers, openInvites] = await Promise.all([
+    getDashboardStats(),
+    listRecentUsers(EXCERPT_LENGTH),
+    listOpenInvites(EXCERPT_LENGTH),
+  ]);
 
   return (
-    <div className="mx-auto min-h-dvh max-w-4xl px-4 pt-20 pb-12 sm:px-6">
-      <div className="mb-6">
-        <h1 className="text-xl font-medium">Dashboard</h1>
-        <p className="text-sm text-muted-foreground">Manage users, roles, and invitations.</p>
-      </div>
-
-      <Tabs defaultValue="users">
-        <TabsList>
-          <TabsTrigger value="users">Users</TabsTrigger>
-          <TabsTrigger value="invites">Invites</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="users">
-          <UsersTab currentUserId={session.user.id} />
-        </TabsContent>
-        <TabsContent value="invites">
-          <InvitesTab />
-        </TabsContent>
-      </Tabs>
-    </div>
+    <DashboardPage>
+      <DashboardPageHeader
+        title="Overview"
+        description="Who has an account, who is signed in, and who can still sign up."
+      >
+        <CreateInviteButton />
+      </DashboardPageHeader>
+      <DashboardSection>
+        <StatTiles stats={stats} />
+      </DashboardSection>
+      <DashboardSection className="grid items-start gap-6 lg:grid-cols-2">
+        <RecentUsersPanel users={recentUsers} />
+        <OpenInvitesPanel invites={openInvites} />
+      </DashboardSection>
+    </DashboardPage>
   );
 }

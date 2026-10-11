@@ -17,6 +17,8 @@ const pageShellVariants = cva("mx-auto w-full px-6", {
       md: "max-w-xl",
       /** Grids and long-form pages. */
       lg: "max-w-4xl",
+      /** Tables and other data-dense screens. */
+      xl: "max-w-6xl",
     },
     align: {
       /** Long pages start below the header and scroll. */
