@@ -1,3 +1,5 @@
+import { HugeiconsIcon } from "@hugeicons/react";
+
 import { IconLink, IconLinkList } from "@/components/shared/icon-links";
 
 import { FEATURED } from "../data";
@@ -17,9 +19,7 @@ export function FeaturedTechMarks({
   return (
     <IconLinkList label={label} className={className}>
       {FEATURED.map((tech) => {
-        const mark = tech.marks?.[0];
-        if (!mark) return null;
-        const Mark = mark.Component;
+        const mark = tech.marks[0];
         return (
           <IconLink
             key={tech.id}
@@ -27,7 +27,7 @@ export function FeaturedTechMarks({
             description={showTaglines ? tech.tagline : undefined}
             href={tech.href}
           >
-            <Mark aria-hidden="true" className="size-5" title={tech.name} />
+            <HugeiconsIcon icon={mark.icon} strokeWidth={1.5} className="size-5" />
           </IconLink>
         );
       })}

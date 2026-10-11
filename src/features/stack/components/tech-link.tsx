@@ -26,7 +26,7 @@ export function TechLink({
   children: ReactNode;
 }) {
   if (tech.href) {
-    const brand = tech.marks?.[0]?.brand;
+    const brand = tech.marks[0]?.brand;
     return (
       <ExternalLink
         href={tech.href}

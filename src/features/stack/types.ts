@@ -1,16 +1,16 @@
-import type { IconType } from "@icons-pack/react-simple-icons";
+import type { IconSvgElement } from "@hugeicons/react";
 
 export type TechMark = {
-  Component: IconType;
-  brand: string;
+  icon: IconSvgElement;
+  /** Hover accent of the tech's surface; falls back to the site's brand color. */
+  brand?: string;
   label: string;
 };
 
 export type Tech = {
   id: string;
   name: string;
-  marks?: TechMark[];
-  initials?: string;
+  marks: TechMark[];
   description: string;
   /** Short note shown as the tooltip when the tech is featured as an icon. */
   tagline?: string;

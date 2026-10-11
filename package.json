@@ -17,7 +17,8 @@
     "lint:fix": "eslint . --fix",
     "lint:ci": "eslint . --max-warnings 0",
     "format": "prettier . --write",
-    "format:check": "prettier . --check"
+    "format:check": "prettier . --check",
+    "icons:generate": "node scripts/generate-stack-icons.mjs && prettier --write src/features/stack/icons/index.ts"
   },
   "packageManager": "pnpm@10.15.0",
   "dependencies": {
@@ -27,7 +28,6 @@
     "@hookform/resolvers": "^5.2.2",
     "@hugeicons/core-free-icons": "^4.1.1",
     "@hugeicons/react": "^1.1.6",
-    "@icons-pack/react-simple-icons": "^13.13.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "better-auth": "^1.6.4",
