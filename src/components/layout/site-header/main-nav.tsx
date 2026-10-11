@@ -1,10 +1,12 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import {
+  CurrentLinkIndicator,
+  useCurrentLinkIndicator,
+} from "@/components/layout/current-link-indicator";
 import { NAV_ITEMS } from "@/config/navigation";
 import { cn } from "@/lib/utils";
 
@@ -16,42 +18,7 @@ const ITEM_INSET = 12;
 /** Inline navigation links, shown from the `md` breakpoint up. */
 export function MainNav() {
   const pathname = usePathname();
-  const listRef = useRef<HTMLUListElement>(null);
-  const indicatorRef = useRef<HTMLSpanElement>(null);
-
-  /*
-   * One rule marks the current page and slides between links on navigation.
-   * It is positioned by measuring the current link, and re-measured whenever
-   * the list resizes (for example once the web font has loaded).
-   */
-  useLayoutEffect(() => {
-    const list = listRef.current;
-    const indicator = indicatorRef.current;
-    if (!list || !indicator) return;
-
-    const place = () => {
-      const current = list.querySelector<HTMLElement>('a[aria-current="page"]');
-      if (!current) {
-        indicator.style.opacity = "0";
-        return;
-      }
-      const link = current.getBoundingClientRect();
-      indicator.style.opacity = "1";
-      indicator.style.width = `${link.width - ITEM_INSET * 2}px`;
-      indicator.style.translate = `${link.left - list.getBoundingClientRect().left + ITEM_INSET}px`;
-    };
-
-    place();
-    // Only animate after the first placement, so the rule doesn't slide in from the edge on load.
-    const frame = requestAnimationFrame(() => indicator.setAttribute("data-ready", ""));
-    const observer = new ResizeObserver(place);
-    observer.observe(list);
-
-    return () => {
-      cancelAnimationFrame(frame);
-      observer.disconnect();
-    };
-  }, [pathname]);
+  const { listRef, indicatorRef } = useCurrentLinkIndicator(pathname, ITEM_INSET);
 
   return (
     <nav aria-label="Main" className="hidden md:block">
@@ -88,12 +55,7 @@ export function MainNav() {
             </li>
           );
         })}
-        <li aria-hidden="true" role="presentation" className="contents">
-          <span
-            ref={indicatorRef}
-            className="pointer-events-none absolute bottom-1 left-0 h-px bg-brand opacity-0 data-ready:transition-[translate,width,opacity] data-ready:duration-500 motion-reduce:transition-none"
-          />
-        </li>
+        <CurrentLinkIndicator ref={indicatorRef} />
       </ul>
     </nav>
   );

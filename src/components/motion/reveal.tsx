@@ -56,6 +56,15 @@ const PRESETS = {
     visible: { opacity: 1, scale: 1 },
     transition: SPRING.bouncy,
   },
+  /**
+   * Short, sharp rise. For working screens such as the dashboard, where content
+   * should arrive without making anyone wait for it.
+   */
+  settle: {
+    hidden: { opacity: 0, y: 6 },
+    visible: { opacity: 1, y: 0 },
+    transition: { duration: DURATION.base, ease: EASE.out },
+  },
 } satisfies Record<string, RevealPreset>;
 
 export type RevealVariant = keyof typeof PRESETS;
