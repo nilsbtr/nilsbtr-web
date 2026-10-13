@@ -105,8 +105,15 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
           <P>
             This is necessary to deliver the website and to keep it secure and stable, for example
             to detect and fend off attacks. The legal basis is <Ref>Art. 6(1)(f) GDPR</Ref>; my
-            legitimate interest is running the website securely and reliably. The logs are kept only
-            briefly and then deleted automatically. They are not combined with other data.
+            legitimate interest is running the website securely and reliably. Depending on the
+            Vercel plan, the logs are deleted automatically after one hour and at most 30 days. They
+            are not combined with other data.
+          </P>
+          <P>
+            To limit sign-in and sign-up attempts, and so protect passwords from being guessed, the
+            server counts requests per IP address for a few seconds at a time in memory. These
+            counters are never stored permanently. The legal basis is again{" "}
+            <Ref>Art. 6(1)(f) GDPR</Ref>.
           </P>
           <P>
             Vercel processes the data as a processor, only on my instructions, under a data
@@ -137,9 +144,10 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
                 duration: "until you sign out, at most 7 days without use",
               },
               {
-                name: "invite_token",
+                name: "better-auth.invite_token",
                 kind: "Cookie",
-                purpose: "Remembers a redeemed invitation until sign-up is complete.",
+                purpose:
+                  "Remembers a redeemed invitation until sign-up is complete. The __Secure- prefix applies here too.",
                 duration: "10 minutes",
               },
               {
@@ -190,7 +198,7 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
             No cookies are set and no IP addresses are stored. To count visits, Vercel derives a
             hash from details of the request, which is discarded after 24 hours. You are not
             recognised across other websites and no profile of you is built; I only see aggregated
-            statistics.
+            statistics, which can no longer be traced to a single visit once the 24 hours are up.
           </P>
           <P>
             The legal basis is your consent under <Ref>Section 25(1) TDDDG</Ref> and{" "}
@@ -240,7 +248,7 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
           </P>
           <P>
             Your account data is kept until you delete your account. Sessions expire after seven
-            days without use and are then deleted automatically.
+            days without use and are deleted automatically at the next sign-in on the website.
           </P>
           <Callout icon={UserShield01Icon} title="In your hands">
             <P>
@@ -258,11 +266,12 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
       content: (
         <P>
           When an administrator creates an invitation, I store a random code, its expiry, how often
-          it may be used and the account that created it. When it is redeemed, I record when and by
-          which account, so it stays clear how someone got access. The legal basis is{" "}
-          <Ref>Art. 6(1)(f) GDPR</Ref>; my legitimate interest is a closed group of users protected
-          from abuse. Invitations that are used up or revoked are deleted automatically, and the
-          link to your account ends at the latest when the account is deleted.
+          it may be used and the account that created it. For invitations that can be used more than
+          once, I record when and by which account they were redeemed, until their last use. The
+          legal basis is <Ref>Art. 6(1)(f) GDPR</Ref>; my legitimate interest is a closed group of
+          users protected from abuse. As soon as an invitation is used up or revoked, I delete it
+          along with these records; administrators remove expired ones. The link to your account
+          ends at the latest when the account is deleted.
         </P>
       ),
     },

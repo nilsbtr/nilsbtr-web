@@ -104,9 +104,15 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
             Diese Verarbeitung ist erforderlich, um die Website auszuliefern sowie ihre Sicherheit
             und Stabilität zu gewährleisten, etwa um Angriffe zu erkennen und abzuwehren.
             Rechtsgrundlage ist <Ref>Art. 6 Abs. 1 lit. f DSGVO</Ref>; mein berechtigtes Interesse
-            liegt im sicheren und zuverlässigen Betrieb der Website. Die Logfiles werden nur
-            kurzzeitig gespeichert und anschließend automatisch gelöscht. Eine Zusammenführung mit
-            anderen Datenquellen findet nicht statt.
+            liegt im sicheren und zuverlässigen Betrieb der Website. Die Logfiles werden je nach
+            Vercel-Tarif nach einer Stunde bis höchstens 30 Tagen automatisch gelöscht. Eine
+            Zusammenführung mit anderen Datenquellen findet nicht statt.
+          </P>
+          <P>
+            Um Anmelde- und Registrierungsversuche zu begrenzen und so Passwörter vor dem Erraten zu
+            schützen, zählt der Server Anfragen je IP-Adresse für jeweils wenige Sekunden im
+            Arbeitsspeicher. Diese Zähler werden nicht dauerhaft gespeichert. Rechtsgrundlage ist
+            ebenfalls <Ref>Art. 6 Abs. 1 lit. f DSGVO</Ref>.
           </P>
           <P>
             Vercel verarbeitet die Daten als Auftragsverarbeiter ausschließlich nach meinen
@@ -141,10 +147,10 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
                 duration: "bis zur Abmeldung, höchstens 7 Tage ohne Nutzung",
               },
               {
-                name: "invite_token",
+                name: "better-auth.invite_token",
                 kind: "Cookie",
                 purpose:
-                  "Merkt sich eine eingelöste Einladung, bis die Registrierung abgeschlossen ist.",
+                  "Merkt sich eine eingelöste Einladung, bis die Registrierung abgeschlossen ist. Auch hier gilt das Präfix __Secure-.",
                 duration: "10 Minuten",
               },
               {
@@ -196,7 +202,8 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
             Es werden keine Cookies gesetzt und keine IP-Adressen gespeichert. Um Besuche zählen zu
             können, bildet Vercel aus Merkmalen der Anfrage einen Hash-Wert, der nach 24 Stunden
             verworfen wird. Ein Wiedererkennen über andere Websites hinweg oder das Bilden von
-            Nutzerprofilen findet nicht statt; ich sehe nur zusammengefasste Statistiken.
+            Nutzerprofilen findet nicht statt; ich sehe nur zusammengefasste Statistiken, die sich
+            nach Ablauf der 24 Stunden keinem einzelnen Besuch mehr zuordnen lassen.
           </P>
           <P>
             Rechtsgrundlage ist Ihre Einwilligung nach <Ref>§ 25 Abs. 1 TDDDG</Ref> und{" "}
@@ -250,7 +257,8 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
           </P>
           <P>
             Ihre Kontodaten speichere ich, bis Sie Ihr Konto löschen. Sitzungen laufen nach sieben
-            Tagen ohne Nutzung ab und werden danach automatisch gelöscht.
+            Tagen ohne Nutzung ab und werden bei der nächsten Anmeldung auf der Website automatisch
+            gelöscht.
           </P>
           <Callout icon={UserShield01Icon} title="Selbst verwalten">
             <P>
@@ -268,12 +276,14 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
       content: (
         <P>
           Erstellt ein Administrator eine Einladung, speichere ich einen zufälligen Code,
-          Ablaufdatum, Anzahl möglicher Nutzungen und das erstellende Konto. Wird die Einladung
-          eingelöst, halte ich fest, wann und von welchem Konto. So bleibt nachvollziehbar, wie
-          jemand Zugang erhalten hat. Rechtsgrundlage ist <Ref>Art. 6 Abs. 1 lit. f DSGVO</Ref>;
-          mein berechtigtes Interesse liegt in einem geschlossenen, vor Missbrauch geschützten
-          Nutzerkreis. Aufgebrauchte und widerrufene Einladungen werden automatisch gelöscht; die
-          Zuordnung zu Ihrem Konto entfällt spätestens mit dessen Löschung.
+          Ablaufdatum, Anzahl möglicher Nutzungen und das erstellende Konto. Bei Einladungen, die
+          mehrfach genutzt werden können, halte ich bis zur letzten Nutzung fest, wann und von
+          welchem Konto sie eingelöst wurden. Rechtsgrundlage ist{" "}
+          <Ref>Art. 6 Abs. 1 lit. f DSGVO</Ref>; mein berechtigtes Interesse liegt in einem
+          geschlossenen, vor Missbrauch geschützten Nutzerkreis. Sobald eine Einladung aufgebraucht
+          ist oder widerrufen wird, lösche ich sie samt dieser Einträge; abgelaufene Einladungen
+          entfernen Administratoren. Die Zuordnung zu Ihrem Konto entfällt spätestens mit dessen
+          Löschung.
         </P>
       ),
     },

@@ -12,7 +12,7 @@ export const PROCESSORS = {
     privacyUrl: "https://vercel.com/legal/privacy-policy",
   },
   neon: {
-    name: "Neon, Inc.",
+    name: "Neon, LLC",
     privacyUrl: "https://neon.com/privacy-policy",
   },
 } as const;
