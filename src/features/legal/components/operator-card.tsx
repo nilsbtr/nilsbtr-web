@@ -1,4 +1,4 @@
-import { Location01Icon, Mail01Icon, SmartPhone01Icon } from "@hugeicons/core-free-icons";
+import { Mail01Icon, SmartPhone01Icon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon, type IconSvgElement } from "@hugeicons/react";
 
 import { Surface } from "@/components/shared/surface";
@@ -8,8 +8,8 @@ import type { LegalLanguage } from "../types";
 import { Missing, ProseLink } from "./blocks";
 
 const LABELS = {
-  de: { address: "Anschrift", email: "E-Mail", phone: "Telefon", missing: "fehlt" },
-  en: { address: "Address", email: "Email", phone: "Phone", missing: "missing" },
+  de: { email: "E-Mail", phone: "Telefon", missing: "fehlt" },
+  en: { email: "Email", phone: "Phone", missing: "missing" },
 } as const;
 
 function Row({
@@ -37,7 +37,7 @@ function Row({
   );
 }
 
-/** Name and contact details of whoever runs the site, as a small address card. */
+/** Name and contact details of whoever runs the site, as a small contact card. */
 export function OperatorCard({ operator, lang }: { operator: Operator; lang: LegalLanguage }) {
   const labels = LABELS[lang];
 
@@ -45,17 +45,6 @@ export function OperatorCard({ operator, lang }: { operator: Operator; lang: Leg
     <Surface className="p-5 sm:p-6">
       <p className="font-serif text-lg text-foreground">{operator.name}</p>
       <dl className="mt-4 grid gap-3 text-sm not-italic">
-        {operator.address && (
-          <Row icon={Location01Icon} label={labels.address}>
-            <address className="not-italic">
-              {operator.address.map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
-            </address>
-          </Row>
-        )}
         <Row icon={Mail01Icon} label={labels.email}>
           {operator.email ? (
             <ProseLink href={`mailto:${operator.email}`}>{operator.email}</ProseLink>
