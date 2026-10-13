@@ -38,23 +38,15 @@ function Row({
 }
 
 /** Name and contact details of whoever runs the site, as a small address card. */
-export function OperatorCard({
-  operator,
-  lang,
-  showPhone = true,
-}: {
-  operator: Operator;
-  lang: LegalLanguage;
-  showPhone?: boolean;
-}) {
+export function OperatorCard({ operator, lang }: { operator: Operator; lang: LegalLanguage }) {
   const labels = LABELS[lang];
 
   return (
     <Surface className="p-5 sm:p-6">
       <p className="font-serif text-lg text-foreground">{operator.name}</p>
       <dl className="mt-4 grid gap-3 text-sm not-italic">
-        <Row icon={Location01Icon} label={labels.address}>
-          {operator.address ? (
+        {operator.address && (
+          <Row icon={Location01Icon} label={labels.address}>
             <address className="not-italic">
               {operator.address.map((line) => (
                 <span key={line} className="block">
@@ -62,10 +54,8 @@ export function OperatorCard({
                 </span>
               ))}
             </address>
-          ) : (
-            <Missing>LEGAL_ADDRESS {labels.missing}</Missing>
-          )}
-        </Row>
+          </Row>
+        )}
         <Row icon={Mail01Icon} label={labels.email}>
           {operator.email ? (
             <ProseLink href={`mailto:${operator.email}`}>{operator.email}</ProseLink>
@@ -73,7 +63,7 @@ export function OperatorCard({
             <Missing>LEGAL_EMAIL {labels.missing}</Missing>
           )}
         </Row>
-        {showPhone && operator.phone && (
+        {operator.phone && (
           <Row icon={SmartPhone01Icon} label={labels.phone}>
             <ProseLink href={`tel:${operator.phone.replace(/[^\d+]/g, "")}`}>
               {operator.phone}

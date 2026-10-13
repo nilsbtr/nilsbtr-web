@@ -3,14 +3,14 @@ import "server-only";
 import { siteConfig } from "./site";
 
 /**
- * Who runs the site, as the imprint and the privacy policy have to name them.
- * The details come from the environment so a home address stays out of the
- * repository. They are read when the legal pages are rendered, which for these
- * static pages is at build time.
+ * Who runs the site, as the privacy policy has to name the controller and how
+ * to reach them (Art. 13 GDPR). The details come from the environment so they
+ * stay out of the repository. They are read when the privacy policy is
+ * rendered, which for this static page is at build time.
  */
 export type Operator = {
   name: string;
-  /** Postal address, one line per entry. */
+  /** Postal address, one line per entry. Optional: an email address is enough to reach the controller. */
   address: string[] | null;
   email: string | null;
   phone: string | null;

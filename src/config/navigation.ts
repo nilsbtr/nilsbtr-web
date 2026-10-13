@@ -14,11 +14,5 @@ export const NAV_ITEMS: readonly NavItem[] = [
   { href: "/blog", label: "Blog", disabled: true },
 ];
 
-/**
- * Legal pages, linked from every page's footer. German law expects them to be
- * easy to find under these names.
- */
-export const LEGAL_NAV_ITEMS: readonly NavItem[] = [
-  { href: "/impressum", label: "Impressum" },
-  { href: "/datenschutz", label: "Datenschutz" },
-];
+/** Legal pages, linked from every page's footer so they are always one click away. */
+export const LEGAL_NAV_ITEMS: readonly NavItem[] = [{ href: "/datenschutz", label: "Datenschutz" }];

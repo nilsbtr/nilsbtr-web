@@ -1,9 +1,6 @@
 /** Date of the current version of the privacy policy. Update it with every change to the text. */
 export const PRIVACY_POLICY_UPDATED = new Date("2026-10-13T12:00:00+02:00");
 
-/** Date of the current version of the imprint. */
-export const IMPRINT_UPDATED = new Date("2026-10-13T12:00:00+02:00");
-
 /** Anchor of the analytics section, linked from the consent prompt. */
 export const ANALYTICS_SECTION_ID = "analytics";
 
