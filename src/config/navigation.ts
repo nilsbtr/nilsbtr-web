@@ -13,3 +13,6 @@ export const NAV_ITEMS: readonly NavItem[] = [
   { href: "/projects", label: "Projects", disabled: true },
   { href: "/blog", label: "Blog", disabled: true },
 ];
+
+/** Legal pages, linked from every page's footer so they are always one click away. */
+export const LEGAL_NAV_ITEMS: readonly NavItem[] = [{ href: "/datenschutz", label: "Datenschutz" }];

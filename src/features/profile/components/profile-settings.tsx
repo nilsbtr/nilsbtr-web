@@ -5,6 +5,8 @@ import { RevealGroup } from "@/components/motion";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import { useSessionUser } from "../hooks/use-session-user";
+import { DataSection } from "./data-section";
+import { DeleteAccountSection } from "./delete-account-section";
 import { PasswordForm } from "./password-form";
 import { ProfileForm } from "./profile-form";
 
@@ -20,7 +22,10 @@ function ProfileSkeleton() {
   );
 }
 
-/** The signed-in user's account settings: who they are, and how they sign in. */
+/**
+ * The signed-in user's account settings: who they are, how they sign in, and
+ * control over their data.
+ */
 export function ProfileSettings() {
   const user = useSessionUser();
 
@@ -32,12 +37,15 @@ export function ProfileSettings() {
     <RevealGroup>
       <PageHeader eyebrow="Account" title="Your profile">
         <PageHeaderDescription>
-          Choose how you appear on the site and keep your sign-in details up to date.
+          Choose how you appear on the site, keep your sign-in details up to date and stay in
+          control of your data.
         </PageHeaderDescription>
       </PageHeader>
       <div className="mt-8 grid gap-6">
         <ProfileForm user={user} />
         <PasswordForm user={user} />
+        <DataSection />
+        <DeleteAccountSection user={user} />
       </div>
     </RevealGroup>
   );

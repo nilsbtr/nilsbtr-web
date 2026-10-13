@@ -5,9 +5,9 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { APIError, createAuthMiddleware } from "better-auth/api";
 import { admin, username } from "better-auth/plugins";
 import { invite } from "better-invite";
-import { eq } from "drizzle-orm";
+import { and, eq, like, lt, ne } from "drizzle-orm";
 
-import { ADMIN_ROLE, USER_ROLE, ac, hasPermission, roles } from "@/lib/auth/permissions";
+import { ADMIN_ROLE, USER_ROLE, ac, hasPermission, hasRole, roles } from "@/lib/auth/permissions";
 import { USERNAME_MAX_LENGTH, USERNAME_MIN_LENGTH, isValidUsername } from "@/lib/auth/username";
 import { getBaseUrl } from "@/lib/url";
 
@@ -32,6 +32,16 @@ async function isOnlyUser(userId: string) {
   return !other;
 }
 
+/** Whether another account than the given one holds the admin role. */
+async function hasOtherAdmin(userId: string) {
+  const candidates = await db
+    .select({ role: schema.user.role })
+    .from(schema.user)
+    .where(and(ne(schema.user.id, userId), like(schema.user.role, `%${ADMIN_ROLE}%`)));
+
+  return candidates.some((candidate) => hasRole(candidate.role, ADMIN_ROLE));
+}
+
 function hasInviteTokenCookie(request: Request) {
   const cookieHeader = request.headers.get("cookie");
   if (!cookieHeader) return false;
@@ -47,6 +57,23 @@ export const auth = betterAuth({
   baseURL: getBaseUrl(),
   database: drizzleAdapter(db, { provider: "pg", schema }),
   emailAndPassword: { enabled: true },
+  user: {
+    // Lets people erase their own account (Art. 17 GDPR). Sessions and sign-in
+    // credentials are deleted with it; invite records lose their link to it.
+    deleteUser: {
+      enabled: true,
+      beforeDelete: async (user) => {
+        if (
+          hasRole((user as { role?: string | null }).role, ADMIN_ROLE) &&
+          !(await hasOtherAdmin(user.id))
+        ) {
+          throw new APIError("BAD_REQUEST", {
+            message: "You're the only administrator. Make someone else an admin first.",
+          });
+        }
+      },
+    },
+  },
   databaseHooks: {
     user: {
       create: {
@@ -62,6 +89,15 @@ export const auth = betterAuth({
           if (typeof user.username !== "string") return;
 
           return { data: { displayUsername: user.username } };
+        },
+      },
+    },
+    session: {
+      create: {
+        // Sessions hold IP addresses and browser details. Once one has expired
+        // it serves no purpose, so expired sessions are purged at every sign-in.
+        after: async () => {
+          await db.delete(schema.session).where(lt(schema.session.expiresAt, new Date()));
         },
       },
     },

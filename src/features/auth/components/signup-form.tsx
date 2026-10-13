@@ -11,6 +11,7 @@ import { FormError } from "@/components/shared/form-error";
 import { IdentityPreview } from "@/components/shared/identity-preview";
 import { InputField } from "@/components/shared/input-field";
 import { PasswordField } from "@/components/shared/password-field";
+import { TextLink } from "@/components/shared/text-link";
 import { UsernameField } from "@/components/shared/username-field";
 import { authClient } from "@/lib/auth/client";
 import { USERNAME_TAKEN_CODE, USERNAME_TAKEN_MESSAGE } from "@/lib/auth/username";
@@ -102,6 +103,11 @@ export function SignupForm() {
         <AuthSubmitButton pending={isSubmitting} pendingLabel="Creating account…">
           Create account
         </AuthSubmitButton>
+        {/* Art. 13 GDPR: say how the details are used where they are collected. */}
+        <p className="text-center text-xs text-pretty text-muted-foreground">
+          Your details are used only to run your account. See the{" "}
+          <TextLink href="/privacy">privacy policy</TextLink>.
+        </p>
       </form>
     </AuthShell>
   );

@@ -23,8 +23,8 @@ const pageShellVariants = cva("mx-auto w-full px-6", {
     align: {
       /** Long pages start below the header and scroll. */
       start: "pt-24 pb-24 sm:pt-32",
-      /** Short pages sit in the vertical center of the viewport. */
-      center: "flex min-h-dvh flex-col justify-center pt-24 pb-20",
+      /** Short pages sit in the vertical center of the space above the footer. */
+      center: "flex flex-1 flex-col justify-center pt-24 pb-20",
     },
   },
   defaultVariants: {

@@ -17,3 +17,9 @@ export const passwordSchema = z.object({
 });
 
 export type PasswordValues = z.infer<typeof passwordSchema>;
+
+export const deleteAccountSchema = z.object({
+  password: z.string().min(1, "Enter your password to confirm."),
+});
+
+export type DeleteAccountValues = z.infer<typeof deleteAccountSchema>;
