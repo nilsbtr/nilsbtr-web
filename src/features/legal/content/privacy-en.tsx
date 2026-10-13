@@ -28,7 +28,13 @@ import {
 import { ConsentStatus } from "../components/consent-status";
 import { OperatorCard } from "../components/operator-card";
 import type { LegalSection } from "../types";
-import { ANALYTICS_SECTION_ID, PROCESSORS, SUPERVISORY_AUTHORITIES_URL } from "./shared";
+import {
+  ANALYTICS_SECTION_ID,
+  DATABASE_BACKUP_DAYS,
+  PROCESSORS,
+  SUPERVISORY_AUTHORITIES_URL,
+  SUPERVISORY_AUTHORITY,
+} from "./shared";
 
 /**
  * The privacy policy in English, a courtesy translation of the German one.
@@ -89,8 +95,11 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
       content: (
         <>
           <P>
-            This website is hosted by {PROCESSORS.vercel.name}, {PROCESSORS.vercel.address}. With
-            every page request your browser sends data that Vercel processes in server logs:
+            This website is hosted by {PROCESSORS.vercel.name}, {PROCESSORS.vercel.address}. Its
+            server functions run in Vercel&apos;s Frankfurt am Main region; static content such as
+            images and scripts is delivered through Vercel&apos;s global network, usually from a
+            location near you. With every page request your browser sends data that Vercel processes
+            in server logs:
           </P>
           <List
             items={[
@@ -116,8 +125,10 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
             <Ref>Art. 6(1)(f) GDPR</Ref>.
           </P>
           <P>
-            Vercel processes the data as a processor, only on my instructions, under a data
-            processing agreement in line with <Ref>Art. 28 GDPR</Ref>. See{" "}
+            Vercel processes the data as a processor for the hosting, under a data processing
+            agreement in line with <Ref>Art. 28 GDPR</Ref>. For limited purposes of its own, such as
+            running its infrastructure and protecting it from abuse, Vercel may also process some of
+            this data, including IP addresses, as a controller in its own right. See{" "}
             <ProseLink href={PROCESSORS.vercel.privacyUrl}>Vercel&apos;s privacy policy</ProseLink>{" "}
             for more.
           </P>
@@ -254,7 +265,9 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
             <P>
               In your <ProseLink href="/profile">profile</ProseLink> you can edit your details,
               download a complete copy of your data as a JSON file and permanently delete your
-              account. Sessions and credentials are removed with it right away.
+              account. Sessions and credentials are removed with it right away. Database backups
+              keep the data for up to {DATABASE_BACKUP_DAYS} more days until they are overwritten
+              automatically; they are only used to recover from a failure.
             </P>
           </Callout>
         </>
@@ -282,8 +295,8 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
         <>
           <P>
             I don&apos;t sell your data or share it for advertising. Only the following service
-            providers have access, as processors acting solely on my instructions under an agreement
-            in line with <Ref>Art. 28 GDPR</Ref>:
+            providers have access, as processors working for me under an agreement in line with{" "}
+            <Ref>Art. 28 GDPR</Ref>:
           </P>
           <CardGrid>
             <InfoCard label="Hosting · Analytics" title={PROCESSORS.vercel.name}>
@@ -293,7 +306,10 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
               <ProseLink href={PROCESSORS.vercel.privacyUrl}>Privacy policy</ProseLink>
             </InfoCard>
             <InfoCard label="Database" title={PROCESSORS.neon.name}>
-              <span className="block">Runs the database that holds account and invite data.</span>
+              <span className="block">
+                Runs the database that holds account and invite data, in the Frankfurt am Main
+                region.
+              </span>
               <ProseLink href={PROCESSORS.neon.privacyUrl}>Privacy policy</ProseLink>
             </InfoCard>
           </CardGrid>
@@ -309,11 +325,14 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
       title: "Transfers outside the EU",
       content: (
         <P>
-          Vercel and Neon are based in the USA, so data may be transferred there. The European
-          Commission has adopted an adequacy decision for the USA (EU-U.S. Data Privacy Framework,{" "}
-          <Ref>Art. 45 GDPR</Ref>) that permits transfers to certified companies. Where a provider
-          is not certified, transfers rely on the European Commission&apos;s standard contractual
-          clauses (<Ref>Art. 46(2)(c) GDPR</Ref>), which are part of the data processing agreements.
+          The database and server functions run in data centres in Frankfurt am Main, so your
+          account data is stored within the EU. As Vercel and Neon are based in the USA, some data
+          may still reach the USA, for example for maintenance and support or for the analytics. The
+          European Commission has adopted an adequacy decision for the USA (EU-U.S. Data Privacy
+          Framework, <Ref>Art. 45 GDPR</Ref>) that permits transfers to certified companies. Where a
+          provider is not certified, transfers rely on the European Commission&apos;s standard
+          contractual clauses (<Ref>Art. 46(2)(c) GDPR</Ref>), which are part of the data processing
+          agreements.
         </P>
       ),
     },
@@ -340,7 +359,8 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
       content: (
         <P>
           If you email me, I process your address and your message to answer you. The legal basis is{" "}
-          <Ref>Art. 6(1)(b) GDPR</Ref> where it concerns your account, and otherwise{" "}
+          <Ref>Art. 6(1)(b) GDPR</Ref> where it concerns your account or steps before a possible
+          agreement, such as an inquiry about working together, and otherwise{" "}
           <Ref>Art. 6(1)(f) GDPR</Ref>; my legitimate interest is being able to reply. I delete the
           message once the matter is settled, unless the law requires me to keep it.
         </P>
@@ -388,9 +408,14 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
             informal message to the contact details above is enough.
           </P>
           <P>
-            You can complain to any data protection supervisory authority, in particular the one in
-            the member state where you live, work or where the alleged infringement took place. The
-            addresses of the German authorities are listed{" "}
+            The authority responsible for me is the{" "}
+            <ProseLink href={SUPERVISORY_AUTHORITY.url}>
+              State Commissioner for Data Protection of Lower Saxony
+            </ProseLink>{" "}
+            ({SUPERVISORY_AUTHORITY.name}), {SUPERVISORY_AUTHORITY.address}. You can also complain
+            to any other data protection supervisory authority, in particular the one in the member
+            state where you live, work or where the alleged infringement took place. The addresses
+            of all German authorities are listed{" "}
             <ProseLink href={SUPERVISORY_AUTHORITIES_URL}>
               by the Federal Commissioner for Data Protection
             </ProseLink>

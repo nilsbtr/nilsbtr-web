@@ -17,6 +17,16 @@ export const PROCESSORS = {
   },
 } as const;
 
+/** The supervisory authority in charge of this site, in Lower Saxony. */
+export const SUPERVISORY_AUTHORITY = {
+  name: "Der Landesbeauftragte für den Datenschutz Niedersachsen",
+  address: "Prinzenstraße 5, 30159 Hannover",
+  url: "https://www.lfd.niedersachsen.de",
+} as const;
+
+/** How long Neon keeps backups of the database, for restoring it. */
+export const DATABASE_BACKUP_DAYS = 7;
+
 /** The German data protection authorities, for finding the one in charge. */
 export const SUPERVISORY_AUTHORITIES_URL =
   "https://www.bfdi.bund.de/DE/Service/Anschriften/Laender/Laender-node.html";

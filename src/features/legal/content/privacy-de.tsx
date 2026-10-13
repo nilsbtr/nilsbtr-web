@@ -28,7 +28,13 @@ import {
 import { ConsentStatus } from "../components/consent-status";
 import { OperatorCard } from "../components/operator-card";
 import type { LegalSection } from "../types";
-import { ANALYTICS_SECTION_ID, PROCESSORS, SUPERVISORY_AUTHORITIES_URL } from "./shared";
+import {
+  ANALYTICS_SECTION_ID,
+  DATABASE_BACKUP_DAYS,
+  PROCESSORS,
+  SUPERVISORY_AUTHORITIES_URL,
+  SUPERVISORY_AUTHORITY,
+} from "./shared";
 
 /** The privacy policy in German. This version is the binding one. */
 export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
@@ -87,8 +93,10 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
         <>
           <P>
             Diese Website wird bei {PROCESSORS.vercel.name}, {PROCESSORS.vercel.address}, gehostet.
-            Bei jedem Seitenaufruf überträgt Ihr Browser technisch bedingt Daten, die Vercel in
-            Server-Logfiles verarbeitet:
+            Die Server-Funktionen der Website laufen in der Vercel-Region Frankfurt am Main;
+            unveränderliche Inhalte wie Bilder und Skripte liefert Vercel über sein weltweites Netz
+            aus, in der Regel von einem Standort in Ihrer Nähe. Bei jedem Seitenaufruf überträgt Ihr
+            Browser technisch bedingt Daten, die Vercel in Server-Logfiles verarbeitet:
           </P>
           <List
             items={[
@@ -115,9 +123,11 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
             ebenfalls <Ref>Art. 6 Abs. 1 lit. f DSGVO</Ref>.
           </P>
           <P>
-            Vercel verarbeitet die Daten als Auftragsverarbeiter ausschließlich nach meinen
-            Weisungen auf Grundlage eines Vertrags zur Auftragsverarbeitung nach{" "}
-            <Ref>Art. 28 DSGVO</Ref>. Mehr dazu in der{" "}
+            Vercel verarbeitet die Daten als Auftragsverarbeiter im Rahmen des Hostings auf
+            Grundlage eines Vertrags zur Auftragsverarbeitung nach <Ref>Art. 28 DSGVO</Ref>. Für
+            begrenzte eigene Zwecke, etwa um seine Infrastruktur zu betreiben und vor Missbrauch zu
+            schützen, kann Vercel einzelne dieser Daten, darunter IP-Adressen, auch in eigener
+            Verantwortung verarbeiten. Mehr dazu in der{" "}
             <ProseLink href={PROCESSORS.vercel.privacyUrl}>
               Datenschutzerklärung von Vercel
             </ProseLink>
@@ -264,7 +274,10 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
             <P>
               In Ihrem <ProseLink href="/profile">Profil</ProseLink> können Sie Ihre Angaben ändern,
               eine vollständige Kopie Ihrer Daten als JSON-Datei herunterladen und Ihr Konto
-              endgültig löschen. Sitzungen und Zugangsdaten werden dabei sofort mit entfernt.
+              endgültig löschen. Sitzungen und Zugangsdaten werden dabei sofort mit entfernt. In den
+              Sicherungskopien der Datenbank bleiben die Daten noch bis zu {DATABASE_BACKUP_DAYS}{" "}
+              Tage erhalten, bis diese automatisch überschrieben werden; sie dienen nur der
+              Wiederherstellung nach einem Fehler.
             </P>
           </Callout>
         </>
@@ -294,8 +307,8 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
         <>
           <P>
             Ich verkaufe Ihre Daten nicht und gebe sie nicht zu Werbezwecken weiter. Zugriff haben
-            nur die folgenden Dienstleister, die als Auftragsverarbeiter auf Grundlage eines
-            Vertrags nach <Ref>Art. 28 DSGVO</Ref> ausschließlich nach meinen Weisungen handeln:
+            die folgenden Dienstleister, die als Auftragsverarbeiter auf Grundlage eines Vertrags
+            nach <Ref>Art. 28 DSGVO</Ref> für mich tätig sind:
           </P>
           <CardGrid>
             <InfoCard label="Hosting · Statistik" title={PROCESSORS.vercel.name}>
@@ -306,7 +319,8 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
             </InfoCard>
             <InfoCard label="Datenbank" title={PROCESSORS.neon.name}>
               <span className="block">
-                Betreibt die Datenbank, in der Konto- und Einladungsdaten liegen.
+                Betreibt die Datenbank, in der Konto- und Einladungsdaten liegen, in der Region
+                Frankfurt am Main.
               </span>
               <ProseLink href={PROCESSORS.neon.privacyUrl}>Datenschutzerklärung</ProseLink>
             </InfoCard>
@@ -323,12 +337,14 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
       title: "Übermittlung in Drittländer",
       content: (
         <P>
-          Vercel und Neon haben ihren Sitz in den USA, sodass Daten dorthin übermittelt werden
-          können. Für die USA besteht ein Angemessenheitsbeschluss der EU-Kommission (EU-U.S. Data
-          Privacy Framework, <Ref>Art. 45 DSGVO</Ref>), der Übermittlungen an zertifizierte
-          Unternehmen erlaubt. Soweit ein Anbieter nicht zertifiziert ist, erfolgt die Übermittlung
-          auf Grundlage der Standardvertragsklauseln der EU-Kommission (
-          <Ref>Art. 46 Abs. 2 lit. c DSGVO</Ref>), die Bestandteil der Verträge zur
+          Datenbank und Server-Funktionen laufen in Rechenzentren in Frankfurt am Main, sodass Ihre
+          Kontodaten innerhalb der EU gespeichert werden. Da Vercel und Neon ihren Sitz in den USA
+          haben, können einzelne Daten dennoch in die USA gelangen, etwa im Rahmen von Wartung und
+          Support oder bei der Reichweitenmessung. Für die USA besteht ein Angemessenheitsbeschluss
+          der EU-Kommission (EU-U.S. Data Privacy Framework, <Ref>Art. 45 DSGVO</Ref>), der
+          Übermittlungen an zertifizierte Unternehmen erlaubt. Soweit ein Anbieter nicht
+          zertifiziert ist, erfolgt die Übermittlung auf Grundlage der Standardvertragsklauseln der
+          EU-Kommission (<Ref>Art. 46 Abs. 2 lit. c DSGVO</Ref>), die Bestandteil der Verträge zur
           Auftragsverarbeitung sind.
         </P>
       ),
@@ -357,7 +373,8 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
         <P>
           Wenn Sie mir eine E-Mail schreiben, verarbeite ich Ihre Adresse und Ihre Nachricht, um Ihr
           Anliegen zu beantworten. Rechtsgrundlage ist <Ref>Art. 6 Abs. 1 lit. b DSGVO</Ref>, soweit
-          es um Ihr Konto geht, im Übrigen <Ref>Art. 6 Abs. 1 lit. f DSGVO</Ref>; mein berechtigtes
+          es um Ihr Konto oder vorvertragliche Maßnahmen geht, etwa eine Anfrage zu einer
+          Zusammenarbeit, im Übrigen <Ref>Art. 6 Abs. 1 lit. f DSGVO</Ref>; mein berechtigtes
           Interesse liegt darin, Anfragen beantworten zu können. Ich lösche die Nachricht, sobald
           das Anliegen erledigt ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
         </P>
@@ -405,10 +422,12 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
             genügt eine formlose Nachricht an die oben genannten Kontaktdaten.
           </P>
           <P>
-            Für eine Beschwerde können Sie sich an jede Datenschutz-Aufsichtsbehörde wenden,
-            insbesondere an die im Mitgliedstaat Ihres Aufenthaltsorts, Ihres Arbeitsplatzes oder
-            des Orts des mutmaßlichen Verstoßes. Die Anschriften der Aufsichtsbehörden in
-            Deutschland finden Sie{" "}
+            Für mich zuständig ist{" "}
+            <ProseLink href={SUPERVISORY_AUTHORITY.url}>{SUPERVISORY_AUTHORITY.name}</ProseLink>,{" "}
+            {SUPERVISORY_AUTHORITY.address}. Sie können sich aber auch an jede andere
+            Datenschutz-Aufsichtsbehörde wenden, insbesondere an die im Mitgliedstaat Ihres
+            Aufenthaltsorts, Ihres Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes. Die
+            Anschriften aller Aufsichtsbehörden in Deutschland finden Sie{" "}
             <ProseLink href={SUPERVISORY_AUTHORITIES_URL}>
               beim Bundesbeauftragten für den Datenschutz
             </ProseLink>
