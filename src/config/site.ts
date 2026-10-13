@@ -8,7 +8,7 @@ export const siteConfig = {
   locale: "en_US",
   twitterHandle: "@digitalstave",
   themeColor: {
-    light: "#f5f3ee",
+    light: "#f0ede4",
     dark: "#1a1917",
   },
 } as const;

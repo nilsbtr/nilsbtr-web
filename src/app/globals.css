@@ -5,43 +5,52 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.9755 0.0067 97.351);
-  --foreground: oklch(0.2178 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2178 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.2178 0 0);
+  /*
+   * Light theme: warm paper rather than white. The page sits well below full
+   * brightness, nothing is pure white or pure black, and every neutral carries
+   * the same warm hue, so large areas stay easy on the eyes while text keeps
+   * AA contrast (body 12.9:1, muted 5.7:1).
+   */
+  --background: oklch(0.945 0.012 90);
+  --foreground: oklch(0.27 0.012 75);
+  --card: oklch(0.968 0.009 90);
+  --card-foreground: oklch(0.27 0.012 75);
+  --popover: oklch(0.975 0.008 90);
+  --popover-foreground: oklch(0.27 0.012 75);
   --primary: oklch(0.7414 0.0738 84.5946);
-  --primary-foreground: oklch(0.2178 0 0);
-  --secondary: oklch(0.9096 0.0167 91.5611);
-  --secondary-foreground: oklch(0.2178 0 0);
-  --muted: oklch(0.9459 0.0165 91.5544);
-  --muted-foreground: oklch(0.5022 0.0278 85.7741);
+  --primary-foreground: oklch(0.27 0.012 75);
+  --secondary: oklch(0.895 0.02 90);
+  --secondary-foreground: oklch(0.27 0.012 75);
+  --muted: oklch(0.918 0.016 90);
+  --muted-foreground: oklch(0.475 0.028 85);
   --accent: oklch(0.7414 0.0738 84.5946);
-  --accent-foreground: oklch(0.2178 0 0);
+  --accent-foreground: oklch(0.27 0.012 75);
   --destructive: oklch(0.53 0.2002 26.4057);
-  --destructive-foreground: oklch(1 0 0);
+  --destructive-foreground: oklch(0.975 0.008 90);
 
-  --border: oklch(0.8986 0.0258 97.1423);
-  --input: oklch(0.64 0.03 95);
-  --ring: oklch(0.52 0.075 84.6);
+  --border: oklch(0.872 0.024 92);
+  --input: oklch(0.615 0.03 92);
+  --ring: oklch(0.495 0.075 84.6);
 
   /* The primary hue, darkened until it reads as text or an icon on the page (4.5:1). */
-  --brand: oklch(0.52 0.075 84.6);
+  --brand: oklch(0.495 0.075 84.6);
+
+  /* Centre of the glow behind the hero: light falling on the paper. */
+  --hero-glow: oklch(0.978 0.034 88 / 0.8);
 
   --chart-1: oklch(0.7414 0.0738 84.5946);
   --chart-2: oklch(0.3738 0.0116 258.366);
-  --chart-3: oklch(0.9096 0.0167 91.5611);
+  --chart-3: oklch(0.895 0.02 90);
   --chart-4: oklch(0.5933 0.0472 87.9063);
   --chart-5: oklch(0.2958 0.0084 255.5667);
 
-  --sidebar: oklch(0.9459 0.0165 91.5544);
-  --sidebar-foreground: oklch(0.2178 0 0);
+  --sidebar: oklch(0.918 0.016 90);
+  --sidebar-foreground: oklch(0.27 0.012 75);
   --sidebar-primary: oklch(0.7414 0.0738 84.5946);
-  --sidebar-primary-foreground: oklch(0.2178 0 0);
-  --sidebar-accent: oklch(0.8986 0.0258 97.1423);
-  --sidebar-accent-foreground: oklch(0.2178 0 0);
-  --sidebar-border: oklch(0.8986 0.0258 97.1423);
+  --sidebar-primary-foreground: oklch(0.27 0.012 75);
+  --sidebar-accent: oklch(0.872 0.024 92);
+  --sidebar-accent-foreground: oklch(0.27 0.012 75);
+  --sidebar-border: oklch(0.872 0.024 92);
   --sidebar-ring: oklch(0.7414 0.0738 84.5946);
 
   --font-sans: Outfit, -apple-system, sans-serif;
@@ -105,6 +114,9 @@
   --ring: oklch(0.8039 0.0702 84.7579);
 
   --brand: oklch(0.8039 0.0702 84.7579);
+
+  /* Here the glow is the primary color, faint enough to read as warm light. */
+  --hero-glow: oklch(0.8039 0.0702 84.7579 / 0.08);
 
   --chart-1: oklch(0.8039 0.0702 84.7579);
   --chart-2: oklch(0.5498 0.0111 252.878);

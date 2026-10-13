@@ -9,11 +9,9 @@ import { EASE, SPRING } from "@/components/motion";
 /** How far the glow drifts from its resting place toward the pointer, in pixels. */
 const DRIFT = 70;
 
-/** Share of the primary color at the centre of the glow, in percent. */
-const PEAK = 8;
-
 /*
- * The falloff follows (1 - r²)², which is flat at the centre and at the rim, so
+ * The color and peak strength come from `--hero-glow`, set per theme. The
+ * falloff follows (1 - r²)², which is flat at the centre and at the rim, so
  * the glow has no visible edge. Many stops keep the straight segments between
  * them too short to show as rings. It is drawn as a gradient rather than with
  * a blur filter: a large blurred layer is rasterised at low resolution and
@@ -22,8 +20,8 @@ const PEAK = 8;
 const STOPS = 32;
 const GLOW = `radial-gradient(closest-side, ${Array.from({ length: STOPS + 1 }, (_, index) => {
   const radius = index / STOPS;
-  const strength = PEAK * (1 - radius ** 2) ** 2;
-  return `color-mix(in oklch, var(--primary) ${strength.toFixed(3)}%, transparent) ${(radius * 100).toFixed(1)}%`;
+  const strength = 100 * (1 - radius ** 2) ** 2;
+  return `color-mix(in oklch, var(--hero-glow) ${strength.toFixed(2)}%, transparent) ${(radius * 100).toFixed(1)}%`;
 }).join(", ")})`;
 
 /*
@@ -40,12 +38,13 @@ const GRAIN = `url("data:image/svg+xml,${encodeURIComponent(GRAIN_SVG)}")`;
 const GRAIN_MASK = "radial-gradient(closest-side, black 20%, transparent)";
 
 /**
- * Soft glow in the primary color behind the hero. It fades in with the page
- * and leans toward the pointer with a slow, heavy follow. Purely decorative;
- * it stays put on touch devices and when reduced motion is requested.
+ * Soft glow behind the hero. It fades in with the page and leans toward the
+ * pointer with a slow, heavy follow. Purely decorative; it stays put on touch
+ * devices and when reduced motion is requested.
  *
- * Dark theme only: the tan reads as warm light on the dark background but
- * only muddies the light one.
+ * On the dark theme it is the primary color, which reads as warm light. On the
+ * light theme the same tan would only muddy the page, so the glow is a pool of
+ * brighter paper instead.
  */
 export function HeroGlow() {
   const prefersReducedMotion = useReducedMotion();
@@ -67,10 +66,7 @@ export function HeroGlow() {
   }, [prefersReducedMotion, targetX, targetY]);
 
   return (
-    <div
-      aria-hidden="true"
-      className="pointer-events-none fixed inset-0 -z-10 hidden overflow-hidden dark:block"
-    >
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       <m.div
         style={{ x, y, backgroundImage: GLOW }}
         initial={{ opacity: 0 }}
