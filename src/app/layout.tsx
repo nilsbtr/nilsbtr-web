@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
 
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-
+import { ConsentBanner } from "@/components/layout/consent-banner";
+import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { MAIN_CONTENT_ID, SkipLink } from "@/components/layout/skip-link";
 import { PointerSpotlight } from "@/components/motion";
 import { AppProviders } from "@/components/providers/app-providers";
+import { ConsentedAnalytics } from "@/components/providers/consented-analytics";
 import { JsonLd } from "@/components/shared/json-ld";
 import { Toaster } from "@/components/ui/sonner";
 import { siteConfig } from "@/config/site";
@@ -91,18 +91,19 @@ export default function RootLayout({
           <style>{NO_SCRIPT_STYLE}</style>
         </noscript>
       </head>
-      <body className={`${fontVariables} antialiased`}>
+      <body className={`${fontVariables} flex min-h-dvh flex-col antialiased`}>
         <AppProviders>
           <SkipLink />
           <SiteHeader />
-          <main id={MAIN_CONTENT_ID} tabIndex={-1} className="outline-none">
+          <main id={MAIN_CONTENT_ID} tabIndex={-1} className="flex flex-1 flex-col outline-none">
             {children}
           </main>
+          <SiteFooter />
+          <ConsentBanner />
           <Toaster />
           <PointerSpotlight />
         </AppProviders>
-        <Analytics />
-        <SpeedInsights />
+        <ConsentedAnalytics />
       </body>
     </html>
   );
