@@ -7,6 +7,8 @@ import { Surface } from "@/components/shared/surface";
 import { TextLink } from "@/components/shared/text-link";
 import { cn } from "@/lib/utils";
 
+import type { LegalLanguage } from "../types";
+
 /*
  * The vocabulary legal texts are written in: paragraphs, lists, highlighted
  * notes and small cards. Each one carries its own type styles, so the texts
@@ -37,8 +39,19 @@ export function List({ items, className }: { items: ReactNode[]; className?: str
 const LINK_CLASS =
   "rounded-sm text-foreground underline decoration-foreground/30 decoration-1 underline-offset-4 transition-all duration-300 hover:text-brand hover:decoration-brand hover:underline-offset-[7px]";
 
+const NEW_TAB_HINTS = { de: "(öffnet in neuem Tab)", en: "(opens in a new tab)" } as const;
+
 /** A prose link: on-site through the router, mail and phone in place, anything else in a new tab. */
-export function ProseLink({ href, children }: { href: string; children: ReactNode }) {
+export function ProseLink({
+  href,
+  lang = "en",
+  children,
+}: {
+  href: string;
+  /** Language of the surrounding text, for the hint read out on off-site links. */
+  lang?: LegalLanguage;
+  children: ReactNode;
+}) {
   if (href.startsWith("/") || href.startsWith("#")) {
     return <TextLink href={href}>{children}</TextLink>;
   }
@@ -52,7 +65,7 @@ export function ProseLink({ href, children }: { href: string; children: ReactNod
   }
 
   return (
-    <ExternalLink href={href} className={LINK_CLASS}>
+    <ExternalLink href={href} newTabHint={NEW_TAB_HINTS[lang]} className={LINK_CLASS}>
       {children}
     </ExternalLink>
   );

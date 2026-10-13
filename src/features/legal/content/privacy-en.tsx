@@ -119,12 +119,6 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
             are not combined with other data.
           </P>
           <P>
-            To limit sign-in and sign-up attempts, and so protect passwords from being guessed, the
-            server counts requests per IP address for a few seconds at a time in memory. These
-            counters are never stored permanently. The legal basis is again{" "}
-            <Ref>Art. 6(1)(f) GDPR</Ref>.
-          </P>
-          <P>
             Vercel processes the data as a processor for the hosting, under a data processing
             agreement in line with <Ref>Art. 28 GDPR</Ref>. For limited purposes of its own, such as
             running its infrastructure and protecting it from abuse, Vercel may also process some of
@@ -223,6 +217,23 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
       ),
     },
     {
+      id: "extern",
+      title: "Fonts and external links",
+      content: (
+        <>
+          <P>
+            All fonts are served by this website itself. Loading a page makes no connection to
+            Google or any other font provider.
+          </P>
+          <P>
+            Links to social networks and other websites are plain links. No third-party content is
+            embedded; a provider only receives data once you follow a link, and from then on their
+            privacy policy applies.
+          </P>
+        </>
+      ),
+    },
+    {
       id: "konto",
       title: "User accounts",
       content: (
@@ -258,6 +269,12 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
             Administrators of this website can view account data and manage accounts.
           </P>
           <P>
+            To limit sign-in and sign-up attempts, and so protect passwords from being guessed, the
+            server counts requests per IP address for a few seconds at a time in memory. These
+            counters are never stored permanently. The legal basis is again{" "}
+            <Ref>Art. 6(1)(f) GDPR</Ref>.
+          </P>
+          <P>
             Your account data is kept until you delete your account. Sessions expire after seven
             days without use and are deleted automatically at the next sign-in on the website.
           </P>
@@ -265,9 +282,9 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
             <P>
               In your <ProseLink href="/profile">profile</ProseLink> you can edit your details,
               download a complete copy of your data as a JSON file and permanently delete your
-              account. Sessions and credentials are removed with it right away. Database backups
-              keep the data for up to {DATABASE_BACKUP_DAYS} more days until they are overwritten
-              automatically; they are only used to recover from a failure.
+              account. All account data, including sessions and credentials, is deleted right away.
+              Database backups keep the data for up to {DATABASE_BACKUP_DAYS} more days until they
+              are overwritten automatically; they are only used to recover from a failure.
             </P>
           </Callout>
         </>
@@ -285,6 +302,19 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
           users protected from abuse. As soon as an invitation is used up or revoked, I delete it
           along with these records; administrators remove expired ones. The link to your account
           ends at the latest when the account is deleted.
+        </P>
+      ),
+    },
+    {
+      id: "kontakt",
+      title: "Contact by email",
+      content: (
+        <P>
+          If you email me, I process your address and your message to answer you. The legal basis is{" "}
+          <Ref>Art. 6(1)(b) GDPR</Ref> where it concerns your account or steps before a possible
+          agreement, such as an inquiry about working together, and otherwise{" "}
+          <Ref>Art. 6(1)(f) GDPR</Ref>; my legitimate interest is being able to reply. I delete the
+          message once the matter is settled, unless the law requires me to keep it.
         </P>
       ),
     },
@@ -337,32 +367,27 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
       ),
     },
     {
-      id: "extern",
-      title: "Fonts and external links",
+      id: "sicherheit",
+      title: "Security",
       content: (
-        <>
-          <P>
-            All fonts are served by this website itself. Loading a page makes no connection to
-            Google or any other font provider.
-          </P>
-          <P>
-            Links to social networks and other websites are plain links. No third-party content is
-            embedded; a provider only receives data once you follow a link, and from then on their
-            privacy policy applies.
-          </P>
-        </>
+        <P>
+          Every connection to this website is encrypted with TLS, shown by the padlock and
+          &ldquo;https://&rdquo; in the address bar. Passwords are only stored as a hash, using a
+          method designed for passwords. Beyond that, I take appropriate technical and
+          organisational measures to protect your data from loss and unauthorised access (
+          <Ref>Art. 32 GDPR</Ref>).
+        </P>
       ),
     },
     {
-      id: "kontakt",
-      title: "Contact by email",
+      id: "pflicht",
+      title: "Providing data and automated decisions",
       content: (
         <P>
-          If you email me, I process your address and your message to answer you. The legal basis is{" "}
-          <Ref>Art. 6(1)(b) GDPR</Ref> where it concerns your account or steps before a possible
-          agreement, such as an inquiry about working together, and otherwise{" "}
-          <Ref>Art. 6(1)(f) GDPR</Ref>; my legitimate interest is being able to reply. I delete the
-          message once the matter is settled, unless the law requires me to keep it.
+          You are under no legal or contractual obligation to provide personal data. Without the
+          data your browser sends, however, the website can&apos;t be delivered, and without the
+          details asked for at sign-up I can&apos;t create an account for you. There is no automated
+          decision-making, including profiling, within the meaning of <Ref>Art. 22 GDPR</Ref>.
         </P>
       ),
     },
@@ -403,9 +428,10 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
             </InfoCard>
           </CardGrid>
           <P>
-            For your account, you can exercise access, rectification, portability and erasure
-            directly in your <ProseLink href="/profile">profile</ProseLink>. For anything else, an
-            informal message to the contact details above is enough.
+            For your account, you can exercise access, portability and erasure directly in your{" "}
+            <ProseLink href="/profile">profile</ProseLink>, and correct your username and name
+            there. To change your email address, or for anything else, an informal message to the
+            contact details above is enough.
           </P>
           <P>
             The authority responsible for me is the{" "}
@@ -438,31 +464,6 @@ export function getPrivacySectionsEn(operator: Operator): LegalSection[] {
           </P>
           <P>You can object informally using the contact details above.</P>
         </Callout>
-      ),
-    },
-    {
-      id: "pflicht",
-      title: "Providing data and automated decisions",
-      content: (
-        <P>
-          You are under no legal or contractual obligation to provide personal data. Without the
-          data your browser sends, however, the website can&apos;t be delivered, and without the
-          details asked for at sign-up I can&apos;t create an account for you. There is no automated
-          decision-making, including profiling, within the meaning of <Ref>Art. 22 GDPR</Ref>.
-        </P>
-      ),
-    },
-    {
-      id: "sicherheit",
-      title: "Security",
-      content: (
-        <P>
-          Every connection to this website is encrypted with TLS, shown by the padlock and
-          &ldquo;https://&rdquo; in the address bar. Passwords are only stored as a hash, using a
-          method designed for passwords. Beyond that, I take appropriate technical and
-          organisational measures to protect your data from loss and unauthorised access (
-          <Ref>Art. 32 GDPR</Ref>).
-        </P>
       ),
     },
     {

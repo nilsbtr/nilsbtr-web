@@ -94,8 +94,8 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
           <P>
             Diese Website wird bei {PROCESSORS.vercel.name}, {PROCESSORS.vercel.address}, gehostet.
             Die Server-Funktionen der Website laufen in der Vercel-Region Frankfurt am Main;
-            unveränderliche Inhalte wie Bilder und Skripte liefert Vercel über sein weltweites Netz
-            aus, in der Regel von einem Standort in Ihrer Nähe. Bei jedem Seitenaufruf überträgt Ihr
+            statische Inhalte wie Bilder und Skripte liefert Vercel über sein weltweites Netz aus,
+            in der Regel von einem Standort in Ihrer Nähe. Bei jedem Seitenaufruf überträgt Ihr
             Browser technisch bedingt Daten, die Vercel in Server-Logfiles verarbeitet:
           </P>
           <List
@@ -117,18 +117,12 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
             Zusammenführung mit anderen Datenquellen findet nicht statt.
           </P>
           <P>
-            Um Anmelde- und Registrierungsversuche zu begrenzen und so Passwörter vor dem Erraten zu
-            schützen, zählt der Server Anfragen je IP-Adresse für jeweils wenige Sekunden im
-            Arbeitsspeicher. Diese Zähler werden nicht dauerhaft gespeichert. Rechtsgrundlage ist
-            ebenfalls <Ref>Art. 6 Abs. 1 lit. f DSGVO</Ref>.
-          </P>
-          <P>
             Vercel verarbeitet die Daten als Auftragsverarbeiter im Rahmen des Hostings auf
             Grundlage eines Vertrags zur Auftragsverarbeitung nach <Ref>Art. 28 DSGVO</Ref>. Für
             begrenzte eigene Zwecke, etwa um seine Infrastruktur zu betreiben und vor Missbrauch zu
             schützen, kann Vercel einzelne dieser Daten, darunter IP-Adressen, auch in eigener
             Verantwortung verarbeiten. Mehr dazu in der{" "}
-            <ProseLink href={PROCESSORS.vercel.privacyUrl}>
+            <ProseLink lang="de" href={PROCESSORS.vercel.privacyUrl}>
               Datenschutzerklärung von Vercel
             </ProseLink>
             .
@@ -196,9 +190,10 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
       content: (
         <>
           <P>
-            Wenn Sie einwilligen, nutze ich <strong>Vercel Web Analytics</strong> und{" "}
-            <strong>Vercel Speed Insights</strong>, ebenfalls von Vercel. So sehe ich, welche Seiten
-            wie oft besucht werden und wie schnell sie laden. Verarbeitet werden dabei:
+            Wenn Sie einwilligen, nutze ich zusätzlich die Vercel-Dienste{" "}
+            <strong>Vercel Web Analytics</strong> und <strong>Vercel Speed Insights</strong>. So
+            sehe ich, welche Seiten wie oft besucht werden und wie schnell sie laden. Verarbeitet
+            werden dabei:
           </P>
           <List
             items={[
@@ -223,6 +218,23 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
             der bis zum Widerruf erfolgten Verarbeitung bleibt davon unberührt.
           </P>
           <ConsentStatus lang="de" />
+        </>
+      ),
+    },
+    {
+      id: "extern",
+      title: "Schriftarten und externe Links",
+      content: (
+        <>
+          <P>
+            Alle Schriftarten werden von dieser Website selbst ausgeliefert. Beim Seitenaufruf wird
+            keine Verbindung zu Google oder anderen Schriftanbietern aufgebaut.
+          </P>
+          <P>
+            Links zu sozialen Netzwerken und anderen Websites sind einfache Verweise. Es werden
+            keine Inhalte Dritter eingebettet; Daten gelangen erst an den jeweiligen Anbieter, wenn
+            Sie einen Link anklicken. Ab dann gilt dessen Datenschutzerklärung.
+          </P>
         </>
       ),
     },
@@ -266,6 +278,12 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
             Kontodaten einsehen und Konten verwalten.
           </P>
           <P>
+            Um Anmelde- und Registrierungsversuche zu begrenzen und so Passwörter vor dem Erraten zu
+            schützen, zählt der Server Anfragen je IP-Adresse für jeweils wenige Sekunden im
+            Arbeitsspeicher. Diese Zähler werden nicht dauerhaft gespeichert. Rechtsgrundlage ist
+            ebenfalls <Ref>Art. 6 Abs. 1 lit. f DSGVO</Ref>.
+          </P>
+          <P>
             Ihre Kontodaten speichere ich, bis Sie Ihr Konto löschen. Sitzungen laufen nach sieben
             Tagen ohne Nutzung ab und werden bei der nächsten Anmeldung auf der Website automatisch
             gelöscht.
@@ -274,10 +292,10 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
             <P>
               In Ihrem <ProseLink href="/profile">Profil</ProseLink> können Sie Ihre Angaben ändern,
               eine vollständige Kopie Ihrer Daten als JSON-Datei herunterladen und Ihr Konto
-              endgültig löschen. Sitzungen und Zugangsdaten werden dabei sofort mit entfernt. In den
-              Sicherungskopien der Datenbank bleiben die Daten noch bis zu {DATABASE_BACKUP_DAYS}{" "}
-              Tage erhalten, bis diese automatisch überschrieben werden; sie dienen nur der
-              Wiederherstellung nach einem Fehler.
+              endgültig löschen. Dabei werden alle Kontodaten einschließlich Sitzungen und
+              Zugangsdaten sofort gelöscht. In den Sicherungskopien der Datenbank bleiben die Daten
+              noch bis zu {DATABASE_BACKUP_DAYS} Tage erhalten, bis diese automatisch überschrieben
+              werden; sie dienen nur der Wiederherstellung nach einem Fehler.
             </P>
           </Callout>
         </>
@@ -301,6 +319,20 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
       ),
     },
     {
+      id: "kontakt",
+      title: "Kontakt per E-Mail",
+      content: (
+        <P>
+          Wenn Sie mir eine E-Mail schreiben, verarbeite ich Ihre Adresse und Ihre Nachricht, um Ihr
+          Anliegen zu beantworten. Rechtsgrundlage ist <Ref>Art. 6 Abs. 1 lit. b DSGVO</Ref>, soweit
+          es um Ihr Konto oder vorvertragliche Maßnahmen geht, etwa eine Anfrage zu einer
+          Zusammenarbeit, im Übrigen <Ref>Art. 6 Abs. 1 lit. f DSGVO</Ref>; mein berechtigtes
+          Interesse liegt darin, Anfragen beantworten zu können. Ich lösche die Nachricht, sobald
+          das Anliegen erledigt ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
+        </P>
+      ),
+    },
+    {
       id: "empfaenger",
       title: "Empfänger und Auftragsverarbeiter",
       content: (
@@ -315,14 +347,18 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
               <span className="block">
                 Liefert die Website aus und erstellt, falls Sie einwilligen, die Statistiken.
               </span>
-              <ProseLink href={PROCESSORS.vercel.privacyUrl}>Datenschutzerklärung</ProseLink>
+              <ProseLink lang="de" href={PROCESSORS.vercel.privacyUrl}>
+                Datenschutzerklärung
+              </ProseLink>
             </InfoCard>
             <InfoCard label="Datenbank" title={PROCESSORS.neon.name}>
               <span className="block">
                 Betreibt die Datenbank, in der Konto- und Einladungsdaten liegen, in der Region
                 Frankfurt am Main.
               </span>
-              <ProseLink href={PROCESSORS.neon.privacyUrl}>Datenschutzerklärung</ProseLink>
+              <ProseLink lang="de" href={PROCESSORS.neon.privacyUrl}>
+                Datenschutzerklärung
+              </ProseLink>
             </InfoCard>
           </CardGrid>
           <P>
@@ -350,33 +386,28 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
       ),
     },
     {
-      id: "extern",
-      title: "Schriftarten und externe Links",
+      id: "sicherheit",
+      title: "Datensicherheit",
       content: (
-        <>
-          <P>
-            Alle Schriftarten werden von dieser Website selbst ausgeliefert. Beim Seitenaufruf wird
-            keine Verbindung zu Google oder anderen Schriftanbietern aufgebaut.
-          </P>
-          <P>
-            Links zu sozialen Netzwerken und anderen Websites sind einfache Verweise. Es werden
-            keine Inhalte Dritter eingebettet; Daten gelangen erst an den jeweiligen Anbieter, wenn
-            Sie einen Link anklicken. Ab dann gilt dessen Datenschutzerklärung.
-          </P>
-        </>
+        <P>
+          Die Verbindung zu dieser Website ist durchgehend per TLS verschlüsselt, erkennbar am
+          Schloss-Symbol und an »https://« in der Adresszeile. Passwörter werden nur als Hash mit
+          einem eigens für Passwörter entwickelten Verfahren gespeichert. Darüber hinaus treffe ich
+          angemessene technische und organisatorische Maßnahmen, um Ihre Daten vor Verlust und
+          unbefugtem Zugriff zu schützen (<Ref>Art. 32 DSGVO</Ref>).
+        </P>
       ),
     },
     {
-      id: "kontakt",
-      title: "Kontakt per E-Mail",
+      id: "pflicht",
+      title: "Bereitstellung und automatisierte Entscheidungen",
       content: (
         <P>
-          Wenn Sie mir eine E-Mail schreiben, verarbeite ich Ihre Adresse und Ihre Nachricht, um Ihr
-          Anliegen zu beantworten. Rechtsgrundlage ist <Ref>Art. 6 Abs. 1 lit. b DSGVO</Ref>, soweit
-          es um Ihr Konto oder vorvertragliche Maßnahmen geht, etwa eine Anfrage zu einer
-          Zusammenarbeit, im Übrigen <Ref>Art. 6 Abs. 1 lit. f DSGVO</Ref>; mein berechtigtes
-          Interesse liegt darin, Anfragen beantworten zu können. Ich lösche die Nachricht, sobald
-          das Anliegen erledigt ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.
+          Sie sind weder gesetzlich noch vertraglich verpflichtet, mir personenbezogene Daten
+          bereitzustellen. Ohne die technisch übermittelten Daten kann die Website jedoch nicht
+          ausgeliefert werden, und ohne die Angaben bei der Registrierung kann ich kein Konto für
+          Sie anlegen. Eine automatisierte Entscheidungsfindung einschließlich Profiling im Sinne
+          von <Ref>Art. 22 DSGVO</Ref> findet nicht statt.
         </P>
       ),
     },
@@ -417,18 +448,21 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
             </InfoCard>
           </CardGrid>
           <P>
-            Auskunft, Berichtigung, Datenübertragbarkeit und Löschung können Sie für Ihr Konto
-            direkt im <ProseLink href="/profile">Profil</ProseLink> wahrnehmen. Für alles andere
-            genügt eine formlose Nachricht an die oben genannten Kontaktdaten.
+            Auskunft, Datenübertragbarkeit und Löschung können Sie für Ihr Konto direkt im{" "}
+            <ProseLink href="/profile">Profil</ProseLink> wahrnehmen, ebenso die Berichtigung von
+            Benutzername und Name. Für eine Änderung Ihrer E-Mail-Adresse und alles andere genügt
+            eine formlose Nachricht an die oben genannten Kontaktdaten.
           </P>
           <P>
-            Für mich zuständig ist{" "}
-            <ProseLink href={SUPERVISORY_AUTHORITY.url}>{SUPERVISORY_AUTHORITY.name}</ProseLink>,{" "}
-            {SUPERVISORY_AUTHORITY.address}. Sie können sich aber auch an jede andere
+            Für mich zuständig ist der{" "}
+            <ProseLink lang="de" href={SUPERVISORY_AUTHORITY.url}>
+              Landesbeauftragte für den Datenschutz Niedersachsen
+            </ProseLink>
+            , {SUPERVISORY_AUTHORITY.address}. Sie können sich aber auch an jede andere
             Datenschutz-Aufsichtsbehörde wenden, insbesondere an die im Mitgliedstaat Ihres
             Aufenthaltsorts, Ihres Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes. Die
             Anschriften aller Aufsichtsbehörden in Deutschland finden Sie{" "}
-            <ProseLink href={SUPERVISORY_AUTHORITIES_URL}>
+            <ProseLink lang="de" href={SUPERVISORY_AUTHORITIES_URL}>
               beim Bundesbeauftragten für den Datenschutz
             </ProseLink>
             .
@@ -451,32 +485,6 @@ export function getPrivacySectionsDe(operator: Operator): LegalSection[] {
           </P>
           <P>Der Widerspruch ist formlos an die oben genannten Kontaktdaten möglich.</P>
         </Callout>
-      ),
-    },
-    {
-      id: "pflicht",
-      title: "Bereitstellung und automatisierte Entscheidungen",
-      content: (
-        <P>
-          Sie sind weder gesetzlich noch vertraglich verpflichtet, mir personenbezogene Daten
-          bereitzustellen. Ohne die technisch übermittelten Daten kann die Website jedoch nicht
-          ausgeliefert werden, und ohne die Angaben bei der Registrierung kann ich kein Konto für
-          Sie anlegen. Eine automatisierte Entscheidungsfindung einschließlich Profiling im Sinne
-          von <Ref>Art. 22 DSGVO</Ref> findet nicht statt.
-        </P>
-      ),
-    },
-    {
-      id: "sicherheit",
-      title: "Datensicherheit",
-      content: (
-        <P>
-          Die Verbindung zu dieser Website ist durchgehend per TLS verschlüsselt, erkennbar am
-          Schloss-Symbol und an »https://« in der Adresszeile. Passwörter werden nur als Hash mit
-          einem eigens für Passwörter entwickelten Verfahren gespeichert. Darüber hinaus treffe ich
-          angemessene technische und organisatorische Maßnahmen, um Ihre Daten vor Verlust und
-          unbefugtem Zugriff zu schützen (<Ref>Art. 32 DSGVO</Ref>).
-        </P>
       ),
     },
     {
